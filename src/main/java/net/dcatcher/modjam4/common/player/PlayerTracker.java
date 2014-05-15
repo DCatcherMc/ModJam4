@@ -19,7 +19,7 @@ public class PlayerTracker {
 
     @SubscribeEvent
     public void onEntityConstructing(PlayerEvent.EntityConstructing event){
-        if(event.entity instanceof EntityPlayer && DCPlayerProperties.getProps(event.entity) != null){
+        if(event.entity instanceof EntityPlayer && DCPlayerProperties.getProps(event.entity) == null){
             DCPlayerProperties.register((EntityPlayer)event.entity);
             System.out.println("PLAYER LOGGED IN");
             DCPlayerProperties.getProps((EntityPlayer)event.entity).sync();
@@ -31,7 +31,9 @@ public class PlayerTracker {
         if(!event.entity.worldObj.isRemote && event.entity instanceof EntityPlayer){
             NBTTagCompound playerData = new NBTTagCompound();
             DCPlayerProperties.getProps(event.entity).saveNBTData(playerData);
+            ModJam4.proxy.saveLevels(((EntityPlayer)event.entity).getDisplayName(), playerData);
             System.out.println("PLAYER DIED");
+            DCPlayerProperties.getProps(event.entity).sync();
         }
     }
 
@@ -41,7 +43,7 @@ public class PlayerTracker {
 
         if(entity instanceof EntityPlayer){
             EntityPlayer player = (EntityPlayer)entity;
-            NBTTagCompound playerData = ModJam4.proxy.getLevels(player.user);
+            NBTTagCompound playerData = ModJam4.proxy.getLevels(player.getDisplayName());
             if(playerData != null){
                 DCPlayerProperties.getProps(player).loadNBTData(playerData);
                 DCPlayerProperties.getProps(player).sync();

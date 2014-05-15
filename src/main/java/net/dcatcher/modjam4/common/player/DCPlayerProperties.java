@@ -23,8 +23,7 @@ public class DCPlayerProperties implements IExtendedEntityProperties {
 
     public DCPlayerProperties(EntityPlayer player){
         this.player = player;
-        levelBow = 1;
-        levelSword = 1;
+        levelBow = levelSword = 1;
     }
 
     public static DCPlayerProperties getProps(Entity player){
