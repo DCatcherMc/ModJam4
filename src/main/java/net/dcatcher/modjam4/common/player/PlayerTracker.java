@@ -3,6 +3,8 @@ package net.dcatcher.modjam4.common.player;
 import cpw.mods.fml.common.eventhandler.EventPriority;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.PlayerEvent;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.dcatcher.modjam4.ModJam4;
 import net.dcatcher.modjam4.common.network.PacketSync;
 import net.minecraft.entity.Entity;
@@ -40,13 +42,18 @@ public class PlayerTracker {
 
     @SubscribeEvent
     public void onLivingEntityJoinWorld(EntityJoinWorldEvent event){
-        if(event.entity instanceof EntityPlayer){
-            DCPlayerProperties data = DCPlayerProperties.getProps(event.entity);
-            NBTTagCompound savedData = ModJam4.proxy.getLevels(((EntityPlayer) event.entity).getDisplayName());
-            if(savedData != null){
-                data.loadNBTData(savedData);
+        Entity entity = event.entity;
+
+        if (entity instanceof EntityLivingBase){
+            EntityLivingBase living = (EntityLivingBase) entity;
+            if (living instanceof EntityPlayer){
+                EntityPlayer player = (EntityPlayer) living;
+                NBTTagCompound playerData = ModJam4.proxy.getLevels(player.getDisplayName());
+                if (playerData != null){
+                    player.getExtendedProperties(DCPlayerProperties.IDENTIFIER).loadNBTData(playerData);
+                    DCPlayerProperties.getProps(event.entity).sync();
+                }
             }
-            ModJam4.packetHandler.sendTo(new PacketSync((EntityPlayer) event.entity), (EntityPlayerMP)((EntityPlayer)event.entity));
         }
     }
 
