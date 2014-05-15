@@ -21,6 +21,7 @@ public class PlayerTracker {
     public void onPlayerLogin(PlayerEvent.EntityConstructing event){
         if(event.entity instanceof EntityPlayer && DCPlayerProperties.getProps(event.entity) != null){
             DCPlayerProperties.register((EntityPlayer)event.entity);
+            System.out.println("PLAYERLOGGEDIN");
         }
     }
 
@@ -29,6 +30,7 @@ public class PlayerTracker {
         if(!event.entity.worldObj.isRemote && event.entity instanceof EntityPlayer){
             NBTTagCompound playerData = new NBTTagCompound();
             DCPlayerProperties.getProps(event.entity).saveNBTData(playerData);
+            System.out.println("PLAYER DIED");
         }
     }
 
@@ -42,6 +44,7 @@ public class PlayerTracker {
             if(playerData != null){
                 DCPlayerProperties.getProps(player).loadNBTData(playerData);
                 DCPlayerProperties.getProps(player).sync();
+                System.out.println("ENTITY JOINED WORLD");
             }
         }
     }
@@ -49,5 +52,18 @@ public class PlayerTracker {
     @SubscribeEvent
     public void onPlayerLogin(cpw.mods.fml.common.gameevent.PlayerEvent.PlayerLoggedInEvent event){
         DCPlayerProperties.getProps(event.player).sync();
+        System.out.println("PLAYER LOGGED IN");
+    }
+
+    @SubscribeEvent
+    public void onPlayerChangedDimension(cpw.mods.fml.common.gameevent.PlayerEvent.PlayerChangedDimensionEvent event) {
+        DCPlayerProperties.getProps(event.player).sync();
+        System.out.println("PLAYER CHANGED DIMENSION");
+    }
+
+    @SubscribeEvent
+    public void onPlayerRespawn(cpw.mods.fml.common.gameevent.PlayerEvent.PlayerRespawnEvent event) {
+        DCPlayerProperties.getProps(event.player).sync();
+        System.out.println("PLAYER RESPAWNED");
     }
 }
