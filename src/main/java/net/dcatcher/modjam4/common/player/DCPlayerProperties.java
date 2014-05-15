@@ -17,7 +17,7 @@ public class DCPlayerProperties implements IExtendedEntityProperties {
 
     private EntityPlayer player;
 
-    public static final String IDENTIFIER = "dcmodjam_data";
+    public static final String IDENTIFIER = "DCMODJAM";
 
     private int levelSword, levelBow, xpSword, xpBow;
 
@@ -34,6 +34,8 @@ public class DCPlayerProperties implements IExtendedEntityProperties {
     public static void register(EntityPlayer player){
         player.registerExtendedProperties(DCPlayerProperties.IDENTIFIER, new DCPlayerProperties(player));
     }
+
+
 
 
     @Override
