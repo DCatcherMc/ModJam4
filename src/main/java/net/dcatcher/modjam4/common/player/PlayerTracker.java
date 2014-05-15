@@ -21,7 +21,7 @@ public class PlayerTracker {
     public void onPlayerLogin(PlayerEvent.EntityConstructing event){
         if(event.entity instanceof EntityPlayer && DCPlayerProperties.getProps(event.entity) != null){
             DCPlayerProperties.register((EntityPlayer)event.entity);
-            System.out.println("PLAYERLOGGEDIN");
+            System.out.println("PLAYER LOGGED IN");
         }
     }
 
