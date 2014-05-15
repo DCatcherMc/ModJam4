@@ -1,5 +1,6 @@
 package net.dcatcher.modjam4.common.player;
 
+import cpw.mods.fml.common.eventhandler.EventPriority;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import net.dcatcher.modjam4.ModJam4;
 import net.minecraft.entity.Entity;
@@ -17,8 +18,8 @@ import net.minecraftforge.event.entity.player.PlayerEvent;
  */
 public class PlayerTracker {
 
-    @SubscribeEvent
-    public void onEntityConstructing(PlayerEvent.EntityConstructing event){
+    @SubscribeEvent(priority = EventPriority.LOWEST)
+    public void onEntityConstructing(EntityEvent.EntityConstructing event){
         if(event.entity instanceof EntityPlayer && DCPlayerProperties.getProps(event.entity) == null){
             DCPlayerProperties.register((EntityPlayer)event.entity);
             System.out.println("PLAYER CONSTRUCTING " + DCPlayerProperties.getProps(event.entity).getLevelBow());
@@ -54,7 +55,7 @@ public class PlayerTracker {
 
     @SubscribeEvent
     public void onPlayerLogin(cpw.mods.fml.common.gameevent.PlayerEvent.PlayerLoggedInEvent event){
-        if(DCPlayerProperties.getProps(event.player)!=null)
+        if(DCPlayerProperties.getProps(event.player) != null)
             DCPlayerProperties.getProps(event.player).sync();
         System.out.println("PLAYER LOGGED in " + DCPlayerProperties.getProps(event.player).getLevelBow());
     }
