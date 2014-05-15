@@ -4,6 +4,7 @@ import net.dcatcher.modjam4.ModJam4;
 import net.dcatcher.modjam4.common.network.PacketSync;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 import net.minecraftforge.common.IExtendedEntityProperties;
@@ -102,5 +103,6 @@ public class DCPlayerProperties implements IExtendedEntityProperties {
     public void sync(){
         PacketSync packet = new PacketSync(levelBow, levelSword, xpBow, xpSword);
         ModJam4.packetHandler.sendToServer(packet);
+        ModJam4.packetHandler.sendTo(packet, (EntityPlayerMP)player);
     }
 }

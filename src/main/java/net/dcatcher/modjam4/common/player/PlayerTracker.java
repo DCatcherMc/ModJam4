@@ -12,6 +12,7 @@ import net.minecraftforge.event.entity.EntityEvent;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
+import org.omg.CORBA.portable.IDLEntity;
 
 /**
  * Copyright: DCatcher
@@ -20,11 +21,11 @@ public class PlayerTracker {
 
     @SubscribeEvent(priority = EventPriority.LOWEST)
     public void onEntityConstructing(EntityEvent.EntityConstructing event){
-        if(event.entity instanceof EntityPlayer && DCPlayerProperties.getProps(event.entity) == null){
-            DCPlayerProperties.register((EntityPlayer)event.entity);
-            System.out.println("PLAYER CONSTRUCTING " + DCPlayerProperties.getProps(event.entity).getLevelBow());
-        }else{
-            DCPlayerProperties.getProps(event.entity).sync();
+        if(event.entity instanceof EntityPlayer){
+            if(DCPlayerProperties.getProps(event.entity) == null){
+                event.entity.registerExtendedProperties(DCPlayerProperties.IDENTIFIER, new DCPlayerProperties((EntityPlayer)event.entity));
+                System.out.println("PLAYER CONSTRUCTING " + DCPlayerProperties.getProps(event.entity).getLevelBow());
+            }
         }
     }
 

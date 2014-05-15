@@ -23,11 +23,6 @@ public class PacketSync extends AbstractPacket {
     }
     @Override
     public void encode(ChannelHandlerContext context, ByteBuf buffer) {
-
-    }
-
-    @Override
-    public void decode(ChannelHandlerContext context, ByteBuf buffer) {
         buffer.writeInt(levelBow);
         buffer.writeInt(levelSword);
         buffer.writeInt(xpBow);
@@ -35,8 +30,20 @@ public class PacketSync extends AbstractPacket {
     }
 
     @Override
-    public void handleClient(EntityPlayer player) {
+    public void decode(ChannelHandlerContext context, ByteBuf buffer) {
+        this.levelBow = buffer.readInt();
+        this.levelSword = buffer.readInt();
+        this.xpBow = buffer.readInt();
+        this.xpSword = buffer.readInt();
+    }
 
+    @Override
+    public void handleClient(EntityPlayer player) {
+        DCPlayerProperties props = DCPlayerProperties.getProps(player);
+        props.setLevelBow(levelBow);
+        props.setLevelSword(levelSword);
+        props.setXpBow(xpBow);
+        props.setXpSword(xpSword);
     }
 
     @Override
