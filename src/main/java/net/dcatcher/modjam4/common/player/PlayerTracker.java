@@ -21,7 +21,7 @@ public class PlayerTracker {
     public void onEntityConstructing(PlayerEvent.EntityConstructing event){
         if(event.entity instanceof EntityPlayer && DCPlayerProperties.getProps(event.entity) == null){
             DCPlayerProperties.register((EntityPlayer)event.entity);
-            System.out.println("PLAYER LOGGED IN");
+            System.out.println("PLAYER CONSTRUCTING " + DCPlayerProperties.getProps(event.entity).getLevelBow());
             DCPlayerProperties.getProps((EntityPlayer)event.entity).sync();
         }
     }
@@ -32,7 +32,7 @@ public class PlayerTracker {
             NBTTagCompound playerData = new NBTTagCompound();
             DCPlayerProperties.getProps(event.entity).saveNBTData(playerData);
             ModJam4.proxy.saveLevels(((EntityPlayer)event.entity).getDisplayName(), playerData);
-            System.out.println("PLAYER DIED");
+            System.out.println("PLAYER DIED " + DCPlayerProperties.getProps(event.entity).getLevelBow());
             DCPlayerProperties.getProps(event.entity).sync();
         }
     }
@@ -47,7 +47,7 @@ public class PlayerTracker {
             if(playerData != null){
                 DCPlayerProperties.getProps(player).loadNBTData(playerData);
                 DCPlayerProperties.getProps(player).sync();
-                System.out.println("ENTITY JOINED WORLD");
+                System.out.println("ENTITY JOINED WORLD " + DCPlayerProperties.getProps(event.entity).getLevelBow());
             }
         }
     }
@@ -56,18 +56,23 @@ public class PlayerTracker {
     public void onPlayerLogin(cpw.mods.fml.common.gameevent.PlayerEvent.PlayerLoggedInEvent event){
         if(DCPlayerProperties.getProps(event.player)!=null)
             DCPlayerProperties.getProps(event.player).sync();
-        System.out.println("PLAYER LOGGED IN");
+        System.out.println("PLAYER LOGGED in " + DCPlayerProperties.getProps(event.player).getLevelBow());
     }
 
     @SubscribeEvent
     public void onPlayerChangedDimension(cpw.mods.fml.common.gameevent.PlayerEvent.PlayerChangedDimensionEvent event) {
         DCPlayerProperties.getProps(event.player).sync();
-        System.out.println("PLAYER CHANGED DIMENSION");
+        System.out.println("PLAYER CHANGED DIMENSION " + DCPlayerProperties.getProps(event.player).getLevelBow());
     }
 
     @SubscribeEvent
     public void onPlayerRespawn(cpw.mods.fml.common.gameevent.PlayerEvent.PlayerRespawnEvent event) {
         DCPlayerProperties.getProps(event.player).sync();
-        System.out.println("PLAYER RESPAWNED");
+        System.out.println("PLAYER RESPAWNED " + DCPlayerProperties.getProps(event.player).getLevelBow());
+    }
+
+    @SubscribeEvent
+    public void onPlayerLogout(cpw.mods.fml.common.gameevent.PlayerEvent.PlayerLoggedOutEvent event){
+        System.out.println("PLAYER Logged out " + DCPlayerProperties.getProps(event.player).getLevelBow());
     }
 }
