@@ -15,7 +15,7 @@ import net.minecraftforge.common.IExtendedEntityProperties;
  */
 public class DCPlayerProperties implements IExtendedEntityProperties {
 
-    private int levelBow, levelSword;
+    private int levelBow=1, levelSword=1;
 
     EntityPlayer player;
 
@@ -57,11 +57,13 @@ public class DCPlayerProperties implements IExtendedEntityProperties {
 
     public static final void loadData(EntityPlayer player){
         DCPlayerProperties data = DCPlayerProperties.getProps(player);
-        NBTTagCompound saved = ModJam4.proxy.getLevels(player.getDisplayName());
-        if(saved != null){
-            data.loadNBTData(saved);
+        if(data != null){
+            NBTTagCompound saved = ModJam4.proxy.getLevels(player.getDisplayName());
+            if(saved != null){
+                data.loadNBTData(saved);
+            }
+            data.sync();
         }
-        data.sync();
     }
 
     @Override
