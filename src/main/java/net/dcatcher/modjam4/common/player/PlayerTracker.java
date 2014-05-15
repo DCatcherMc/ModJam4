@@ -31,18 +31,8 @@ public class PlayerTracker {
 
     @SubscribeEvent
     public void onLivingEntityJoinWorld(EntityJoinWorldEvent event){
-        Entity entity = event.entity;
-
-        if (entity instanceof EntityLivingBase){
-            EntityLivingBase living = (EntityLivingBase) entity;
-            if (living instanceof EntityPlayer){
-                EntityPlayer player = (EntityPlayer) living;
-                NBTTagCompound playerData = ModJam4.proxy.getLevels(player.getDisplayName());
-                if (playerData != null){
-                    player.getExtendedProperties(DCPlayerProperties.IDENTIFIER).loadNBTData(playerData);
-                    DCPlayerProperties.getProps(event.entity).sync();
-                }
-            }
+        if(!event.entity.worldObj.isRemote && event.entity instanceof EntityPlayer){
+            DCPlayerProperties.loadData((EntityPlayer)event.entity);
         }
     }
 

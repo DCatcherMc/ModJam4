@@ -1,6 +1,7 @@
 package net.dcatcher.modjam4.common.player;
 
 import net.dcatcher.modjam4.ModJam4;
+import net.dcatcher.modjam4.common.CommonProxy;
 import net.dcatcher.modjam4.common.network.PacketSync;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
@@ -52,6 +53,15 @@ public class DCPlayerProperties implements IExtendedEntityProperties {
         levelBow = nbt.getInteger("levelBow");
         xpSword = nbt.getInteger("xpSword");
         xpBow = nbt.getInteger("xpBow");
+    }
+
+    public static final void loadData(EntityPlayer player){
+        DCPlayerProperties data = DCPlayerProperties.getProps(player);
+        NBTTagCompound saved = ModJam4.proxy.getLevels(player.getDisplayName());
+        if(saved != null){
+            data.loadNBTData(saved);
+        }
+        data.sync();
     }
 
     @Override
