@@ -54,6 +54,7 @@ public class DCPlayerProperties implements IExtendedEntityProperties {
         levelSword = nbt.getInteger("levelSword");
         xpBow = nbt.getInteger("xpBow");
         xpSword = nbt.getInteger("xpSword");
+        ModJam4.packetHandler.sendToServer(new PacketSync(player));
     }
 
     @Override
