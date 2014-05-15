@@ -3,6 +3,7 @@ package net.dcatcher.modjam4.common.player;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import net.minecraft.entity.EntityTracker;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.event.entity.EntityEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
@@ -21,7 +22,8 @@ public class PlayerTracker {
 
     public void onPlayerDeath(LivingDeathEvent event){
         if(!event.entity.worldObj.isRemote && event.entity instanceof EntityPlayer){
-            
+            NBTTagCompound playerData = new NBTTagCompound();
+            DCPlayerProperties.getProps(event.entity).saveNBTData(playerData);
         }
     }
 }
