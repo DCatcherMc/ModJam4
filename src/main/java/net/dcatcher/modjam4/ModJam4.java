@@ -36,11 +36,12 @@ public class ModJam4 {
     public static final PacketHandler packetHandler = new PacketHandler();
 
     @SidedProxy(clientSide = "net.dcatcher.modjam4.client.ClientProxy", serverSide = "net.dcatcher.modjam4.common.CommonProxy")
-    public static CommonProxy proxy = new CommonProxy();
+    public static CommonProxy proxy;
+
     @Mod.EventHandler
     public static void preInit(FMLPreInitializationEvent event){
         MinecraftForge.EVENT_BUS.register(new PlayerTracker());
-        //FMLCommonHandler.instance().bus().register(new PlayerTracker());
+        FMLCommonHandler.instance().bus().register(new PlayerTracker());
         ItemHandler.initialiseItems();
     }
 
