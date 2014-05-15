@@ -67,7 +67,9 @@ public class DCPlayerProperties implements IExtendedEntityProperties {
     }
 
     @Override
-    public void init(Entity entity, World world) {}
+    public void init(Entity entity, World world) {
+        levelBow = levelSword = 1;
+    }
 
     public void addXp(int type, int ammout){
         switch(type){
