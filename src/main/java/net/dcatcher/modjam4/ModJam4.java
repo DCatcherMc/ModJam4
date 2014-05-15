@@ -27,6 +27,10 @@ import java.nio.channels.NetworkChannel;
 @Mod(modid="DCatcher_ModJam4", name="To be decided!", version="${version}")
 public class ModJam4 {
 
+    @Mod.Instance("DCatcher_ModJam4")
+    public static ModJam4 instance;
+
+
     public static CreativeTabs danTab = new DCCreativeTab();
 
     public static final PacketHandler packetHandler = new PacketHandler();

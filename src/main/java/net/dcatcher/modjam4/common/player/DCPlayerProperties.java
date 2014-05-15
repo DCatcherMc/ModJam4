@@ -71,6 +71,7 @@ public class DCPlayerProperties implements IExtendedEntityProperties {
 
     public void setLevelBow(int levelBow) {
         this.levelBow = levelBow;
+        sync();
     }
 
     public int getLevelSword() {
@@ -79,6 +80,7 @@ public class DCPlayerProperties implements IExtendedEntityProperties {
 
     public void setLevelSword(int levelSword) {
         this.levelSword = levelSword;
+        sync();
     }
 
     public int getXpBow() {
@@ -87,6 +89,7 @@ public class DCPlayerProperties implements IExtendedEntityProperties {
 
     public void setXpBow(int xpBow) {
         this.xpBow = xpBow;
+        sync();
     }
 
     public int getXpSword() {
@@ -95,6 +98,7 @@ public class DCPlayerProperties implements IExtendedEntityProperties {
 
     public void setXpSword(int xpSword) {
         this.xpSword = xpSword;
+        sync();
     }
 
     public void sync(){
