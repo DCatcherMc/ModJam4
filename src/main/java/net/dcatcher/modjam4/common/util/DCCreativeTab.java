@@ -9,7 +9,7 @@ import net.minecraft.item.Item;
  */
 public class DCCreativeTab extends CreativeTabs {
     public DCCreativeTab() {
-        super("DCatcher's ModJam");
+        super("DCatcherModjam");
     }
 
     @Override
