@@ -3,19 +3,8 @@ package net.dcatcher.modjam4.common.player;
 import cpw.mods.fml.common.eventhandler.EventPriority;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.PlayerEvent;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import net.dcatcher.modjam4.ModJam4;
-import net.dcatcher.modjam4.common.network.PacketSync;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.event.entity.EntityEvent;
-import net.minecraftforge.event.entity.EntityJoinWorldEvent;
-import net.minecraftforge.event.entity.living.LivingDeathEvent;
-import sun.net.www.content.text.plain;
 
 /**
  * Copyright: DCatcher
@@ -23,10 +12,10 @@ import sun.net.www.content.text.plain;
 public class PlayerTracker {
 
     @SubscribeEvent(priority = EventPriority.LOWEST)
-    public void onEntityConstructing(EntityEvent.EntityConstructing event)
-    {
-        if (event.entity instanceof EntityPlayer && event.entity.getExtendedProperties(DCPlayerProperties.IDENTIFIER) == null){
-            event.entity.registerExtendedProperties(DCPlayerProperties.IDENTIFIER, new DCPlayerProperties((EntityPlayer) event.entity));
+    public void onEntityConstructing(EntityEvent.EntityConstructing event){
+        if (event.entity instanceof EntityPlayer && DCPlayerProperties.getProps(event.entity) == null){
+            System.out.println("Initialising PlayerData");
+            DCPlayerProperties.register((EntityPlayer)event.entity);
         }
     }
     /**
