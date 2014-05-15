@@ -10,6 +10,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
+import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.handler.codec.MessageToMessageCodec;
 import net.minecraft.client.Minecraft;
@@ -22,6 +23,7 @@ import java.util.*;
 
 //Helped by the tutorial.. Had no idea how to do the 1.7 packets!
 
+@ChannelHandler.Sharable        //<--- Wow forgot one annotation :O
 public class PacketHandler extends MessageToMessageCodec<FMLProxyPacket, AbstractPacket> {
 
     private EnumMap<Side, FMLEmbeddedChannel> channels;
@@ -40,6 +42,7 @@ public class PacketHandler extends MessageToMessageCodec<FMLProxyPacket, Abstrac
         }
 
         if(this.isPostInitialised){
+            System.out.println("Error: in post init stage");
             return false;
         }
 
@@ -92,7 +95,7 @@ public class PacketHandler extends MessageToMessageCodec<FMLProxyPacket, Abstrac
 
 
     public void init(){
-        this.channels = NetworkRegistry.INSTANCE.newChannel("DCatcherModJam", this);
+        this.channels = NetworkRegistry.INSTANCE.newChannel("DCModJam", this);
         this.registerPacket(PacketSync.class);
     }
 

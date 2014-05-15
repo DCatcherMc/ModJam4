@@ -24,11 +24,11 @@ public class ModJam4 {
 
     public static CreativeTabs danTab = new DCCreativeTab();
 
-    public static PacketHandler packetHandler;
+    public static final PacketHandler packetHandler = new PacketHandler();
+    ;
 
     @Mod.EventHandler
     public static void preInit(FMLPreInitializationEvent event){
-        packetHandler = new PacketHandler();
         ItemHandler.initialiseItems();
     }
 
