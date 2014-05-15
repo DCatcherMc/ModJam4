@@ -1,14 +1,18 @@
 package net.dcatcher.modjam4.common.network;
 
+import cpw.mods.fml.common.network.ByteBufUtils;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
 import net.dcatcher.modjam4.common.player.DCPlayerProperties;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.nbt.NBTTagCompound;
 
 /**
  * Copyright: DCatcher
  */
 public class PacketSync extends AbstractPacket {
+
+    private NBTTagCompound data;
 
     public PacketSync(){
         //Yay for an empty one... apparently it's necessary?
@@ -19,43 +23,27 @@ public class PacketSync extends AbstractPacket {
                 xpBow,
                 xpSword;
 
-    public PacketSync(int levelBow, int levelSword, int xpBow, int xpSword){
-        this.levelBow = levelBow;
-        this.levelSword = levelSword;
-        this.xpBow = xpBow;
-        this.xpSword = xpSword;
+    public PacketSync(EntityPlayer player){
+        data = new NBTTagCompound();
+        DCPlayerProperties.getProps(player).saveNBTData(data);
     }
     @Override
     public void encode(ChannelHandlerContext context, ByteBuf buffer) {
-        buffer.writeInt(levelBow);
-        buffer.writeInt(levelSword);
-        buffer.writeInt(xpBow);
-        buffer.writeInt(xpSword);
+        ByteBufUtils.writeTag(buffer, data);
     }
 
     @Override
     public void decode(ChannelHandlerContext context, ByteBuf buffer) {
-        this.levelBow = buffer.readInt();
-        this.levelSword = buffer.readInt();
-        this.xpBow = buffer.readInt();
-        this.xpSword = buffer.readInt();
+        data = ByteBufUtils.readTag(buffer);
     }
 
     @Override
     public void handleClient(EntityPlayer player) {
-        DCPlayerProperties props = DCPlayerProperties.getProps(player);
-        props.setLevelBow(levelBow);
-        props.setLevelSword(levelSword);
-        props.setXpBow(xpBow);
-        props.setXpSword(xpSword);
+        DCPlayerProperties.getProps(player).loadNBTData(data);
     }
 
     @Override
     public void handleServer(EntityPlayer player) {
-        DCPlayerProperties props = DCPlayerProperties.getProps(player);
-        props.setLevelBow(this.levelBow);
-        props.setLevelSword(this.levelSword);
-        props.setXpBow(this.xpBow);
-        props.setXpSword(this.xpSword);
+
     }
 }
