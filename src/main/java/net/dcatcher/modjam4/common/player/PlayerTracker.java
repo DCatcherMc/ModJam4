@@ -23,7 +23,8 @@ public class PlayerTracker {
         if(event.entity instanceof EntityPlayer && DCPlayerProperties.getProps(event.entity) == null){
             DCPlayerProperties.register((EntityPlayer)event.entity);
             System.out.println("PLAYER CONSTRUCTING " + DCPlayerProperties.getProps(event.entity).getLevelBow());
-            DCPlayerProperties.getProps((EntityPlayer)event.entity).sync();
+        }else{
+            DCPlayerProperties.getProps(event.entity).sync();
         }
     }
 
@@ -32,9 +33,8 @@ public class PlayerTracker {
         if(!event.entity.worldObj.isRemote && event.entity instanceof EntityPlayer){
             NBTTagCompound playerData = new NBTTagCompound();
             DCPlayerProperties.getProps(event.entity).saveNBTData(playerData);
-            ModJam4.proxy.saveLevels(((EntityPlayer)event.entity).getDisplayName(), playerData);
+            ModJam4.proxy.saveLevels(((EntityPlayer) event.entity).getDisplayName(), playerData);
             System.out.println("PLAYER DIED " + DCPlayerProperties.getProps(event.entity).getLevelBow());
-            DCPlayerProperties.getProps(event.entity).sync();
         }
     }
 
