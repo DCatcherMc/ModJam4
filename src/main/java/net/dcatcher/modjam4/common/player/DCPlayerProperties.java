@@ -76,6 +76,7 @@ public class DCPlayerProperties implements IExtendedEntityProperties {
 
     public final DCPlayerProperties sync(){
         ModJam4.packetPipeline.sendTo(new PacketSync(player), (EntityPlayerMP) player);
+        System.out.println("SENDING A SYNC PACKET");
         return this.getProps(player);
     }
 

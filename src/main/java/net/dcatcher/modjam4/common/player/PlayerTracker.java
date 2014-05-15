@@ -3,8 +3,13 @@ package net.dcatcher.modjam4.common.player;
 import cpw.mods.fml.common.eventhandler.EventPriority;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.PlayerEvent;
+import net.dcatcher.modjam4.ModJam4;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.event.entity.EntityEvent;
+import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 
 /**
  * Copyright: DCatcher
@@ -28,6 +33,7 @@ public class PlayerTracker {
 
         }
     }
+*/
 
     @SubscribeEvent
     public void onLivingEntityJoinWorld(EntityJoinWorldEvent event){
@@ -45,7 +51,7 @@ public class PlayerTracker {
             }
         }
     }
-*/
+
     @SubscribeEvent
     public void onPlayerLogin(PlayerEvent.PlayerLoggedInEvent event) {
         DCPlayerProperties.getProps(event.player).sync();

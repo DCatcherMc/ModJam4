@@ -25,18 +25,18 @@ public class ModJam4 {
     @Mod.Instance("DCatcher_ModJam4")
     public static ModJam4 instance;
 
-
     public static CreativeTabs danTab = new DCCreativeTab();
 
     public static final PacketPipeline packetPipeline = new PacketPipeline();
 
     @SidedProxy(clientSide = "net.dcatcher.modjam4.client.ClientProxy", serverSide = "net.dcatcher.modjam4.common.CommonProxy")
-    public static CommonProxy proxy;
+    public static CommonProxy proxy = new CommonProxy();
 
     @Mod.EventHandler
     public static void preInit(FMLPreInitializationEvent event){
-        MinecraftForge.EVENT_BUS.register(new PlayerTracker());
-        FMLCommonHandler.instance().bus().register(new PlayerTracker());
+        PlayerTracker tracker = new PlayerTracker();
+        MinecraftForge.EVENT_BUS.register(tracker);
+        FMLCommonHandler.instance().bus().register(tracker);
         ItemHandler.initialiseItems();
     }
 
