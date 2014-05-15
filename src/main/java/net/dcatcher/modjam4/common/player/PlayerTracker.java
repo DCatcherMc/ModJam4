@@ -40,12 +40,14 @@ public class PlayerTracker {
 
     @SubscribeEvent
     public void onLivingEntityJoinWorld(EntityJoinWorldEvent event){
-        DCPlayerProperties data = DCPlayerProperties.getProps(event.entity);
-        NBTTagCompound savedData = ModJam4.proxy.getLevels(((EntityPlayer) event.entity).getDisplayName()); 
-        if(savedData != null){
-            data.loadNBTData(savedData);
+        if(event.entity instanceof EntityPlayer){
+            DCPlayerProperties data = DCPlayerProperties.getProps(event.entity);
+            NBTTagCompound savedData = ModJam4.proxy.getLevels(((EntityPlayer) event.entity).getDisplayName());
+            if(savedData != null){
+                data.loadNBTData(savedData);
+            }
+            ModJam4.packetHandler.sendTo(new PacketSync((EntityPlayer) event.entity), (EntityPlayerMP)((EntityPlayer)event.entity));
         }
-        ModJam4.packetHandler.sendTo(new PacketSync((EntityPlayer) event.entity), (EntityPlayerMP)event.entity);
     }
 
     @SubscribeEvent
