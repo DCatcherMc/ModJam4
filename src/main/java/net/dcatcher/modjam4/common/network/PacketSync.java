@@ -10,6 +10,10 @@ import net.minecraft.entity.player.EntityPlayer;
  */
 public class PacketSync extends AbstractPacket {
 
+    public PacketSync(){
+        //Yay for an empty one... apparently it's necessary?
+    }
+
     private int levelBow,
                 levelSword,
                 xpBow,

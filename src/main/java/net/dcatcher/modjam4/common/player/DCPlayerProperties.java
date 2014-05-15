@@ -103,6 +103,7 @@ public class DCPlayerProperties implements IExtendedEntityProperties {
     public void sync(){
         PacketSync packet = new PacketSync(levelBow, levelSword, xpBow, xpSword);
         ModJam4.packetHandler.sendToServer(packet);
-        ModJam4.packetHandler.sendTo(packet, (EntityPlayerMP)player);
+        PacketSync packetz = new PacketSync(levelBow, levelSword, xpBow, xpSword);
+        ModJam4.packetHandler.sendTo(packetz, (EntityPlayerMP)player);
     }
 }
