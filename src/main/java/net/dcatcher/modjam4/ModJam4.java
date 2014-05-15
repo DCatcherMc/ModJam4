@@ -13,6 +13,8 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 @Mod(modid="DCatcher_ModJam4", name="To be decided!", version="${version}")
 public class ModJam4 {
 
+
+
     @Mod.EventHandler
     public static void preInit(FMLPreInitializationEvent event){
 
