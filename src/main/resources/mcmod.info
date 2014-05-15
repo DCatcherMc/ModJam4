@@ -1,0 +1,16 @@
+[
+{
+  "modid": "DCatcher_ModJam4",
+  "name": "To be decided!",
+  "description": "DCatcher's #ModJam 4 Mod",
+  "version": "${version}",
+  "mcversion": "${mcversion}",
+  "url": "",
+  "updateUrl": "",
+  "authors": ["DCatcher"],
+  "credits": "DCatcher",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]

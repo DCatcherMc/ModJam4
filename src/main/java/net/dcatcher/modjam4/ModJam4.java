@@ -21,7 +21,7 @@ public class ModJam4 {
     @Mod.EventHandler
     public static void Init(FMLInitializationEvent event){
 
-        
+
     }
 
     @Mod.EventHandler
