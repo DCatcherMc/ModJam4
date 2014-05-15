@@ -18,11 +18,6 @@ public class PacketSync extends AbstractPacket {
         //Yay for an empty one... apparently it's necessary?
     }
 
-    private int levelBow,
-                levelSword,
-                xpBow,
-                xpSword;
-
     public PacketSync(EntityPlayer player){
         data = new NBTTagCompound();
         DCPlayerProperties.getProps(player).saveNBTData(data);
@@ -39,7 +34,7 @@ public class PacketSync extends AbstractPacket {
 
     @Override
     public void handleClient(EntityPlayer player) {
-        DCPlayerProperties.getProps(player).loadNBTData(data);
+        DCPlayerProperties.getProps(player).loadNBTData(this.data);
     }
 
     @Override

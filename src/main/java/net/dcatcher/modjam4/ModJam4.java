@@ -6,18 +6,13 @@ import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
-import cpw.mods.fml.common.network.NetworkRegistry;
-import cpw.mods.fml.common.registry.GameRegistry;
 import net.dcatcher.modjam4.common.CommonProxy;
 import net.dcatcher.modjam4.common.items.ItemHandler;
-import net.dcatcher.modjam4.common.network.PacketHandler;
+import net.dcatcher.modjam4.common.network.PacketPipeline;
 import net.dcatcher.modjam4.common.player.PlayerTracker;
 import net.dcatcher.modjam4.common.util.DCCreativeTab;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraftforge.common.MinecraftForge;
-
-import java.net.NetworkInterface;
-import java.nio.channels.NetworkChannel;
 
 /**
  * TODO:
@@ -33,7 +28,7 @@ public class ModJam4 {
 
     public static CreativeTabs danTab = new DCCreativeTab();
 
-    public static final PacketHandler packetHandler = new PacketHandler();
+    public static final PacketPipeline packetPipeline = new PacketPipeline();
 
     @SidedProxy(clientSide = "net.dcatcher.modjam4.client.ClientProxy", serverSide = "net.dcatcher.modjam4.common.CommonProxy")
     public static CommonProxy proxy;
@@ -47,11 +42,11 @@ public class ModJam4 {
 
     @Mod.EventHandler
     public static void Init(FMLInitializationEvent event){
-        packetHandler.init();
+        packetPipeline.init();
     }
 
     @Mod.EventHandler
     public static void postInit(FMLPostInitializationEvent event){
-        packetHandler.postInit();
+        packetPipeline.postInit();
     }
 }
