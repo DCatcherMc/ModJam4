@@ -3,6 +3,7 @@ package net.dcatcher.modjam4.common.player;
 import net.dcatcher.modjam4.ModJam4;
 import net.dcatcher.modjam4.common.CommonProxy;
 import net.dcatcher.modjam4.common.network.PacketSync;
+import net.minecraft.client.entity.EntityClientPlayerMP;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -49,13 +50,13 @@ public class DCPlayerProperties implements IExtendedEntityProperties {
     @Override
     public void loadNBTData(NBTTagCompound compound) {
         NBTTagCompound nbt = compound.getCompoundTag(IDENTIFIER);
-        levelSword = nbt.getInteger("levelSword");
-        levelBow = nbt.getInteger("levelBow");
-        xpSword = nbt.getInteger("xpSword");
-        xpBow = nbt.getInteger("xpBow");
+        setLevelSword(nbt.getInteger("levelSword"));
+        setLevelBow(nbt.getInteger("levelBow"));
+        setXpBow(nbt.getInteger("xpBow"));
+        setXpSword(nbt.getInteger("xpSword"));
     }
 
-    public static final void loadData(EntityPlayer player){
+    public static void loadData(EntityPlayer player){
         DCPlayerProperties data = DCPlayerProperties.getProps(player);
         if(data != null){
             NBTTagCompound saved = ModJam4.proxy.getLevels(player.getDisplayName());
@@ -116,6 +117,7 @@ public class DCPlayerProperties implements IExtendedEntityProperties {
     }
 
     public void sync(){
-        ModJam4.packetHandler.sendTo(new PacketSync(player), (EntityPlayerMP)player);
+        if(!(player instanceof EntityClientPlayerMP))
+           ModJam4.packetHandler.sendTo(new PacketSync(player), (EntityPlayerMP)player);
     }
 }
