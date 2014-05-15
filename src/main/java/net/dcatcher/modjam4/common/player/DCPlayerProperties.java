@@ -17,10 +17,20 @@ public class DCPlayerProperties implements IExtendedEntityProperties {
 
     private int xpBow, xpSword;
 
+    public static final String IDENTIFIER = "DCModJam_data";
+
     public DCPlayerProperties(EntityPlayer player){
         this.player = player;
         levelBow = 1;
         levelSword = 1;
+    }
+
+    public static DCPlayerProperties getProps(Entity player){
+        return (DCPlayerProperties)player.getExtendedProperties(IDENTIFIER);
+    }
+
+    public static void register(EntityPlayer player){
+        player.registerExtendedProperties(DCPlayerProperties.IDENTIFIER, new DCPlayerProperties(player));
     }
 
     @Override

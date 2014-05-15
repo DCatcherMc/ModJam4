@@ -6,6 +6,7 @@ import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import net.dcatcher.modjam4.common.items.ItemHandler;
+import net.dcatcher.modjam4.common.network.PacketHandler;
 import net.dcatcher.modjam4.common.util.DCCreativeTab;
 import net.minecraft.creativetab.CreativeTabs;
 
@@ -23,6 +24,8 @@ public class ModJam4 {
 
     public static CreativeTabs danTab = new DCCreativeTab();
 
+    public static final PacketHandler packetHandler = new PacketHandler();
+
     @Mod.EventHandler
     public static void preInit(FMLPreInitializationEvent event){
         ItemHandler.initialiseItems();
@@ -30,11 +33,11 @@ public class ModJam4 {
 
     @Mod.EventHandler
     public static void Init(FMLInitializationEvent event){
-        
+        packetHandler.init();
     }
 
     @Mod.EventHandler
     public static void postInit(FMLPostInitializationEvent event){
-
+        packetHandler.postInit();
     }
 }
