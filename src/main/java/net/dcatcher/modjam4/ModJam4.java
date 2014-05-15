@@ -1,5 +1,6 @@
 package net.dcatcher.modjam4;
 
+import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
@@ -35,6 +36,7 @@ public class ModJam4 {
     @Mod.EventHandler
     public static void preInit(FMLPreInitializationEvent event){
         MinecraftForge.EVENT_BUS.register(new PlayerTracker());
+        FMLCommonHandler.instance().bus().register(new PlayerTracker());
         ItemHandler.initialiseItems();
     }
 

@@ -18,10 +18,11 @@ import net.minecraftforge.event.entity.player.PlayerEvent;
 public class PlayerTracker {
 
     @SubscribeEvent
-    public void onPlayerLogin(PlayerEvent.EntityConstructing event){
+    public void onEntityConstructing(PlayerEvent.EntityConstructing event){
         if(event.entity instanceof EntityPlayer && DCPlayerProperties.getProps(event.entity) != null){
             DCPlayerProperties.register((EntityPlayer)event.entity);
             System.out.println("PLAYER LOGGED IN");
+            DCPlayerProperties.getProps((EntityPlayer)event.entity).sync();
         }
     }
 
@@ -40,7 +41,7 @@ public class PlayerTracker {
 
         if(entity instanceof EntityPlayer){
             EntityPlayer player = (EntityPlayer)entity;
-            NBTTagCompound playerData = ModJam4.proxy.getLevels(player.getDisplayName());
+            NBTTagCompound playerData = ModJam4.proxy.getLevels(player.user);
             if(playerData != null){
                 DCPlayerProperties.getProps(player).loadNBTData(playerData);
                 DCPlayerProperties.getProps(player).sync();
@@ -51,7 +52,8 @@ public class PlayerTracker {
 
     @SubscribeEvent
     public void onPlayerLogin(cpw.mods.fml.common.gameevent.PlayerEvent.PlayerLoggedInEvent event){
-        DCPlayerProperties.getProps(event.player).sync();
+        if(DCPlayerProperties.getProps(event.player)!=null)
+            DCPlayerProperties.getProps(event.player).sync();
         System.out.println("PLAYER LOGGED IN");
     }
 

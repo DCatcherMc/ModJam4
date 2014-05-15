@@ -32,7 +32,7 @@ public class DCPlayerProperties implements IExtendedEntityProperties {
     }
 
     public static void register(EntityPlayer player){
-        player.registerExtendedProperties(DCPlayerProperties.IDENTIFIER, new DCPlayerProperties(player));
+        player.registerExtendedProperties(IDENTIFIER, new DCPlayerProperties(player));
     }
 
     @Override
