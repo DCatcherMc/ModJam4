@@ -10,7 +10,7 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
  *  Name this main mod something different.
  */
 
-@Mod(modid="DCatcher_ModJam4", name="To be decided!", version="modjamDev")
+@Mod(modid="DCatcher_ModJam4", name="To be decided!", version="${version}")
 public class ModJam4 {
 
     @Mod.EventHandler
@@ -21,6 +21,7 @@ public class ModJam4 {
     @Mod.EventHandler
     public static void Init(FMLInitializationEvent event){
 
+        
     }
 
     @Mod.EventHandler
