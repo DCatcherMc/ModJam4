@@ -41,24 +41,14 @@ public class PlayerTracker {
 
     @SubscribeEvent
     public void onLivingEntityJoinWorld(EntityJoinWorldEvent event){
-        Entity entity = event.entity;
-
-        if(entity instanceof EntityPlayer){
-            EntityPlayer player = (EntityPlayer)entity;
-            NBTTagCompound playerData = ModJam4.proxy.getLevels(player.getDisplayName());
-            if(playerData != null){
-                DCPlayerProperties.getProps(player).loadNBTData(playerData);
-                DCPlayerProperties.getProps(player).sync();
-                System.out.println("ENTITY JOINED WORLD " + DCPlayerProperties.getProps(event.entity).getLevelBow());
-            }
-        }
     }
 
     @SubscribeEvent
     public void onPlayerLogin(cpw.mods.fml.common.gameevent.PlayerEvent.PlayerLoggedInEvent event){
-        if(DCPlayerProperties.getProps(event.player) != null)
+        if(DCPlayerProperties.getProps(event.player) != null){
             DCPlayerProperties.getProps(event.player).sync();
-        System.out.println("PLAYER LOGGED in " + DCPlayerProperties.getProps(event.player).getLevelBow());
+            System.out.println("PLAYER LOGGED in " + DCPlayerProperties.getProps(event.player).getLevelBow());
+        }
     }
 
     @SubscribeEvent
