@@ -1,18 +1,22 @@
 package net.dcatcher.modjam4.common.network;
 
+import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.common.network.FMLEmbeddedChannel;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.network.internal.FMLProxyPacket;
 import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.handler.codec.MessageToMessageCodec;
+import net.minecraft.client.Minecraft;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.network.INetHandler;
+import net.minecraft.network.NetHandlerPlayServer;
 
-import java.util.EnumMap;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 //Helped by the tutorial.. Had no idea how to do the 1.7 packets!
 
@@ -59,6 +63,58 @@ public class PacketHandler extends MessageToMessageCodec<FMLProxyPacket, Abstrac
 
     @Override
     protected void decode(ChannelHandlerContext ctx, FMLProxyPacket msg, List<Object> out) throws Exception {
-        
+        ByteBuf payload = msg.payload();
+        byte discriminator = payload.readByte();
+
+        Class<? extends AbstractPacket> clazz = this.packets.get(discriminator);
+        if(clazz == null)
+            throw new NullPointerException("No packet registered for discriminator: " + discriminator);
+        AbstractPacket pkt = clazz.newInstance();
+        pkt.decode(ctx, payload.slice());
+
+        EntityPlayer player;
+        switch(FMLCommonHandler.instance().getEffectiveSide()){
+            case CLIENT:
+                player = this.getClientPlayer();
+                pkt.handleClient(player);
+                break;
+            case SERVER:
+                INetHandler netHandler = ctx.channel().attr(NetworkRegistry.NET_HANDLER).get();
+                player = ((NetHandlerPlayServer) netHandler).playerEntity;
+                pkt.handleServer(player);
+                break;
+            default:
+        }
+        out.add(pkt);
     }
+
+
+    public void init(){
+        this.channels = NetworkRegistry.INSTANCE.newChannel("DCatcherModJam", this);
+    }
+
+    public void postInit(){
+        if(this.isPostInitialised)
+            return;
+
+        this.isPostInitialised = true;
+        Collections.sort(this.packets, new Comparator<Class<? extends AbstractPacket>> (){
+
+            @Override
+            public int compare(Class<? extends AbstractPacket> clazz1, Class<? extends AbstractPacket> clazz2){
+                int com = String.CASE_INSENSITIVE_ORDER.compare(clazz1.getCanonicalName(), clazz2.getCanonicalName());
+                if(com == 0)
+                    com = clazz1.getCanonicalName().compareTo(clazz2.getCanonicalName());
+                return com;
+            }
+        });
+    }
+
+    @SideOnly(Side.CLIENT)
+    private EntityPlayer getClientPlayer(){
+        return Minecraft.getMinecraft().thePlayer;
+    }
+
+
+
 }
