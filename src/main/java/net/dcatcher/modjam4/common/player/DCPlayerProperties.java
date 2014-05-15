@@ -1,5 +1,6 @@
 package net.dcatcher.modjam4.common.player;
 
+import net.dcatcher.modjam4.common.network.PacketSync;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
@@ -62,5 +63,47 @@ public class DCPlayerProperties implements IExtendedEntityProperties {
         switch(type){
 
         }
+
+        sync();
+    }
+
+    public int getLevelBow() {
+        return levelBow;
+    }
+
+    public void setLevelBow(int levelBow) {
+        this.levelBow = levelBow;
+        sync();
+    }
+
+    public int getLevelSword() {
+        return levelSword;
+    }
+
+    public void setLevelSword(int levelSword) {
+        this.levelSword = levelSword;
+        sync();
+    }
+
+    public int getXpBow() {
+        return xpBow;
+    }
+
+    public void setXpBow(int xpBow) {
+        this.xpBow = xpBow;
+        sync();
+    }
+
+    public int getXpSword() {
+        return xpSword;
+    }
+
+    public void setXpSword(int xpSword) {
+        this.xpSword = xpSword;
+        sync();
+    }
+
+    public void sync(){
+        PacketSync packet = new PacketSync(levelBow, levelSword, xpBow, xpSword);
     }
 }
