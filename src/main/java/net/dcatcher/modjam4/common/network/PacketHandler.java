@@ -93,6 +93,7 @@ public class PacketHandler extends MessageToMessageCodec<FMLProxyPacket, Abstrac
 
     public void init(){
         this.channels = NetworkRegistry.INSTANCE.newChannel("DCatcherModJam", this);
+        this.registerPacket(PacketSync.class);
     }
 
     public void postInit(){
