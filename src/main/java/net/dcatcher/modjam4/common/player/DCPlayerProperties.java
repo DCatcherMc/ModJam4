@@ -35,20 +35,32 @@ public class DCPlayerProperties implements IExtendedEntityProperties {
 
     @Override
     public void saveNBTData(NBTTagCompound compound) {
-
+        NBTTagCompound nbt = new NBTTagCompound();
+        nbt.setInteger("levelSword", levelSword);
+        nbt.setInteger("levelBow", levelBow);
+        nbt.setInteger("xpSword", xpSword);
+        nbt.setInteger("xpBow", xpBow);
+        compound.setTag(IDENTIFIER, nbt);
     }
 
     @Override
     public void loadNBTData(NBTTagCompound compound) {
-
+        NBTTagCompound nbt = compound.getCompoundTag(IDENTIFIER);
+        levelSword = nbt.getInteger("levelSword");
+        levelBow = nbt.getInteger("levelBow");
+        xpSword = nbt.getInteger("xpSword");
+        xpBow = nbt.getInteger("xpBow");
     }
 
     @Override
     public void init(Entity entity, World world) {
-
+        xpSword = xpBow = 0;
+        levelBow = levelSword = 1;
     }
 
-    public void addXp(String type){
+    public void addXp(int type, int ammout){
+        switch(type){
 
+        }
     }
 }
