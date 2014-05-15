@@ -29,7 +29,7 @@ public class PlayerTracker {
             event.entity.registerExtendedProperties(DCPlayerProperties.IDENTIFIER, new DCPlayerProperties((EntityPlayer) event.entity));
         }
     }
-
+    /**
     @SubscribeEvent
     public void onLivingEntityDeath(LivingDeathEvent event){
         if (!event.entity.worldObj.isRemote && event.entity instanceof EntityPlayer){
@@ -56,7 +56,7 @@ public class PlayerTracker {
             }
         }
     }
-
+*/
     @SubscribeEvent
     public void onPlayerLogin(PlayerEvent.PlayerLoggedInEvent event) {
         DCPlayerProperties.getProps(event.player).sync();
