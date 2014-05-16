@@ -2,22 +2,23 @@ package net.dcatcher.enderius.common.items;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.item.Item;
+import org.w3c.dom.NodeList;
 
 /**
  * Copyright: DCatcher
  */
 public class ItemHandler {
 
-    public static Item bookOfLeveling;
+    //public static Item bookOfLeveling;
     public static Item enderSlime;
     public static Item enderFocus;
 
     public static void initialiseItems(){
-        bookOfLeveling = new ItemBookOfLevelling();
+        //bookOfLeveling = new ItemBookOfLevelling();
         enderSlime = new ItemEnderSlime();
         enderFocus = new ItemEnderFocus();
 
-        GameRegistry.registerItem(bookOfLeveling, "bookOfLevelling");
+        //GameRegistry.registerItem(bookOfLeveling, "bookOfLevelling");
         GameRegistry.registerItem(enderSlime, "enderSlime");
         GameRegistry.registerItem(enderFocus, "enderFocus");
     }
