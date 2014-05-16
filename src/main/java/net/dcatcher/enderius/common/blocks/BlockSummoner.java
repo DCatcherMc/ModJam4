@@ -18,12 +18,15 @@ public class BlockSummoner extends BlockContainer {
         setBlockName("enderSummoner");
         setCreativeTab(Enderius.danTab);
         setHardness(2.0f);
+        setTickRandomly(true);
     }
 
     @Override
     public TileEntity createNewTileEntity(World var1, int var2) {
         return new TileEntitySummoner();
     }
+
+
 
     @Override
     public void registerBlockIcons(IIconRegister reg) {
