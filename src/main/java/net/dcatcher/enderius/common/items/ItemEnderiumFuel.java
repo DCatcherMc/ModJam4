@@ -17,6 +17,6 @@ public class ItemEnderiumFuel extends Item {
 
     @Override
     public void registerIcons(IIconRegister par1IconRegister) {
-        this.itemIcon = par1IconRegister.registerIcon("enderius:enderiumfuel")
+        this.itemIcon = par1IconRegister.registerIcon("enderius:enderiumfuel");
     }
 }

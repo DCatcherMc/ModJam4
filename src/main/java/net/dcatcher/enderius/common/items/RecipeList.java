@@ -12,5 +12,6 @@ public class RecipeList {
     public static void initialiseRecipes(){
         GameRegistry.addShapelessRecipe(new ItemStack(Items.ender_pearl, 1), new ItemStack(Items.slime_ball), new ItemStack(ItemHandler.enderSlime));
         GameRegistry.addShapedRecipe(new ItemStack(ItemHandler.enderFocus, 1), "EEE", "E E", "EEE", 'E', new ItemStack(ItemHandler.enderSlime));
+        GameRegistry.addSmelting(new ItemStack(ItemHandler.enderSlime), new ItemStack(ItemHandler.enderiumFuel, 4), 5);
     }
 }

@@ -37,11 +37,14 @@ public class ItemEnderFocus extends Item {
                 int startZa = z -1 ;
                 for(int a = 0; a < 3; a++){
                     for(int b = 0; b < 3; b++){
-                        if(world.getBlock(startXa + a, y, startZa + b) != Blocks.bedrock)
+                        if(world.getBlock(startXa + a, y, startZa + b) != Blocks.bedrock && player.inventory.hasItem(ItemHandler.enderiumFuel)){
                             world.setBlockToAir(startXa + a, y, startZa + b);
+                        }
                     }
                 }
+                player.inventory.consumeInventoryItem(ItemHandler.enderiumFuel);
                 break;
+
             case 2:
             case 3:
                 int startXb = x - 1;
@@ -49,21 +52,26 @@ public class ItemEnderFocus extends Item {
 
                 for(int a = 0; a < 3; a++){
                     for(int b = 0; b < 3; b++){
-                        if(world.getBlock(startXb + a, startYb + b, z) != Blocks.bedrock && player.inventory.hasItem(ItemHandler.enderiumFuel))
+                        if(world.getBlock(startXb + a, startYb + b, z) != Blocks.bedrock && player.inventory.hasItem(ItemHandler.enderiumFuel)){
                             world.setBlockToAir(startXb + a, startYb + b, z);
+                        }
                     }
                 }
+                player.inventory.consumeInventoryItem(ItemHandler.enderiumFuel);
                 break;
+
             case 4:
             case 5:
                 int startZc = z - 1;
                 int startYc = y - 1;
                 for(int a = 0; a < 3; a++){
                     for(int b = 0; b < 3; b++){
-                        if(world.getBlock(x, startYc + b, startZc + a) != Blocks.bedrock)
-                            world.setBlockToAir(x, startYc + b, startZc + a);
+                        if(world.getBlock(x, startYc + a, startZc + b) != Blocks.bedrock && player.inventory.hasItem(ItemHandler.enderiumFuel)){
+                            world.setBlockToAir(x, startYc + a, startZc + b);
+                        }
                     }
                 }
+                player.inventory.consumeInventoryItem(ItemHandler.enderiumFuel);
                 break;
         }
         return true;

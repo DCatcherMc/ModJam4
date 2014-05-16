@@ -23,5 +23,6 @@ public class ItemHandler {
         //GameRegistry.registerItem(bookOfLeveling, "bookOfLevelling");
         GameRegistry.registerItem(enderSlime, "enderSlime");
         GameRegistry.registerItem(enderFocus, "enderFocus");
+        GameRegistry.registerItem(enderiumFuel, "Enderium Fuel");
     }
 }
