@@ -9,6 +9,7 @@ import cpw.mods.fml.common.registry.EntityRegistry;
 import net.dcatcher.enderius.common.CommonProxy;
 import net.dcatcher.enderius.common.EntityEnderSlime;
 import net.dcatcher.enderius.common.items.ItemHandler;
+import net.dcatcher.enderius.common.items.RecipeList;
 import net.dcatcher.enderius.common.network.PacketPipeline;
 import net.dcatcher.enderius.common.util.DCCreativeTab;
 import net.minecraft.creativetab.CreativeTabs;
@@ -52,6 +53,7 @@ public class Enderius {
     public static void Init(FMLInitializationEvent event){
         packetPipeline.init();
         proxy.registerRenders();
+        RecipeList.initialiseRecipes();
     }
 
 

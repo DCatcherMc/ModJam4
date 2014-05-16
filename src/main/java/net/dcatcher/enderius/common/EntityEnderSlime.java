@@ -37,8 +37,10 @@ public class EntityEnderSlime extends EntitySlime implements IMob{
     }
 
     @Override
-    protected void dropRareDrop(int par1) {
-        super.dropRareDrop(par1);
+    protected void dropFewItems(boolean par1, int par2) {
+        if(this.rand.nextInt(10) < 1){
+            this.dropItem(ItemHandler.enderSlime, 1);
+        }
     }
 
     @Override
