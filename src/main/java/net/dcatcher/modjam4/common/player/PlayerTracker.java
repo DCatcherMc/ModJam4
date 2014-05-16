@@ -4,9 +4,11 @@ import cpw.mods.fml.common.eventhandler.EventPriority;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.PlayerEvent;
 import net.dcatcher.modjam4.ModJam4;
+import net.minecraft.client.entity.EntityClientPlayerMP;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.event.entity.EntityEvent;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
@@ -18,7 +20,7 @@ public class PlayerTracker {
 
     @SubscribeEvent
     public void onEntityConstructing(EntityEvent.EntityConstructing event){
-        if (event.entity instanceof EntityPlayer && event.entity.getExtendedProperties(DCPlayerProperties.IDENTIFIER) == null){
+        if (event.entity instanceof EntityClientPlayerMP && event.entity.getExtendedProperties(DCPlayerProperties.IDENTIFIER) == null){
             System.out.println("Initialising PlayerData" );
             event.entity.registerExtendedProperties(DCPlayerProperties.IDENTIFIER, new DCPlayerProperties((EntityPlayer) event.entity));
             System.out.println("+_+ " + DCPlayerProperties.getProps(event.entity).getLevelBow());
@@ -57,8 +59,8 @@ public class PlayerTracker {
 
     @SubscribeEvent
     public void onPlayerLogin(PlayerEvent.PlayerLoggedInEvent event) {
-        DCPlayerProperties.getProps(event.player).sync();
-        System.out.println("^THAT PACKET WAS A PLAYERLOGIN ONE REALLY :P");
+        //DCPlayerProperties.getProps(event.player).sync();
+        //System.out.println("^THAT PACKET WAS A PLAYERLOGIN ONE REALLY :P");
     }
 
 }
