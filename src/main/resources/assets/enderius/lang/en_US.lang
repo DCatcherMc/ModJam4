@@ -1,4 +1,4 @@
-itemGroup.DCatcherModjam=DCatcher's ModJam Mod
+itemGroup.Enderius=DCatcher's ModJam Mod
 
 
 item.itemBookOfLevelling.name=Book O' Levelling
@@ -7,6 +7,11 @@ item.enderFocus.name=Ender Focus
 item.enderiumFuel.name=Enderium Fuel
 item.enderNucleus.name=Ender Nucleus
 item.enderStar.name=End Star
+
+
+tile.blockEndStar.name=End Star Block
+tile.blockNetherStar.name=Nether Star Block
+tile.enderSummoner.name=Summoner
 
 
 entity.EnderSlime.name=Ender Cube
