@@ -37,7 +37,13 @@ public class PlayerTracker {
 
     @SubscribeEvent
     public void onLivingEntityJoinWorld(EntityJoinWorldEvent event){
-        Entity entity = event.entity;
+
+
+
+
+
+
+        /**Entity entity = event.entity;
 
         if (entity instanceof EntityLivingBase){
             EntityLivingBase living = (EntityLivingBase) entity;
@@ -45,16 +51,18 @@ public class PlayerTracker {
                 EntityPlayer player = (EntityPlayer) living;
                 NBTTagCompound playerData = ModJam4.proxy.getLevels(player.getDisplayName());
                 if (playerData != null){
-                    player.getExtendedProperties(DCPlayerProperties.IDENTIFIER).loadNBTData(playerData);
-                    DCPlayerProperties.getProps(event.entity).sync();
+                    // player.getExtendedProperties(DCPlayerProperties.IDENTIFIER).loadNBTData(playerData);
+                    // DCPlayerProperties.getProps(event.entity).sync();
                 }
             }
         }
+
+         */
     }
 
     @SubscribeEvent
     public void onPlayerLogin(PlayerEvent.PlayerLoggedInEvent event) {
-        DCPlayerProperties.getProps(event.player).sync();
+        // DCPlayerProperties.getProps(event.player).sync();
     }
 
 }
