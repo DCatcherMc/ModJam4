@@ -6,6 +6,7 @@ item.enderSlime.name=Ender Slime
 item.enderFocus.name=Ender Focus
 item.enderiumFuel.name=Enderium Fuel
 item.enderNucleus.name=Ender Nucleus
+item.enderStar.name=End Star
 
 
 entity.EnderSlime.name=Ender Cube

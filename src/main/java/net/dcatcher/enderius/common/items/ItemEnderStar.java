@@ -17,6 +17,6 @@ public class ItemEnderStar extends net.minecraft.item.Item {
 
     @Override
     public void registerIcons(IIconRegister par1IconRegister) {
-        this.itemIcon = par1IconRegister.registerIcon("enderius:enderstar");
+        this.itemIcon = par1IconRegister.registerIcon("enderius:endstar");
     }
 }

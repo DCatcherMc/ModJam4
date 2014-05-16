@@ -3,6 +3,7 @@ package net.dcatcher.enderius.common.util;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.PlayerEvent;
 import net.dcatcher.enderius.common.items.ItemHandler;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.boss.EntityDragon;
 import net.minecraft.world.WorldProviderEnd;
 import net.minecraft.world.biome.BiomeGenEnd;
@@ -23,7 +24,14 @@ public class EventListener {
 
     @SubscribeEvent
     public void onPlayerDimensionChange(PlayerEvent.PlayerChangedDimensionEvent event){
-        if(){
+        if(event.fromDim == 0 && event.toDim == 1){
+            for(Object entity : event.player.worldObj.loadedEntityList){
+                Entity current = (Entity)entity;
+                if(entity instanceof EntityDragon){
+                    return;
+                }
+            }
+            event.player.worldObj.spawnEntityInWorld(new EntityDragon(event.player.worldObj));
         }
     }
 }
