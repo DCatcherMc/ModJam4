@@ -2,9 +2,12 @@ package net.dcatcher.enderius.common.blocks;
 
 import net.dcatcher.enderius.Enderius;
 import net.dcatcher.enderius.common.TileEntitySummoner;
+import net.dcatcher.enderius.common.items.ItemEnderSlime;
+import net.dcatcher.enderius.common.items.ItemHandler;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
@@ -26,7 +29,20 @@ public class BlockSummoner extends BlockContainer {
         return new TileEntitySummoner();
     }
 
-
+    @Override
+    public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float px, float py, float pz) {
+        if(player.getCurrentEquippedItem() != null && player.getCurrentEquippedItem().getItem() == ItemHandler.enderSlime){
+            TileEntitySummoner summoner = (TileEntitySummoner)world.getTileEntity(x, y, z);
+            ItemEnderSlime slime = (ItemEnderSlime) player.getCurrentEquippedItem().getItem();
+            if(slime.getData() != null && slime.getID() != 0){
+                summoner.setData(slime.getData(), slime.getID());
+                return true;
+            }else{
+                return false;
+            }
+        }
+        return false;
+    }
 
     @Override
     public void registerBlockIcons(IIconRegister reg) {

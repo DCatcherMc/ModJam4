@@ -30,4 +30,11 @@ public class ItemEnderSlime extends Item {
         this.id = id;
     }
 
+    public NBTTagCompound getData(){
+        return data;
+    }
+
+    public int getID(){
+        return id;
+    }
 }

@@ -39,16 +39,24 @@ public class TileEntitySummoner extends TileEntity {
 
             cooldown--;
 
-            if(cooldown == 0){
+            if(cooldown == 0 && entityID != 0){
                 cooldown = 20;
 
                 Entity createdEntity = EntityList.createEntityByID(entityID, worldObj);
+                if(!(createdEntity instanceof EntityLivingBase)){
+                    return;
+                }
+
                 EntityLivingBase ent = (EntityLivingBase)createdEntity;
+
+                ent.readEntityFromNBT((NBTTagCompound) data.copy());
+
                 int x = xCoord + (rand.nextInt(10)-5);
                 int z = zCoord + (rand.nextInt(10)-5);
                 int y = yCoord + 1;
-                worldObj.spawnEntityInWorld(createdEntity);
+
                 createdEntity.setLocationAndAngles(x, y, z, 0f, 0f);
+                worldObj.spawnEntityInWorld(createdEntity);
             }
     }
 
