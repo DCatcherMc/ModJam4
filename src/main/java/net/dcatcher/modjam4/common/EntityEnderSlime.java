@@ -4,6 +4,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.monster.EntityEnderman;
 import net.minecraft.entity.monster.EntitySlime;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
 
 import java.util.Random;
@@ -42,6 +43,12 @@ public class EntityEnderSlime extends EntitySlime {
     protected String getJumpSound() {
         return "mob.endermen.idle";
     }
+
+    protected EntityEnderSlime createInstance() {
+        return new EntityEnderSlime(worldObj);
+    }
+
+    
 }
 
 

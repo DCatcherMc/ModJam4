@@ -1,6 +1,7 @@
 package net.dcatcher.modjam4.client;
 
 import cpw.mods.fml.client.registry.RenderingRegistry;
+import net.dcatcher.modjam4.client.render.RenderEnderSlime;
 import net.dcatcher.modjam4.common.CommonProxy;
 import net.dcatcher.modjam4.common.EntityEnderSlime;
 import net.minecraft.client.model.ModelSlime;
@@ -13,6 +14,6 @@ public class ClientProxy extends CommonProxy {
 
     @Override
     public void registerRenders(){
-        RenderingRegistry.registerEntityRenderingHandler(EntityEnderSlime.class, new RenderSlime(new ModelSlime(20), new ModelSlime(0), 0.5F));
+        RenderingRegistry.registerEntityRenderingHandler(EntityEnderSlime.class, new RenderEnderSlime(new ModelSlime(20), new ModelSlime(0), 0.5F));
     }
 }

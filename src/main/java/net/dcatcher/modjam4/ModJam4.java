@@ -41,7 +41,7 @@ public class ModJam4 {
         //FMLCommonHandler.instance().bus().register(tracker);
         ItemHandler.initialiseItems();
 
-        EntityRegistry.registerGlobalEntityID(EntityEnderSlime.class, "EnderSlime", EntityRegistry.findGlobalUniqueEntityId());
+        EntityRegistry.registerGlobalEntityID(EntityEnderSlime.class, "EnderSlime", EntityRegistry.findGlobalUniqueEntityId(), (255 << 16), (255 << 16) + (200 << 8));
     }
 
     @Mod.EventHandler
