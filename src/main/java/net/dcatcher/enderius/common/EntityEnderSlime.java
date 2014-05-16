@@ -16,7 +16,7 @@ public class EntityEnderSlime extends EntitySlime implements IMob{
 
     public EntityEnderSlime(World world) {
         super(world);
-        int slimesize = 1 << this.rand.nextInt(5);
+        int slimesize = 1 << this.rand.nextInt(3);
         setSlimeSize(slimesize);
     }
 

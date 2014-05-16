@@ -16,5 +16,6 @@ public class ItemHandler {
         enderSlime = new ItemEnderSlime();
 
         GameRegistry.registerItem(bookOfLeveling, "bookOfLevelling");
+        GameRegistry.registerItem(enderSlime, "enderSlime");
     }
 }

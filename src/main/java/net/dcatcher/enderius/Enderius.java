@@ -12,6 +12,8 @@ import net.dcatcher.enderius.common.items.ItemHandler;
 import net.dcatcher.enderius.common.network.PacketPipeline;
 import net.dcatcher.enderius.common.util.DCCreativeTab;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.EnumCreatureType;
+import net.minecraft.world.biome.BiomeGenBase;
 
 /**
  * TODO:
@@ -39,6 +41,8 @@ public class Enderius {
         ItemHandler.initialiseItems();
 
         EntityRegistry.registerGlobalEntityID(EntityEnderSlime.class, "EnderSlime", EntityRegistry.findGlobalUniqueEntityId(), (255 << 16), (255 << 16) + (200 << 8));
+        EntityRegistry.addSpawn(EntityEnderSlime.class, 1, 1, 1, EnumCreatureType.monster);
+        EntityRegistry.addSpawn(EntityEnderSlime.class, 1, 1, 1, EnumCreatureType.monster);
     }
 
     @Mod.EventHandler
