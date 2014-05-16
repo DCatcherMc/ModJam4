@@ -37,14 +37,15 @@ public class TileEntitySummoner extends TileEntity {
 
             cooldown--;
 
-            //if(cooldown == 0){
+            if(cooldown == 0){
                 cooldown = 20;
 
-                Entity createdEntity = EntityList.createEntityByID(91, worldObj);
-                createdEntity.posX = xCoord + (rand.nextInt(10)-5);
-                createdEntity.posZ = zCoord + (rand.nextInt(10)-5);
-                createdEntity.posY = yCoord + 1;
-                createdEntity.forceSpawn = true;
-            //}
+                Entity createdEntity = EntityList.createEntityByName("sheep", worldObj);
+                int x = xCoord + (rand.nextInt(10)-5);
+                int z = zCoord + (rand.nextInt(10)-5);
+                int y = yCoord + 1;
+                worldObj.spawnEntityInWorld(createdEntity);
+                createdEntity.setLocationAndAngles(x, y, z, 0f, 0f);
+            }
     }
 }
