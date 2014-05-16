@@ -8,19 +8,20 @@ import net.minecraft.item.Item;
  */
 public class ItemHandler {
 
-    //public static Item bookOfLeveling;
     public static Item enderSlime;
     public static Item enderFocus;
     public static Item enderiumFuel;
     public static Item enderNucleus;
+    public static Item enderStar;
 
     public static void initialiseItems(){
-        //bookOfLeveling = new ItemBookOfLevelling();
         enderSlime = new ItemEnderSlime();
         enderFocus = new ItemEnderFocus();
         enderiumFuel = new ItemEnderiumFuel();
         enderNucleus = new ItemEnderNucleus();
-        //GameRegistry.registerItem(bookOfLeveling, "bookOfLevelling");
+        enderStar = new ItemEnderStar();
+
+
         GameRegistry.registerItem(enderSlime, "enderSlime");
         GameRegistry.registerItem(enderFocus, "enderFocus");
         GameRegistry.registerItem(enderiumFuel, "enderiumFuel");

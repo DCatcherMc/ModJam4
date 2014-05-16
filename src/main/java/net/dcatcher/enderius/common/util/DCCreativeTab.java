@@ -1,5 +1,6 @@
 package net.dcatcher.enderius.common.util;
 
+import net.dcatcher.enderius.common.items.ItemHandler;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
@@ -9,11 +10,11 @@ import net.minecraft.item.Item;
  */
 public class DCCreativeTab extends CreativeTabs {
     public DCCreativeTab() {
-        super("DCatcherModjam");
+        super("Enderius");
     }
 
     @Override
     public Item getTabIconItem() {
-        return Items.enchanted_book;
+        return ItemHandler.enderStar;
     }
 }
