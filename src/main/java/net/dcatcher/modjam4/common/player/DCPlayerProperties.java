@@ -73,10 +73,13 @@ public class DCPlayerProperties implements IExtendedEntityProperties {
         sync();
     }
 
-    public final DCPlayerProperties sync(){
-        ModJam4.packetPipeline.sendTo(new PacketSync(levelBow, levelSword, xpBow, xpSword), (EntityPlayerMP) player);
-        System.out.println("SENDING A SYNC PACKET");
-        return this.getProps(player);
+    public final boolean sync(){
+        if(!player.worldObj.isRemote){
+            ModJam4.packetPipeline.sendTo(new PacketSync(levelBow, levelSword, xpBow, xpSword), (EntityPlayerMP) player);
+            System.out.println("SENDING A SYNC PACKET");
+            return true;
+        }
+        return false;
     }
 
     public int getLevelBow() {

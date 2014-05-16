@@ -39,7 +39,7 @@ public class PlayerTracker {
     @SubscribeEvent
     public void onLivingEntityJoinWorld(EntityJoinWorldEvent event){
 
-        /**Entity entity = event.entity;
+        Entity entity = event.entity;
 
         if (entity instanceof EntityLivingBase){
             EntityLivingBase living = (EntityLivingBase) entity;
@@ -47,18 +47,18 @@ public class PlayerTracker {
                 EntityPlayer player = (EntityPlayer) living;
                 NBTTagCompound playerData = ModJam4.proxy.getLevels(player.getDisplayName());
                 if (playerData != null){
-                    // player.getExtendedProperties(DCPlayerProperties.IDENTIFIER).loadNBTData(playerData);
-                    // DCPlayerProperties.getProps(event.entity).sync();
+                    DCPlayerProperties.getProps(event.entity).sync();
+                    System.out.println("JOINED WORLD AND PROXY WAS NOT NULL!");
+                    player.getExtendedProperties(DCPlayerProperties.IDENTIFIER).loadNBTData(playerData);
                 }
             }
         }
-
-         */
     }
 
     @SubscribeEvent
     public void onPlayerLogin(PlayerEvent.PlayerLoggedInEvent event) {
-        // DCPlayerProperties.getProps(event.player).sync();
+        DCPlayerProperties.getProps(event.player).sync();
+        System.out.println("^THAT PACKET WAS A PLAYERLOGIN ONE REALLY :P");
     }
 
 }
