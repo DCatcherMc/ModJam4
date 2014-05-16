@@ -14,22 +14,29 @@ public class EntityEnderSlime extends EntitySlime {
 
     public EntityEnderSlime(World par1World) {
         super(par1World);
+        int slimesize = 1 << this.rand.nextInt(5);
+        setSlimeSize(slimesize);
     }
 
     @Override
     public void onCollideWithPlayer(EntityPlayer player) {
-        player.attackEntityAsMob(this);
         double playerX = player.posX;
         double playerY = player.posY;
         double playerZ = player.posZ;
         Random random = new Random();
 
-        player.setPosition(playerX + (random.nextDouble()*5), playerY + 2, playerZ + (random.nextDouble()*5));
+        player.setPosition(playerX + (this.rand.nextInt(10) - 5), playerY + this.rand.nextInt(5), playerZ + (this.rand.nextInt(10) - 5));
+        player.playSound("mob.endermen.portal", 1f, 1f);
     }
 
     @Override
     protected String getSlimeParticle() {
         return "portal";
+    }
+
+    @Override
+    protected String getJumpSound() {
+        return "mob.enderman.idle";
     }
 }
 
