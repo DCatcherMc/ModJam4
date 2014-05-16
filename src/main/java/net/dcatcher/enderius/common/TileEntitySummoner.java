@@ -41,12 +41,12 @@ public class TileEntitySummoner extends TileEntity {
             if(cooldown == 0){
                 cooldown = 100;
                 if(!worldObj.isRemote){
-                    EntitySheep sheep = new EntitySheep(worldObj);
+                    Entity ent = EntityList.createEntityByID(entityID, worldObj);
                     int x = xCoord + (rand.nextInt(10)-5);
                     int z = zCoord + (rand.nextInt(10)-5);
                     int y = yCoord + 1;
-                    sheep.setLocationAndAngles(x, y, z, 0f, 0f);
-                    worldObj.spawnEntityInWorld(sheep);
+                    ent.setLocationAndAngles(x, y, z, 0f, 0f);
+                    worldObj.spawnEntityInWorld(ent);
                 }
             }
     }
