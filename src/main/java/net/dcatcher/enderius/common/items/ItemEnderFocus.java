@@ -30,22 +30,39 @@ public class ItemEnderFocus extends Item {
     @Override
     public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, int x,
                              int y, int z, int side, float px, float py, float pz) {
-        int modifier = 1;
+        int abc = 1;
+        if(player.isSneaking())
+            abc = 2;
+        else
+            abc = 10;
 
         switch(side){
             case 0:
-                modifier = 1;
-            case 1:
-                modifier = -1;
-                int startXa = x - 1;
-                int startZa = z -1 ;
-                for(int dist = 0; dist < 10; dist=(dist++ * modifier)){
+                int startXa0 = x - 1;
+                int startZa0 = z -1 ;
+                for(int dist = 0; dist < abc; dist++){
                     for(int a = 0; a < 3; a++){
                         for(int b = 0; b < 3; b++){
-                            if(world.getBlock(startXa + a, y+dist, startZa + b) != Blocks.bedrock && player.inventory.hasItem(ItemHandler.enderiumFuel)){
+                            if(world.getBlock(startXa0 + a, y+dist, startZa0 + b) != Blocks.bedrock && player.inventory.hasItem(ItemHandler.enderiumFuel)){
                                 if(!world.isRemote)
-                                    player.entityDropItem(new ItemStack(world.getBlock(startXa + a, y+dist, startZa + b)), 0f);
-                                world.setBlockToAir(startXa + a, y+dist, startZa + b);
+                                    player.entityDropItem(new ItemStack(world.getBlock(startXa0 + a, y+dist, startZa0 + b)), 0f);
+                                world.setBlockToAir(startXa0 + a, y+dist, startZa0 + b);
+                            }
+                        }
+                    }
+                    player.inventory.consumeInventoryItem(ItemHandler.enderiumFuel);
+                }
+                break;
+            case 1:
+                int startXa1 = x - 1;
+                int startZa1 = z -1 ;
+                for(int dist = 0; dist < abc; dist++){
+                    for(int a = 0; a < 3; a++){
+                        for(int b = 0; b < 3; b++){
+                            if(world.getBlock(startXa1 + a, y-dist, startZa1 + b) != Blocks.bedrock && player.inventory.hasItem(ItemHandler.enderiumFuel)){
+                                if(!world.isRemote)
+                                    player.entityDropItem(new ItemStack(world.getBlock(startXa1 + a, y-dist, startZa1 + b)), 0f);
+                                world.setBlockToAir(startXa1 + a, y-dist, startZa1 + b);
                             }
                         }
                     }
@@ -54,15 +71,12 @@ public class ItemEnderFocus extends Item {
                 break;
 
             case 2:
-                modifier = 1;
-            case 3:
-                modifier = -1;
                 int startXb = x - 1;
                 int startYb = y - 1;
-                for(int dist = 0; dist < 10; dist=(dist++ * modifier)){
-                for(int a = 0; a < 3; a++){
+                for(int dist = 0; dist < abc; dist++){
+                    for(int a = 0; a < 3; a++){
                         for(int b = 0; b < 3; b++){
-                            if(world.getBlock(startXb + a, startYb + b, z) != Blocks.bedrock && player.inventory.hasItem(ItemHandler.enderiumFuel)){
+                            if(world.getBlock(startXb + a, startYb + b, z +dist) != Blocks.bedrock && player.inventory.hasItem(ItemHandler.enderiumFuel)){
                                 if(!world.isRemote)
                                     player.entityDropItem(new ItemStack(world.getBlock(startXb + a, startYb + b, z+dist)), 0f);
                                 world.setBlockToAir(startXb + a, startYb + b, z+dist);
@@ -72,14 +86,27 @@ public class ItemEnderFocus extends Item {
                     player.inventory.consumeInventoryItem(ItemHandler.enderiumFuel);
                 }
                 break;
+            case 3:
+                int startXb1 = x - 1;
+                int startYb1 = y - 1;
+                for(int dist = 0; dist < abc; dist++){
+                    for(int a = 0; a < 3; a++){
+                        for(int b = 0; b < 3; b++){
+                            if(world.getBlock(startXb1 + a, startYb1 + b, z-dist) != Blocks.bedrock && player.inventory.hasItem(ItemHandler.enderiumFuel)){
+                                if(!world.isRemote)
+                                    player.entityDropItem(new ItemStack(world.getBlock(startXb1 + a, startYb1 + b, z-dist)), 0f);
+                                world.setBlockToAir(startXb1 + a, startYb1 + b, z-dist);
+                            }
+                        }
+                    }
+                    player.inventory.consumeInventoryItem(ItemHandler.enderiumFuel);
+                }
+                break;
 
             case 4:
-                modifier = 1;
-            case 5:
-                modifier = -1;
                 int startZc = z - 1;
                 int startYc = y - 1;
-                for(int dist = 0; dist < 10; dist=(dist++ * modifier)){
+                for(int dist = 0; dist < abc; dist++){
                     for(int a = 0; a < 3; a++){
                         for(int b = 0; b < 3; b++){
                             Block current = world.getBlock(x+dist, startYc+a, startZc + b);
@@ -87,6 +114,23 @@ public class ItemEnderFocus extends Item {
                                 if(!world.isRemote)
                                     player.entityDropItem(new ItemStack(current), 0f);
                                 world.setBlockToAir(x + dist, startYc + a, startZc + b);
+                            }
+                        }
+                    }
+                    player.inventory.consumeInventoryItem(ItemHandler.enderiumFuel);
+                }
+                break;
+            case 5:
+                int startZc1 = z - 1;
+                int startYc1 = y - 1;
+                for(int dist = 0; dist < abc; dist++){
+                    for(int a = 0; a < 3; a++){
+                        for(int b = 0; b < 3; b++){
+                            Block current = world.getBlock(x-dist, startYc1+a, startZc1 + b);
+                            if(current != Blocks.bedrock && player.inventory.hasItem(ItemHandler.enderiumFuel)){
+                                if(!world.isRemote)
+                                    player.entityDropItem(new ItemStack(current), 0f);
+                                world.setBlockToAir(x - dist, startYc1 + a, startZc1 + b);
                             }
                         }
                     }
