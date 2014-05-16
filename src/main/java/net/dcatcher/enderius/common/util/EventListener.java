@@ -41,8 +41,8 @@ public class EventListener {
     public void onPlayerInteract(EntityInteractEvent event){
         if(event.entityPlayer.getCurrentEquippedItem() != null &&
                 event.entityPlayer.getCurrentEquippedItem().getItem() instanceof ItemEnderSlime){
-            ItemStack slime =  event.entityPlayer.getCurrentEquippedItem();
-            slime.;
+            ItemEnderSlime slime = (ItemEnderSlime) event.entityPlayer.getCurrentEquippedItem().getItem();
+            slime.setData(event.entity.getEntityData(), event.entity.getEntityId());
             System.out.println("Getting information from this mob!");
         }
     }

@@ -42,21 +42,25 @@ public class TileEntitySummoner extends TileEntity {
             if(cooldown == 0 && entityID != 0){
                 cooldown = 20;
 
+                /**
                 Entity createdEntity = EntityList.createEntityByID(entityID, worldObj);
                 if(!(createdEntity instanceof EntityLivingBase)){
+                    System.out.println("error,not entitylivingbase");
                     return;
                 }
 
                 EntityLivingBase ent = (EntityLivingBase)createdEntity;
 
                 ent.readEntityFromNBT((NBTTagCompound) data.copy());
+                */
 
+                EntitySheep sheep = new EntitySheep(worldObj);
                 int x = xCoord + (rand.nextInt(10)-5);
                 int z = zCoord + (rand.nextInt(10)-5);
                 int y = yCoord + 1;
 
-                createdEntity.setLocationAndAngles(x, y, z, 0f, 0f);
-                worldObj.spawnEntityInWorld(createdEntity);
+                sheep.setLocationAndAngles(x, y, z, 0f, 0f);
+                worldObj.spawnEntityInWorld(sheep);
             }
     }
 

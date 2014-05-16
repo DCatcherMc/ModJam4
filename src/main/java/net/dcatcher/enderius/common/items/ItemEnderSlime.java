@@ -2,7 +2,9 @@ package net.dcatcher.enderius.common.items;
 
 import net.dcatcher.enderius.Enderius;
 import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.entity.Entity;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 
 /**
@@ -32,6 +34,12 @@ public class ItemEnderSlime extends Item {
 
     public NBTTagCompound getData(){
         return data;
+    }
+
+    public void storeNBT(ItemStack stack, Entity entity){
+        NBTTagCompound entityData = entity.getEntityData();
+
+
     }
 
     public int getID(){

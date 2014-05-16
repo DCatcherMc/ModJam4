@@ -8,6 +8,9 @@ import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagByte;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
@@ -33,14 +36,12 @@ public class BlockSummoner extends BlockContainer {
     public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float px, float py, float pz) {
         if(player.getCurrentEquippedItem() != null && player.getCurrentEquippedItem().getItem() == ItemHandler.enderSlime){
             TileEntitySummoner summoner = (TileEntitySummoner)world.getTileEntity(x, y, z);
-            ItemEnderSlime slime = (ItemEnderSlime) player.getCurrentEquippedItem().getItem();
-            if(slime.getData() != null && slime.getID() != 0){
-                summoner.setData(slime.getData(), slime.getID());
-                System.out.println("Added Data to summoner");
-                return true;
-            }else{
-                return false;
-            }
+            ItemStack slime = player.getCurrentEquippedItem();
+            NBTTagCompound nbt = new NBTTagCompound();
+            slime.writeToNBT(nbt);
+            summoner.setData(nbt, 0);
+            System.out.println("Added Data to summoner");
+            return true;
         }
         return false;
     }
