@@ -1,6 +1,7 @@
 package net.dcatcher.modjam4.common;
 
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.monster.EntityEnderman;
 import net.minecraft.entity.monster.EntitySlime;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
@@ -12,10 +13,13 @@ import java.util.Random;
  */
 public class EntityEnderSlime extends EntitySlime {
 
-    public EntityEnderSlime(World par1World) {
-        super(par1World);
+    public EntityEnderSlime(World world) {
+        super(world);
         int slimesize = 1 << this.rand.nextInt(5);
         setSlimeSize(slimesize);
+        if(this.rand.nextInt(100) > 2){
+            this.ridingEntity = new EntityEnderman(world);
+        }
     }
 
     @Override
@@ -36,7 +40,7 @@ public class EntityEnderSlime extends EntitySlime {
 
     @Override
     protected String getJumpSound() {
-        return "mob.enderman.idle";
+        return "mob.endermen.idle";
     }
 }
 
