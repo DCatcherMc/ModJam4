@@ -12,29 +12,42 @@ import net.minecraft.nbt.NBTTagCompound;
  */
 public class PacketSync extends AbstractPacket {
 
-    private NBTTagCompound data;
+    private DCPlayerProperties props;
+    private int levelBow;
+    private int levelSword;
+    private int xpBow;
+    private int xpSword;
 
     public PacketSync(){
         //Yay for an empty one... apparently it's necessary?
     }
 
     public PacketSync(EntityPlayer player){
-        data = new NBTTagCompound();
-        DCPlayerProperties.getProps(player).saveNBTData(data);
+        props = DCPlayerProperties.getProps(player);
     }
     @Override
     public void encode(ChannelHandlerContext context, ByteBuf buffer) {
-        ByteBufUtils.writeTag(buffer, data);
+        buffer.writeInt(props.getLevelBow());
+        buffer.writeInt(props.getLevelSword());
+        buffer.writeInt(props.getXpBow());
+        buffer.writeInt(props.getXpSword());
     }
 
     @Override
     public void decode(ChannelHandlerContext context, ByteBuf buffer) {
-        data = ByteBufUtils.readTag(buffer);
+        this.levelBow = buffer.readInt();
+        this.levelSword = buffer.readInt();
+        this.xpBow = buffer.readInt();
+        this.xpSword = buffer.readInt();
     }
 
     @Override
     public void handleClient(EntityPlayer player) {
-        DCPlayerProperties.getProps(player).loadNBTData(this.data);
+        DCPlayerProperties props = DCPlayerProperties.getProps(player);
+        props.setLevelBow(levelBow);
+        props.setLevelBow(levelBow);
+        props.setLevelBow(levelBow);
+        props.setLevelBow(levelBow);
     }
 
     @Override
