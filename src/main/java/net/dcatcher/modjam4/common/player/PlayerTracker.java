@@ -31,12 +31,14 @@ public class PlayerTracker {
             NBTTagCompound playerData = new NBTTagCompound();
             event.entity.getExtendedProperties(DCPlayerProperties.IDENTIFIER).saveNBTData(playerData);
             ModJam4.proxy.saveLevels(((EntityPlayer) event.entity).getDisplayName(), playerData);
+
         }
     }
 */
 
     @SubscribeEvent
     public void onLivingEntityJoinWorld(EntityJoinWorldEvent event){
+
         /**Entity entity = event.entity;
 
         if (entity instanceof EntityLivingBase){
@@ -50,12 +52,13 @@ public class PlayerTracker {
                 }
             }
         }
+
          */
     }
 
     @SubscribeEvent
     public void onPlayerLogin(PlayerEvent.PlayerLoggedInEvent event) {
-        DCPlayerProperties.getProps(event.player).sync();
+        // DCPlayerProperties.getProps(event.player).sync();
     }
 
 }

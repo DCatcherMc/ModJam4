@@ -34,16 +34,15 @@ public class ModJam4 {
 
     @Mod.EventHandler
     public static void preInit(FMLPreInitializationEvent event){
-
+        PlayerTracker tracker = new PlayerTracker();
+        MinecraftForge.EVENT_BUS.register(tracker);
+        FMLCommonHandler.instance().bus().register(tracker);
         ItemHandler.initialiseItems();
     }
 
     @Mod.EventHandler
     public static void Init(FMLInitializationEvent event){
         packetPipeline.init();
-        PlayerTracker tracker = new PlayerTracker();
-        MinecraftForge.EVENT_BUS.register(tracker);
-        FMLCommonHandler.instance().bus().register(tracker);
     }
 
     @Mod.EventHandler
