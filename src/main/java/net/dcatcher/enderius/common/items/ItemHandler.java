@@ -10,10 +10,12 @@ public class ItemHandler {
 
     public static Item bookOfLeveling;
     public static Item enderSlime;
+    public static Item enderFocus;
 
     public static void initialiseItems(){
         bookOfLeveling = new ItemBookOfLevelling();
         enderSlime = new ItemEnderSlime();
+        enderFocus = new ItemEnderFocus();
 
         GameRegistry.registerItem(bookOfLeveling, "bookOfLevelling");
         GameRegistry.registerItem(enderSlime, "enderSlime");

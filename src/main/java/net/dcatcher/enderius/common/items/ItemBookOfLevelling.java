@@ -15,7 +15,7 @@ public class ItemBookOfLevelling extends net.minecraft.item.Item {
 
     @Override
     public void registerIcons(IIconRegister icons) {
-        this.itemIcon = icons.registerIcon("dcatcher_modjam4:bookOfLeveling");
+        this.itemIcon = icons.registerIcon("enderius:bookOfLeveling");
 
     }
 }

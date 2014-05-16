@@ -12,7 +12,7 @@ import org.lwjgl.opengl.GL11;
  */
 public class RenderEnderSlime extends RenderSlime {
 
-    private static final ResourceLocation texture = new ResourceLocation("dcatcher_modjam4", "textures/mobs/enderslime.png");
+    private static final ResourceLocation texture = new ResourceLocation("enderius", "textures/mobs/enderslime.png");
 
     private ModelBase scale;
 

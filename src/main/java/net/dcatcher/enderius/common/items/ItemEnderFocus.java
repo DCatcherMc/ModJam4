@@ -6,16 +6,16 @@ import net.minecraft.client.renderer.texture.IIconRegister;
 /**
  * Copyright: DCatcher
  */
-public class ItemEnderSlime extends net.minecraft.item.Item {
+public class ItemEnderFocus extends net.minecraft.item.Item {
 
-    public ItemEnderSlime(){
+    public ItemEnderFocus(){
         super();
-        setUnlocalizedName("enderSlime");
         setCreativeTab(Enderius.danTab);
+        setMaxStackSize(1);
     }
 
     @Override
     public void registerIcons(IIconRegister par1IconRegister) {
-        this.itemIcon = par1IconRegister.registerIcon("enderius:enderslime");
+        this.itemIcon = par1IconRegister.registerIcon("enderius:enderfocus");
     }
 }

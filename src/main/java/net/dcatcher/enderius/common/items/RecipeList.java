@@ -11,6 +11,6 @@ public class RecipeList {
 
     public static void initialiseRecipes(){
         GameRegistry.addShapelessRecipe(new ItemStack(Items.ender_pearl, 1), new ItemStack(Items.slime_ball), new ItemStack(ItemHandler.enderSlime));
-        GameRegistry.addShapedRecipe(new ItemStack(ItemHandler.bookOfLeveling, 1), new Object[]{"EEE", "E E", "EEE", 'E', ItemHandler.bookOfLeveling});
+        GameRegistry.addShapedRecipe(new ItemStack(ItemHandler.bookOfLeveling, 1), "EEE", "E E", "EEE", 'E', new ItemStack(ItemHandler.enderSlime));
     }
 }

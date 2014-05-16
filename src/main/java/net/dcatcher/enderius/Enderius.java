@@ -6,6 +6,7 @@ import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.registry.EntityRegistry;
+import cpw.mods.fml.common.registry.GameRegistry;
 import net.dcatcher.enderius.common.CommonProxy;
 import net.dcatcher.enderius.common.EntityEnderSlime;
 import net.dcatcher.enderius.common.items.ItemHandler;
@@ -47,13 +48,15 @@ public class Enderius {
             if(biome != null)
                 EntityRegistry.addSpawn(EntityEnderSlime.class, 1, 5, 10, EnumCreatureType.monster, biome);
         }
+
+        RecipeList.initialiseRecipes();
+
     }
 
     @Mod.EventHandler
     public static void Init(FMLInitializationEvent event){
         packetPipeline.init();
         proxy.registerRenders();
-        RecipeList.initialiseRecipes();
     }
 
 
