@@ -34,18 +34,26 @@ public class ItemEnderFocus extends Item {
 
     public void removeBlocks(World world, int x, int y, int z, int side){
         switch(side){
-            case 0 || 1:
+            case 0:
+            case 1:
                 int startXa = x - 1;
-                int startZa = z + 1;
-                for(int a = 0; a < 3; x++){
-                    for(int b = 3; b < 3; b++){
+                int startZa = z -1 ;
+                for(int a = 0; a < 3; a++){
+                    for(int b = 0; b < 3; b++){
                         world.setBlockToAir(startXa + a, y, startZa + b);
                     }
                 }
                 break;
-            case 2 | 3:
+            case 2:
+            case 3:
                 int startXb = x - 1;
                 int startYb = y + 1;
+
+                for(int a = 0; a < 3; a++){
+                    for(int b = 0; b < 3; b++){
+                        world.setBlockToAir(startXb + a, y, startYb + b);
+                    }
+                }
                 break;
             case 4 | 5:
                 int startZc = z - 1;
