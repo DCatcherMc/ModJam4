@@ -20,7 +20,10 @@ public class EntityEnderSlime extends EntitySlime implements IMob{
         setSlimeSize(slimesize);
     }
 
-
+    @Override
+    public boolean getCanSpawnHere() {
+        return true;
+    }
 
     @Override
     public void onCollideWithPlayer(EntityPlayer player) {
