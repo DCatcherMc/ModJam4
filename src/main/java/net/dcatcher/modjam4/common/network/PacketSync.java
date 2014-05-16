@@ -45,9 +45,9 @@ public class PacketSync extends AbstractPacket {
     public void handleClient(EntityPlayer player) {
         DCPlayerProperties props = DCPlayerProperties.getProps(player);
         props.setLevelBow(levelBow);
-        props.setLevelSword(levelSword);
-        props.setXpBow(xpBow);
-        props.setXpSword(xpSword);
+        props.setLevelBow(levelBow);
+        props.setLevelBow(levelBow);
+        props.setLevelBow(levelBow);
     }
 
     @Override
