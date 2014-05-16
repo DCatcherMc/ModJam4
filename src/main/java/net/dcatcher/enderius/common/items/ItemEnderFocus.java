@@ -12,6 +12,7 @@ public class ItemEnderFocus extends net.minecraft.item.Item {
         super();
         setCreativeTab(Enderius.danTab);
         setMaxStackSize(1);
+        setUnlocalizedName("enderFocus");
     }
 
     @Override

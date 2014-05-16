@@ -1,4 +1,9 @@
 itemGroup.DCatcherModjam=DCatcher's ModJam Mod
+
+
 item.itemBookOfLevelling.name=Book O' Levelling
 item.enderSlime.name=Ender Slime
+item.enderFocus.name=Ender Focus
+
+
 entity.EmderSlime.name=Ender Cube
