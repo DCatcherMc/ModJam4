@@ -2,12 +2,14 @@ package net.dcatcher.enderius.common.util;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.PlayerEvent;
+import net.dcatcher.enderius.common.items.ItemEnderSlime;
 import net.dcatcher.enderius.common.items.ItemHandler;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.boss.EntityDragon;
 import net.minecraft.world.WorldProviderEnd;
 import net.minecraft.world.biome.BiomeGenEnd;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
+import net.minecraftforge.event.entity.player.EntityInteractEvent;
 
 /**
  * Copyright: DCatcher
@@ -32,6 +34,16 @@ public class EventListener {
                 }
             }
             event.player.worldObj.spawnEntityInWorld(new EntityDragon(event.player.worldObj));
+        }
+    }
+
+    @SubscribeEvent
+    public void onPlayerInteract(EntityInteractEvent event){
+        if(event.entityPlayer.getCurrentEquippedItem() != null &&
+                event.entityPlayer.getCurrentEquippedItem().getItem() instanceof ItemEnderSlime){
+            ItemEnderSlime slime = (ItemEnderSlime) event.entityPlayer.getCurrentEquippedItem().getItem();
+            slime.setData(event.entity.getEntityData(), event.entity.getEntityId());
+            System.out.println("Getting information from this mob!");
         }
     }
 }

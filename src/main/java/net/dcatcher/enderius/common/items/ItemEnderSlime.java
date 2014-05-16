@@ -2,11 +2,17 @@ package net.dcatcher.enderius.common.items;
 
 import net.dcatcher.enderius.Enderius;
 import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.item.Item;
+import net.minecraft.nbt.NBTTagCompound;
 
 /**
  * Copyright: DCatcher
  */
-public class ItemEnderSlime extends net.minecraft.item.Item {
+public class ItemEnderSlime extends Item {
+
+    NBTTagCompound data;
+    int id;
+
 
     public ItemEnderSlime(){
         super();
@@ -18,4 +24,10 @@ public class ItemEnderSlime extends net.minecraft.item.Item {
     public void registerIcons(IIconRegister par1IconRegister) {
         this.itemIcon = par1IconRegister.registerIcon("enderius:enderslime");
     }
+
+    public void setData(NBTTagCompound nbt,int id){
+        this.data = nbt;
+        this.id = id;
+    }
+
 }

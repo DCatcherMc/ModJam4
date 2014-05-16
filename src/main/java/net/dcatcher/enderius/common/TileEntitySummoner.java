@@ -2,6 +2,7 @@ package net.dcatcher.enderius.common;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.passive.EntitySheep;
 import net.minecraft.init.Blocks;
 import net.minecraft.nbt.NBTTagCompound;
@@ -14,7 +15,8 @@ import java.util.Random;
  */
 public class TileEntitySummoner extends TileEntity {
 
-    public String entityID;
+    public int entityID;
+    public NBTTagCompound data;
     public Random rand = new Random();
     public int cooldown = 20;
 
@@ -40,12 +42,18 @@ public class TileEntitySummoner extends TileEntity {
             if(cooldown == 0){
                 cooldown = 20;
 
-                Entity createdEntity = EntityList.createEntityByName("sheep", worldObj);
+                Entity createdEntity = EntityList.createEntityByID(entityID, worldObj);
+                EntityLivingBase ent = (EntityLivingBase)createdEntity;
                 int x = xCoord + (rand.nextInt(10)-5);
                 int z = zCoord + (rand.nextInt(10)-5);
                 int y = yCoord + 1;
                 worldObj.spawnEntityInWorld(createdEntity);
                 createdEntity.setLocationAndAngles(x, y, z, 0f, 0f);
             }
+    }
+
+    public void setData(NBTTagCompound tag, int id){
+        this.data = tag;
+        this.entityID = id;
     }
 }
