@@ -13,6 +13,7 @@ import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.dcatcher.enderius.common.CommonProxy;
 import net.dcatcher.enderius.common.EntityEnderSlime;
+import net.dcatcher.enderius.common.blocks.BlockHandler;
 import net.dcatcher.enderius.common.items.ItemHandler;
 import net.dcatcher.enderius.common.items.RecipeList;
 import net.dcatcher.enderius.common.network.PacketPipeline;
@@ -44,16 +45,21 @@ public class Enderius {
 
     @Mod.EventHandler
     public static void preInit(FMLPreInitializationEvent event){
+        //Initialise Items and Blocks
         ItemHandler.initialiseItems();
+        BlockHandler.initialiseBlocks();
 
         EntityRegistry.registerGlobalEntityID(EntityEnderSlime.class, "EnderSlime", EntityRegistry.findGlobalUniqueEntityId(), (255 << 16), (255 << 16) + (200 << 8));
         for(BiomeGenBase biome : BiomeGenBase.getBiomeGenArray()){
             if(biome != null)
                 EntityRegistry.addSpawn(EntityEnderSlime.class, 1, 1, 3, EnumCreatureType.monster, biome);
         }
+
+        //EventListener initialise
         EventListener listener = new EventListener();
         MinecraftForge.EVENT_BUS.register(listener);
         FMLCommonHandler.instance().bus().register(listener);
+        //Initialise Recipes
         RecipeList.initialiseRecipes();
 
     }
