@@ -4,6 +4,8 @@ import net.dcatcher.enderius.Enderius;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
@@ -26,13 +28,8 @@ public class ItemEnderFocus extends Item {
     }
 
     @Override
-    public boolean onItemUse(ItemStack stack, EntityPlayer entityPlayer, World world, int x,
+    public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, int x,
                              int y, int z, int side, float px, float py, float pz) {
-        removeBlocks(world, x, y, z, side);
-        return true;
-    }
-
-    public void removeBlocks(World world, int x, int y, int z, int side){
         switch(side){
             case 0:
             case 1:
@@ -40,25 +37,35 @@ public class ItemEnderFocus extends Item {
                 int startZa = z -1 ;
                 for(int a = 0; a < 3; a++){
                     for(int b = 0; b < 3; b++){
-                        world.setBlockToAir(startXa + a, y, startZa + b);
+                        if(world.getBlock(startXa + a, y, startZa + b) != Blocks.bedrock)
+                            world.setBlockToAir(startXa + a, y, startZa + b);
                     }
                 }
                 break;
             case 2:
             case 3:
                 int startXb = x - 1;
-                int startYb = y + 1;
+                int startYb = y - 1;
 
                 for(int a = 0; a < 3; a++){
                     for(int b = 0; b < 3; b++){
-                        world.setBlockToAir(startXb + a, y, startYb + b);
+                        if(world.getBlock(startXb + a, startYb + b, z) != Blocks.bedrock && player.inventory.hasItem(ItemHandler.enderiumFuel))
+                            world.setBlockToAir(startXb + a, startYb + b, z);
                     }
                 }
                 break;
-            case 4 | 5:
+            case 4:
+            case 5:
                 int startZc = z - 1;
-                int startYc = y + 1;
+                int startYc = y - 1;
+                for(int a = 0; a < 3; a++){
+                    for(int b = 0; b < 3; b++){
+                        if(world.getBlock(x, startYc + b, startZc + a) != Blocks.bedrock)
+                            world.setBlockToAir(x, startYc + b, startZc + a);
+                    }
+                }
                 break;
         }
+        return true;
     }
 }
