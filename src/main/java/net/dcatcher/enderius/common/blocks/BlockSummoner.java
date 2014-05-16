@@ -36,9 +36,7 @@ public class BlockSummoner extends BlockContainer {
         if(player.getCurrentEquippedItem() != null && player.getCurrentEquippedItem().getItem() == ItemHandler.enderSlime){
             TileEntitySummoner summoner = (TileEntitySummoner)world.getTileEntity(x, y, z);
             ItemStack slime = player.getCurrentEquippedItem();
-            NBTTagCompound nbt = new NBTTagCompound();
-            slime.writeToNBT(nbt);
-            summoner.setData(nbt, 0);
+            summoner.setData(Integer.parseInt(slime.getDisplayName()));
             System.out.println("Added Data to summoner");
             return true;
         }

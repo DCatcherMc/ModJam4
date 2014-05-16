@@ -18,7 +18,7 @@ public class TileEntitySummoner extends TileEntity {
     public int entityID;
     public NBTTagCompound data;
     public Random rand = new Random();
-    public int cooldown = 20;
+    public int cooldown = 100;
 
     public TileEntitySummoner(){
 
@@ -36,37 +36,22 @@ public class TileEntitySummoner extends TileEntity {
 
     public void updateEntity() {
         super.updateEntity();
-
             cooldown--;
 
             if(cooldown == 0){
-                cooldown = 20;
-
-                /**
-                Entity createdEntity = EntityList.createEntityByID(entityID, worldObj);
-                if(!(createdEntity instanceof EntityLivingBase)){
-                    System.out.println("error,not entitylivingbase");
-                    return;
+                cooldown = 100;
+                if(!worldObj.isRemote){
+                    EntitySheep sheep = new EntitySheep(worldObj);
+                    int x = xCoord + (rand.nextInt(10)-5);
+                    int z = zCoord + (rand.nextInt(10)-5);
+                    int y = yCoord + 1;
+                    sheep.setLocationAndAngles(x, y, z, 0f, 0f);
+                    worldObj.spawnEntityInWorld(sheep);
                 }
-
-                EntityLivingBase ent = (EntityLivingBase)createdEntity;
-
-                ent.readEntityFromNBT((NBTTagCompound) data.copy());
-                */
-
-                EntitySheep sheep = new EntitySheep(worldObj);
-                int x = xCoord + (rand.nextInt(10)-5);
-                int z = zCoord + (rand.nextInt(10)-5);
-                int y = yCoord + 1;
-
-                sheep.setLocationAndAngles(x, y, z, 0f, 0f);
-                worldObj.spawnEntityInWorld(sheep);
-                System.out.println("Attempting to spawn a sheeps!");
             }
     }
 
-    public void setData(NBTTagCompound tag, int id){
-        this.data = tag;
+    public void setData(int id){
         this.entityID = id;
     }
 }
