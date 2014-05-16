@@ -16,11 +16,12 @@ import net.minecraftforge.event.entity.EntityJoinWorldEvent;
  */
 public class PlayerTracker {
 
-    @SubscribeEvent(priority = EventPriority.LOWEST)
+    @SubscribeEvent
     public void onEntityConstructing(EntityEvent.EntityConstructing event){
-        if (event.entity instanceof EntityPlayer && DCPlayerProperties.getProps(event.entity) == null){
-            System.out.println("Initialising PlayerData");
-            DCPlayerProperties.register((EntityPlayer)event.entity);
+        if (event.entity instanceof EntityPlayer && event.entity.getExtendedProperties(DCPlayerProperties.IDENTIFIER) == null){
+            System.out.println("Initialising PlayerData" );
+            event.entity.registerExtendedProperties(DCPlayerProperties.IDENTIFIER, new DCPlayerProperties((EntityPlayer) event.entity));
+            System.out.println("+_+ " + DCPlayerProperties.getProps(event.entity).getLevelBow());
         }
     }
     /**
@@ -37,11 +38,6 @@ public class PlayerTracker {
 
     @SubscribeEvent
     public void onLivingEntityJoinWorld(EntityJoinWorldEvent event){
-
-
-
-
-
 
         /**Entity entity = event.entity;
 
