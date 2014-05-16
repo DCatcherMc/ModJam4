@@ -38,6 +38,8 @@ public class ItemEnderFocus extends Item {
                 for(int a = 0; a < 3; a++){
                     for(int b = 0; b < 3; b++){
                         if(world.getBlock(startXa + a, y, startZa + b) != Blocks.bedrock && player.inventory.hasItem(ItemHandler.enderiumFuel)){
+                            if(!world.isRemote)
+                                player.entityDropItem(new ItemStack(world.getBlock(startXa + a, y, startZa + b)), 0f);
                             world.setBlockToAir(startXa + a, y, startZa + b);
                         }
                     }
@@ -53,6 +55,8 @@ public class ItemEnderFocus extends Item {
                 for(int a = 0; a < 3; a++){
                     for(int b = 0; b < 3; b++){
                         if(world.getBlock(startXb + a, startYb + b, z) != Blocks.bedrock && player.inventory.hasItem(ItemHandler.enderiumFuel)){
+                            if(!world.isRemote)
+                                player.entityDropItem(new ItemStack(world.getBlock(startXb + a, startYb + b, z)), 0f);
                             world.setBlockToAir(startXb + a, startYb + b, z);
                         }
                     }
@@ -67,6 +71,9 @@ public class ItemEnderFocus extends Item {
                 for(int a = 0; a < 3; a++){
                     for(int b = 0; b < 3; b++){
                         if(world.getBlock(x, startYc + a, startZc + b) != Blocks.bedrock && player.inventory.hasItem(ItemHandler.enderiumFuel)){
+                            if(!world.isRemote)
+                                player.entityDropItem(new ItemStack(world.getBlock(x, startYc + a, startZc + b)), 0f);
+                            world.spawnParticle();
                             world.setBlockToAir(x, startYc + a, startZc + b);
                         }
                     }
