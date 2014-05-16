@@ -6,7 +6,9 @@ import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import cpw.mods.fml.common.registry.EntityRegistry;
 import net.dcatcher.modjam4.common.CommonProxy;
+import net.dcatcher.modjam4.common.EntityEnderSlime;
 import net.dcatcher.modjam4.common.items.ItemHandler;
 import net.dcatcher.modjam4.common.network.PacketPipeline;
 import net.dcatcher.modjam4.common.player.PlayerTracker;
@@ -38,12 +40,16 @@ public class ModJam4 {
         //MinecraftForge.EVENT_BUS.register(tracker);
         //FMLCommonHandler.instance().bus().register(tracker);
         ItemHandler.initialiseItems();
+
+        EntityRegistry.registerGlobalEntityID(EntityEnderSlime.class, "EnderSlime", EntityRegistry.findGlobalUniqueEntityId());
     }
 
     @Mod.EventHandler
     public static void Init(FMLInitializationEvent event){
         packetPipeline.init();
+        proxy.registerRenders();
     }
+
 
     @Mod.EventHandler
     public static void postInit(FMLPostInitializationEvent event){
