@@ -36,6 +36,7 @@ public class BlockSummoner extends BlockContainer {
             ItemEnderSlime slime = (ItemEnderSlime) player.getCurrentEquippedItem().getItem();
             if(slime.getData() != null && slime.getID() != 0){
                 summoner.setData(slime.getData(), slime.getID());
+                System.out.println("Added Data to summoner");
                 return true;
             }else{
                 return false;

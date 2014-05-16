@@ -6,6 +6,7 @@ import net.dcatcher.enderius.common.items.ItemEnderSlime;
 import net.dcatcher.enderius.common.items.ItemHandler;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.boss.EntityDragon;
+import net.minecraft.item.ItemStack;
 import net.minecraft.world.WorldProviderEnd;
 import net.minecraft.world.biome.BiomeGenEnd;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
@@ -41,8 +42,9 @@ public class EventListener {
     public void onPlayerInteract(EntityInteractEvent event){
         if(event.entityPlayer.getCurrentEquippedItem() != null &&
                 event.entityPlayer.getCurrentEquippedItem().getItem() instanceof ItemEnderSlime){
-            ItemEnderSlime slime = (ItemEnderSlime) event.entityPlayer.getCurrentEquippedItem().getItem();
-            slime.setData(event.entity.getEntityData(), event.entity.getEntityId());
+            ItemStack slime = event.entityPlayer.getCurrentEquippedItem();
+            slime.nbt
+            slime.nbt(event.entity.getEntityData(), event.entity.getEntityId());
             System.out.println("Getting information from this mob!");
         }
     }
