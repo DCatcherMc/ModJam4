@@ -26,5 +26,6 @@ public class ItemHandler {
         GameRegistry.registerItem(enderFocus, "enderFocus");
         GameRegistry.registerItem(enderiumFuel, "enderiumFuel");
         GameRegistry.registerItem(enderNucleus, "enderNucleus");
+        GameRegistry.registerItem(enderStar, "enderStar");
     }
 }
