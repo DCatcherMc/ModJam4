@@ -39,7 +39,7 @@ public class TileEntitySummoner extends TileEntity {
 
             cooldown--;
 
-            if(cooldown == 0 && entityID != 0){
+            if(cooldown == 0){
                 cooldown = 20;
 
                 /**
@@ -61,6 +61,7 @@ public class TileEntitySummoner extends TileEntity {
 
                 sheep.setLocationAndAngles(x, y, z, 0f, 0f);
                 worldObj.spawnEntityInWorld(sheep);
+                System.out.println("Attempting to spawn a sheeps!");
             }
     }
 

@@ -24,7 +24,6 @@ public class BlockSummoner extends BlockContainer {
         setBlockName("enderSummoner");
         setCreativeTab(Enderius.danTab);
         setHardness(2.0f);
-        setTickRandomly(true);
     }
 
     @Override
