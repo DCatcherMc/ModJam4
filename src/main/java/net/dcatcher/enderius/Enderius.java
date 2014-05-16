@@ -42,7 +42,10 @@ public class Enderius {
         ItemHandler.initialiseItems();
 
         EntityRegistry.registerGlobalEntityID(EntityEnderSlime.class, "EnderSlime", EntityRegistry.findGlobalUniqueEntityId(), (255 << 16), (255 << 16) + (200 << 8));
-        EntityRegistry.addSpawn(EntityEnderSlime.class, 50, 1, 5, EnumCreatureType.monster);
+        for(BiomeGenBase biome : BiomeGenBase.getBiomeGenArray()){
+            if(biome != null)
+                EntityRegistry.addSpawn(EntityEnderSlime.class, 1, 5, 10, EnumCreatureType.monster, biome);
+        }
     }
 
     @Mod.EventHandler

@@ -37,8 +37,8 @@ public class EntityEnderSlime extends EntitySlime implements IMob{
     }
 
     @Override
-    protected Item getDropItem() {
-        return ItemHandler.enderSlime;
+    protected void dropRareDrop(int par1) {
+        super.dropRareDrop(par1);
     }
 
     @Override
