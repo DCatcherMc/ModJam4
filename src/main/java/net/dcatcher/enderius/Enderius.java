@@ -38,9 +38,6 @@ public class Enderius {
 
     @Mod.EventHandler
     public static void preInit(FMLPreInitializationEvent event){
-        //PlayerTracker tracker = new PlayerTracker();
-        //MinecraftForge.EVENT_BUS.register(tracker);
-        //FMLCommonHandler.instance().bus().register(tracker);
         ItemHandler.initialiseItems();
 
         EntityRegistry.registerGlobalEntityID(EntityEnderSlime.class, "EnderSlime", EntityRegistry.findGlobalUniqueEntityId(), (255 << 16), (255 << 16) + (200 << 8));
