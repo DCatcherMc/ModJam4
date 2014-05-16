@@ -19,12 +19,12 @@ public class DCPlayerProperties implements IExtendedEntityProperties {
 
     public static final String IDENTIFIER = "DCMODJAM";
 
-    private int levelSword, levelBow, xpSword, xpBow;
+    public int levelSword, levelBow, xpSword, xpBow;
 
     public DCPlayerProperties(EntityPlayer player)
     {
         this.player = player;
-        levelSword = levelBow = 1;
+        levelBow = levelSword = 1;
     }
 
     public static DCPlayerProperties getProps(Entity player){
@@ -56,7 +56,6 @@ public class DCPlayerProperties implements IExtendedEntityProperties {
         levelSword = nbt.getInteger("levelSword");
         xpBow = nbt.getInteger("xpBow");
         xpSword = nbt.getInteger("xpSword");
-        ModJam4.packetPipeline.sendToServer(new PacketSync(player));
     }
 
     @Override
@@ -75,7 +74,7 @@ public class DCPlayerProperties implements IExtendedEntityProperties {
     }
 
     public final DCPlayerProperties sync(){
-        ModJam4.packetPipeline.sendTo(new PacketSync(player), (EntityPlayerMP) player);
+        ModJam4.packetPipeline.sendTo(new PacketSync(levelBow, levelSword, xpBow, xpSword), (EntityPlayerMP) player);
         System.out.println("SENDING A SYNC PACKET");
         return this.getProps(player);
     }

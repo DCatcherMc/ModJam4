@@ -30,7 +30,7 @@ public class ModJam4 {
     public static final PacketPipeline packetPipeline = new PacketPipeline();
 
     @SidedProxy(clientSide = "net.dcatcher.modjam4.client.ClientProxy", serverSide = "net.dcatcher.modjam4.common.CommonProxy")
-    public static CommonProxy proxy = new CommonProxy();
+    public static CommonProxy proxy;
 
     @Mod.EventHandler
     public static void preInit(FMLPreInitializationEvent event){
