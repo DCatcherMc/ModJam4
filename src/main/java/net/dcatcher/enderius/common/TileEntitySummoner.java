@@ -88,7 +88,7 @@ public class TileEntitySummoner extends TileEntity {
     }
 
     public boolean checkNoOfMobs(){
-        List entities = worldObj.getEntitiesWithinAABB(EntityLiving.class, getRenderBoundingBox().expand(5, 5, 5));
+        List entities = worldObj.getEntitiesWithinAABB(EntityLiving.class, getRenderBoundingBox().expand(4, 4, 4));
         if(entities.isEmpty())
             return true;
         int total = 0;
