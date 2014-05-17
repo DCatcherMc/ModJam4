@@ -14,7 +14,7 @@ import java.util.Random;
  */
 public class TileEntityRepellent extends TileEntity {
 
-    public List<String> blockedUsers = new ArrayList<String>();
+    public String blockedUser;
     public Random rand = new Random();
     public int locX, locY, locZ;
 
@@ -25,21 +25,13 @@ public class TileEntityRepellent extends TileEntity {
     @Override
     public void writeToNBT(NBTTagCompound compound) {
         super.writeToNBT(compound);
-        compound.setInteger("numberSaved", blockedUsers.size());
-        for(int i = 0; i < blockedUsers.size(); i++){
-            compound.setString("banneduser_" + i, blockedUsers.get(i));
-        }
+        compound.setString("banneduser", blockedUser);
     }
 
     @Override
     public void readFromNBT(NBTTagCompound compound) {
         super.readFromNBT(compound);
-        int total = compound.getInteger("numberSaved");
-        System.out.println(total);
-        for(int i = 0; i < total; i++){
-            System.out.println("Added to banned list "+ compound.getString("banneduser_" + i));
-            addPlayerToBlacklist(compound.getString("banneduser_" + i));
-        }
+        blockedUser = compound.getString("banneduser");
     }
 
     @Override
@@ -48,10 +40,10 @@ public class TileEntityRepellent extends TileEntity {
         if(worldObj.isBlockIndirectlyGettingPowered(xCoord,  yCoord, zCoord)){
             worldObj.spawnParticle("portal", xCoord + rand.nextInt(2)-1, yCoord + rand.nextInt(2)-1, zCoord + rand.nextInt(2)-1, 0d, 0d, 0d);
             List entities = worldObj.getEntitiesWithinAABB(EntityPlayer.class, AxisAlignedBB.getBoundingBox(xCoord, yCoord, zCoord, xCoord + 1, yCoord + 1, zCoord + 1).expand(10, 10, 10));
-
+            System.out.println(blockedUser);
             for(Object entity : entities){
                 EntityPlayer player = (EntityPlayer) entity;
-                if(blockedUsers.contains(player.getDisplayName())){
+                if(player.getDisplayName().equals(blockedUser)){
                     player.setLocationAndAngles(xCoord+20, yCoord + 1, zCoord+20, 0f, 0f);
                 }
             }
@@ -59,8 +51,7 @@ public class TileEntityRepellent extends TileEntity {
     }
 
     public void addPlayerToBlacklist(String username){
-        if(!blockedUsers.contains(username))
-            blockedUsers.add(username);
+        this.blockedUser = username;
     }
 
     public void setLocationToTPOut(int x, int y, int z){
