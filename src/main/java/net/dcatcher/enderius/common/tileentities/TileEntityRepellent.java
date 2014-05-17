@@ -52,12 +52,12 @@ public class TileEntityRepellent extends TileEntity {
     public void updateEntity() {
         super.updateEntity();
         if(worldObj.isBlockIndirectlyGettingPowered(xCoord,  yCoord, zCoord)){
-            List entities = worldObj.getEntitiesWithinAABB(EntityPlayer.class, getRenderBoundingBox().expand(10, 10, 10));
+            List entities = worldObj.getEntitiesWithinAABB(EntityPlayer.class, AxisAlignedBB.getBoundingBox(xCoord, yCoord, zCoord, xCoord + 1, yCoord +1, zCoord + 1).expand(10, 10, 10));
 
             for(Object entity : entities){
                 EntityPlayer player = (EntityPlayer) entity;
                 if(!allowedUsers.contains(player.getDisplayName())){
-                    player.setLocationAndAngles(xCoord+20, locY + 1, locZ+20, 0f, 0f);
+                    player.setLocationAndAngles(xCoord+20, yCoord + 1, zCoord+20, 0f, 0f);
                 }
             }
         }
