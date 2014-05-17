@@ -13,6 +13,7 @@ public class ItemHandler {
     public static Item enderiumFuel;
     public static Item enderNucleus;
     public static Item enderStar;
+    public static Item dnaSyringe;
 
     public static void initialiseItems(){
         enderSlime = new ItemEnderSlime();
@@ -20,6 +21,7 @@ public class ItemHandler {
         enderiumFuel = new ItemEnderiumFuel();
         enderNucleus = new ItemEnderNucleus();
         enderStar = new ItemEnderStar();
+        dnaSyringe = new ItemDNASyringe();
 
 
         GameRegistry.registerItem(enderSlime, "enderSlime");

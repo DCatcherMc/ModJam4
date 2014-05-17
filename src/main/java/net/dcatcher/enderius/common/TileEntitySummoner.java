@@ -51,8 +51,7 @@ public class TileEntitySummoner extends TileEntity {
                 cooldown--;
             }
             if(cooldown == 0 && entityID != null && worldObj.getBlock(xCoord, yCoord + 1, zCoord) == Blocks.dragon_egg){
-                cooldown = 20;
-                System.out.println("Finished Cooooldown");
+                cooldown = 100;
                 Entity ent = EntityList.createEntityByName(entityID, worldObj);
                 int x = xCoord + (rand.nextInt(6)-3);
                 int z = zCoord + (rand.nextInt(6)-3);
@@ -63,7 +62,6 @@ public class TileEntitySummoner extends TileEntity {
                 }
                 if(shouldSpawn){
                     worldObj.spawnEntityInWorld(ent);
-                    System.out.println("Spawning a mob of id: " + entityID);
                 }
             }
         }
