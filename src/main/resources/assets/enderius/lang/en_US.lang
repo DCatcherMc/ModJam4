@@ -12,6 +12,7 @@ item.enderStar.name=End Star
 tile.blockEndStar.name=End Star Block
 tile.blockNetherStar.name=Nether Star Block
 tile.enderSummoner.name=Summoner
+tile.enderRepellent.name=Repellent
 
 
 entity.EnderSlime.name=Ender Cube

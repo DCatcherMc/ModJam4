@@ -20,6 +20,7 @@ public class BlockRepellent extends BlockContainer {
     protected BlockRepellent() {
         super(Material.iron);
         setCreativeTab(Enderius.danTab);
+        setBlockName("enderRepellent");
     }
 
     @Override
@@ -47,13 +48,16 @@ public class BlockRepellent extends BlockContainer {
         if(te == null || player.isSneaking())
             return false;
 
-        if(player.getItemInUse() != null && player.getItemInUse().getItem() == Items.paper){
-            ItemStack itemStack = player.getItemInUse();
+        System.out.println("Current Item: " + player.getCurrentEquippedItem().getItem());
+
+        if(player.getCurrentEquippedItem() != null && player.getCurrentEquippedItem().getItem() == Items.paper){
+            ItemStack itemStack = player.getCurrentEquippedItem();
             String stackName = itemStack.getDisplayName();
             System.out.println("Added to whitelist " + stackName);
             ((TileEntityRepellent)te).addPlayerToWhitelist(stackName);
+            return true;
         }
-        return true;
+        return false;
     }
 
     @Override
