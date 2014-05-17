@@ -49,14 +49,22 @@ public class BlockSummoner extends BlockContainer {
     }
 
     @Override
-    public IIcon getIcon(IBlockAccess p_149673_1_, int p_149673_2_, int p_149673_3_, int p_149673_4_, int p_149673_5_) {
-        return super.getIcon(p_149673_1_, p_149673_2_, p_149673_3_, p_149673_4_, p_149673_5_);
+    public IIcon getIcon(int side, int meta) {
+        switch(side){
+            case 0:
+                return iconBottom;
+            case 1:
+                return iconTop;
+            default:
+                return blockIcon;
+        }
     }
+
 
     @Override
     public void registerBlockIcons(IIconRegister reg) {
         this.blockIcon = reg.registerIcon("enderius:summoner_side");
-        this.iconBottom = reg.registerIcon("enderius:summoner_side");
-        this.iconTop = reg.registerIcon("enderius:summoner_side");
+        this.iconBottom = reg.registerIcon("enderius:summoner_bottom");
+        this.iconTop = reg.registerIcon("enderius:summoner_top");
     }
 }
