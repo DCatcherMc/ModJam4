@@ -38,7 +38,7 @@ public class TileEntitySummoner extends TileEntity {
         super.updateEntity();
             cooldown--;
 
-            if(cooldown == 0){
+            if(cooldown == 0 && entityID != 0){
                 cooldown = 100;
                 if(!worldObj.isRemote){
                     Entity ent = EntityList.createEntityByID(entityID, worldObj);
