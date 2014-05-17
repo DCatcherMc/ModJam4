@@ -59,6 +59,7 @@ public class TileEntityRepellent extends TileEntity {
             for(Object entity : entities){
                 EntityPlayer player = (EntityPlayer) entity;
                 if(!allowedUsers.contains(player.getDisplayName())){
+                    System.out.println(player.getDisplayName() + " is not in the lisT!");
                     player.setLocationAndAngles(xCoord+20, yCoord + 1, zCoord+20, 0f, 0f);
                 }
             }
