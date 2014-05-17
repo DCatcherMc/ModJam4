@@ -1,5 +1,6 @@
 package net.dcatcher.enderius.common.tileentities;
 
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.nbt.NBTTagCompound;
@@ -37,8 +38,9 @@ public class TileEntityRepellent extends TileEntity {
     public void readFromNBT(NBTTagCompound compound) {
         super.readFromNBT(compound);
         int total = compound.getInteger("numberSaved");
+        System.out.println(total);
         for(int i = 0; i < total; i++){
-            allowedUsers.set(i, compound.getString("alloweduser"+i));
+            allowedUsers.add(compound.getString("alloweduser"+i));
             System.out.println("Adding: " + compound.getString("alloweduser"+i));
         }
     }
@@ -53,7 +55,8 @@ public class TileEntityRepellent extends TileEntity {
             for(Object entity : entities){
                 EntityPlayer player = (EntityPlayer) entity;
                 if(!allowedUsers.contains(player.getDisplayName())){
-                    System.out.println(player.getDisplayName() + " is not in the lisT!");
+                    System.out.println(player.getDisplayName() + " is not in the list");
+                    for(String str: allowedUsers){System.out.println(str);}
                     player.setLocationAndAngles(xCoord+20, yCoord + 1, zCoord+20, 0f, 0f);
                 }
             }
