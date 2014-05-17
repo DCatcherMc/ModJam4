@@ -44,7 +44,7 @@ public class EventListener {
         if(event.entityPlayer.getCurrentEquippedItem() != null &&
                 event.entityPlayer.getCurrentEquippedItem().getItem() instanceof ItemEnderSlime){
             ItemStack slime = event.entityPlayer.getCurrentEquippedItem();
-            slime.setStackDisplayName(""+EntityList.getEntityID(event.entityLiving));
+            slime.setStackDisplayName(""+EntityList.getEntityString(event.target));
             System.out.println("Getting information from this mob!");
         }
     }

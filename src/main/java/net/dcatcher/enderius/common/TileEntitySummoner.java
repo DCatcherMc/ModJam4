@@ -5,6 +5,8 @@ import net.minecraft.entity.EntityList;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.passive.EntitySheep;
 import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 
@@ -15,7 +17,7 @@ import java.util.Random;
  */
 public class TileEntitySummoner extends TileEntity {
 
-    public int entityID;
+    public String entityID;
     public NBTTagCompound data;
     public Random rand = new Random();
     public int cooldown = 100;
@@ -38,20 +40,24 @@ public class TileEntitySummoner extends TileEntity {
         super.updateEntity();
             cooldown--;
 
-            if(cooldown == 0 && entityID != 0){
+            if(cooldown == 0 && entityID != null){
                 cooldown = 100;
                 if(!worldObj.isRemote){
-                    Entity ent = EntityList.createEntityByID(entityID, worldObj);
+                    Entity ent = EntityList.createEntityByName(entityID, worldObj);
                     int x = xCoord + (rand.nextInt(10)-5);
                     int z = zCoord + (rand.nextInt(10)-5);
                     int y = yCoord + 1;
                     ent.setLocationAndAngles(x, y, z, 0f, 0f);
+                    System.out.println("Spawning a mob of id: " + entityID);
+                    if(entityID.equals("Skeleton")){
+                        ent.setCurrentItemOrArmor(0, new ItemStack(Items.bow));
+                    }
                     worldObj.spawnEntityInWorld(ent);
                 }
             }
     }
 
-    public void setData(int id){
+    public void setData(String id){
         this.entityID = id;
     }
 }
