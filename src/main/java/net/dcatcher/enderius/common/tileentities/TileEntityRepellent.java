@@ -52,7 +52,7 @@ public class TileEntityRepellent extends TileEntity {
     public void updateEntity() {
         super.updateEntity();
         if(worldObj.isBlockIndirectlyGettingPowered(xCoord,  yCoord, zCoord)){
-            List entities = worldObj.getEntitiesWithinAABB(EntityPlayerMP.class, getRenderBoundingBox().expand(10, 10, 10));
+            List entities = worldObj.getEntitiesWithinAABB(EntityPlayer.class, getRenderBoundingBox().expand(10, 10, 10));
 
             for(Object entity : entities){
                 EntityPlayer player = (EntityPlayer) entity;
