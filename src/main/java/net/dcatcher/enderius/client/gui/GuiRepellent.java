@@ -1,6 +1,7 @@
 package net.dcatcher.enderius.client.gui;
 
 import cpw.mods.fml.client.GuiConfirmation;
+import net.dcatcher.enderius.Enderius;
 import net.dcatcher.enderius.common.network.PacketRepellent;
 import net.dcatcher.enderius.common.tileentities.ContainerRepellent;
 import net.dcatcher.enderius.common.tileentities.TileEntityRepellent;
@@ -13,6 +14,7 @@ import net.minecraft.inventory.Container;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.input.Keyboard;
 import scala.Int;
+import scala.tools.nsc.Global;
 
 /**
  * Copyright: DCatcher
@@ -55,7 +57,8 @@ public class GuiRepellent extends GuiContainer {
         xCoord.setText(""+tileEntity.locX);
         yCoord.setText(""+tileEntity.locY);
         zCoord.setText(""+tileEntity.locZ);
-    }
+        buttonList.add(butt);
+        }
 
     @Override
     public void drawScreen(int i, int j, float f) {
@@ -68,19 +71,13 @@ public class GuiRepellent extends GuiContainer {
 
     @Override
     protected void actionPerformed(GuiButton button) {
-        switch(button.id){
-            case 0:
-                int locX = Integer.parseInt(xCoord.getText());
-                int locY = Integer.parseInt(yCoord.getText());
-                int locZ = Integer.parseInt(zCoord.getText());
+        int locX = Integer.parseInt(xCoord.getText());
+        int locY = Integer.parseInt(yCoord.getText());
+        int locZ = Integer.parseInt(zCoord.getText());
 
-                PacketRepellent packetRepel = new PacketRepellent()
-
-                System.out.println("Modifying TILEENTITY");
-                break;
-            default:
-                break;
-        }
+        PacketRepellent packetRepel = new PacketRepellent(locX, locY, locZ, tileEntity.xCoord, tileEntity.yCoord, tileEntity.zCoord);
+        Enderius.packetPipeline.sendToServer(packetRepel);
+        System.out.println("Sending Packet");
     }
 
     @Override
@@ -89,7 +86,7 @@ public class GuiRepellent extends GuiContainer {
         xCoord.mouseClicked(i, j, k);
         yCoord.mouseClicked(i, j, k);
         zCoord.mouseClicked(i, j, k);
-        butt.mousePressed(mc, i, j);
+        //butt.mousePressed(mc, i, j);
     }
 
 

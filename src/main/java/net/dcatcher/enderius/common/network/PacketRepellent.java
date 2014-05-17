@@ -50,10 +50,11 @@ public class PacketRepellent extends AbstractPacket {
         World world = player.worldObj;
 
         TileEntityRepellent repel = (TileEntityRepellent) world.getTileEntity(ex, ey, ez);
-        repel.locX = tx;
-        repel.locY = ty;
-        repel.locZ = tz;
-
+        if(repel != null){
+            repel.locX = tx;
+            repel.locY = ty;
+            repel.locZ = tz;
+        }
         System.out.println("Recieved Packet!");
     }
 }
