@@ -15,7 +15,6 @@ public class ItemDNASyringe extends Item {
         setCreativeTab(Enderius.danTab);
     }
 
-
     @Override
     public void registerIcons(IIconRegister par1IconRegister) {
         this.itemIcon = par1IconRegister.registerIcon("enderius:dnasyringe");
