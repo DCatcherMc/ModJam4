@@ -32,7 +32,6 @@ public class TileEntitySummoner extends TileEntity {
         super.writeToNBT(compound);
         if(entityID != null){
             compound.setString("entityID", entityID);
-            System.out.println("Saving EntityID: " + entityID);
         }
     }
 
@@ -40,7 +39,6 @@ public class TileEntitySummoner extends TileEntity {
     public void readFromNBT(NBTTagCompound compound) {
         super.readFromNBT(compound);
         this.entityID = compound.getString("entityID");
-        System.out.println("Loaded EntityID: " + entityID);
     }
 
     @Override

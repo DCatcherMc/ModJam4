@@ -54,9 +54,6 @@ public class GuiRepellent extends GuiContainer {
         zCoord = new GuiTextField(fontRendererObj, ((width-xSize)/2)  + 5, ((height - ySize) /2) + 30, 40, 10);
         butt = new GuiButton(0, ((width-xSize)/2)  + 5, ((height - ySize) /2) + 10, 100, 20, "Save");
 
-        xCoord.setText(""+tileEntity.locX);
-        yCoord.setText(""+tileEntity.locY);
-        zCoord.setText(""+tileEntity.locZ);
         buttonList.add(butt);
         }
 
