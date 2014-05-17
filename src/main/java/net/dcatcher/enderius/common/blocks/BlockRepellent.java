@@ -32,12 +32,14 @@ public class BlockRepellent extends BlockContainer {
         return this.blockIcon;
     }
 
+    /**
     @Override
     public int onBlockPlaced(World world, int x, int y, int z, int side, float hx, float hy, float hz, int meta) {
         TileEntityRepellent repel = (TileEntityRepellent) world.getTileEntity(x, y, z);
         repel.addPlayerToWhitelist(world.getClosestPlayer((double)x, (double)y, (double)z, -1).getDisplayName());
         return meta;
     }
+    */
 
     @Override
     public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float px, float py, float pz) {
@@ -48,7 +50,7 @@ public class BlockRepellent extends BlockContainer {
         if(player.getItemInUse() != null && player.getItemInUse().getItem() == Items.paper){
             ItemStack itemStack = player.getItemInUse();
             String stackName = itemStack.getDisplayName();
-
+            System.out.println("Added to whitelist " + stackName);
             ((TileEntityRepellent)te).addPlayerToWhitelist(stackName);
         }
         return true;
