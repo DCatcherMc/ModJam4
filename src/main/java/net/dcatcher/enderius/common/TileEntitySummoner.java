@@ -24,31 +24,32 @@ public class TileEntitySummoner extends TileEntity {
     public int cooldown = 100;
 
     public TileEntitySummoner(){
-
     }
 
     @Override
     public void writeToNBT(NBTTagCompound compound) {
         super.writeToNBT(compound);
-        if(entityID != null)
+        if(entityID != null){
             compound.setString("entityID", entityID);
+            System.out.println("Saving EntityID: " + entityID);
+        }
     }
 
     @Override
     public void readFromNBT(NBTTagCompound compound) {
         super.readFromNBT(compound);
         this.entityID = compound.getString("entityID");
+        System.out.println("Loaded EntityID: " + entityID);
     }
 
-
-
-
+    //@Override
     public void updateEntity() {
+
         if(!worldObj.isRemote){
             boolean shouldSpawn = checkNoOfMobs();
-
-            if(shouldSpawn)
+            if(shouldSpawn){
                 cooldown--;
+            }
             if(cooldown == 0 && entityID != null && worldObj.getBlock(xCoord, yCoord + 1, zCoord) == Blocks.dragon_egg){
                 cooldown = 20;
                 System.out.println("Finished Cooooldown");
@@ -86,7 +87,6 @@ public class TileEntitySummoner extends TileEntity {
         return false;
     }
 
-
     public boolean checkNoOfMobs(){
         List entities = worldObj.getEntitiesWithinAABB(EntityLiving.class, getRenderBoundingBox().expand(9, 9, 9));
         if(entities.isEmpty())
@@ -99,6 +99,5 @@ public class TileEntitySummoner extends TileEntity {
         }
 
         return total < 10;
-
     }
 }
