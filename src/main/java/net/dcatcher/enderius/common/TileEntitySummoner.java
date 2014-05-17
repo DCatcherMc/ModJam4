@@ -1,19 +1,13 @@
 package net.dcatcher.enderius.common;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import net.dcatcher.enderius.Enderius;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
 import net.minecraft.entity.EntityLiving;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.passive.EntitySheep;
-import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.AxisAlignedBB;
 
 import java.util.List;
 import java.util.Random;
@@ -45,16 +39,18 @@ public class TileEntitySummoner extends TileEntity {
         this.entityID = compound.getString("entityID");
     }
 
+
+
+
     public void updateEntity() {
+        if(!worldObj.isRemote){
+            boolean shouldSpawn = checkNoOfMobs();
 
-        boolean shouldSpawn = checkNoOfMobs();
-
-
-        cooldown--;
-        if(cooldown == 0 && entityID != null){
-            cooldown = 20;
-            System.out.println("Finished Cooooldown");
-            if(!worldObj.isRemote){
+            if(shouldSpawn)
+                cooldown--;
+            if(cooldown == 0 && entityID != null){
+                cooldown = 20;
+                System.out.println("Finished Cooooldown");
                 Entity ent = EntityList.createEntityByName(entityID, worldObj);
                 int x = xCoord + (rand.nextInt(8)-4);
                 int z = zCoord + (rand.nextInt(8)-4);
@@ -63,7 +59,7 @@ public class TileEntitySummoner extends TileEntity {
                 if(entityID.equals("Skeleton")){
                     ent.setCurrentItemOrArmor(0, new ItemStack(Items.bow));
                 }
-                if(!checkBlacklist(ent) && shouldSpawn){
+                if(shouldSpawn){
                     worldObj.spawnEntityInWorld(ent);
                     System.out.println("Spawning a mob of id: " + entityID);
                 }

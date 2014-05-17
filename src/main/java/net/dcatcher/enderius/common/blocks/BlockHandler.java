@@ -23,10 +23,13 @@ public class BlockHandler {
         GameRegistry.registerBlock(endStarBlock, "blockEndStar");
         GameRegistry.registerBlock(enderSummoner, "enderSummoner");
 
-        GameRegistry.registerTileEntity(TileEntitySummoner.class, "teSummoner");
-
 
         OreDictionary.registerOre("blockNetherStar", netherStarBlock);
         OreDictionary.registerOre("blockEndStar", endStarBlock);
+    }
+
+
+    public static void registerTileEntities(){
+        GameRegistry.registerTileEntity(TileEntitySummoner.class, "teSummoner");
     }
 }
