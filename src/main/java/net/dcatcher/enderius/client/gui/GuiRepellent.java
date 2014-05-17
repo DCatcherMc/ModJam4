@@ -10,6 +10,7 @@ import net.minecraft.client.renderer.texture.ITextureObject;
 import net.minecraft.entity.effect.EntityLightningBolt;
 import net.minecraft.inventory.Container;
 import net.minecraft.util.ResourceLocation;
+import scala.Int;
 
 /**
  * Copyright: DCatcher
@@ -19,6 +20,7 @@ public class GuiRepellent extends GuiContainer {
     TileEntityRepellent tileEntity;
 
     private GuiTextField xCoord, yCoord, zCoord;
+    private GuiButton butt;
 
 
     public GuiRepellent(TileEntityRepellent te) {
@@ -38,9 +40,6 @@ public class GuiRepellent extends GuiContainer {
     @Override
     protected void drawGuiContainerForegroundLayer(int p1, int p2) {
         fontRendererObj.drawString("Position to teleport users out of: ", 5, 5, 4210752);
-        xCoord.drawTextBox();
-        yCoord.drawTextBox();
-        zCoord.drawTextBox();
     }
 
     @Override
@@ -49,14 +48,23 @@ public class GuiRepellent extends GuiContainer {
         xCoord = new GuiTextField(fontRendererObj, ((width-xSize)/2)  + 5, ((height - ySize) /2) + 10, 40, 10);
         yCoord = new GuiTextField(fontRendererObj, ((width-xSize)/2)  + 5, ((height - ySize) /2) + 20, 40, 10);
         zCoord = new GuiTextField(fontRendererObj, ((width-xSize)/2)  + 5, ((height - ySize) /2) + 30, 40, 10);
+        butt = new GuiButton(0, ((width-xSize)/2)  + 5, ((height - ySize) /2) + 10, 100, 20, "Save");
 
+        xCoord.setText(""+tileEntity.locX);
+        yCoord.setText(""+tileEntity.locY);
+        zCoord.setText(""+tileEntity.locZ);
     }
 
     @Override
     public void drawScreen(int i, int j, float f) {
-
         super.drawScreen(i, j, f);
+        xCoord.drawTextBox();
+        yCoord.drawTextBox();
+        zCoord.drawTextBox();
+        butt.drawButton(mc, i, j);
     }
+
+
 
     @Override
     protected void mouseClicked(int i, int j, int k) {
@@ -64,26 +72,30 @@ public class GuiRepellent extends GuiContainer {
         xCoord.mouseClicked(i, j, k);
         yCoord.mouseClicked(i, j, k);
         zCoord.mouseClicked(i, j, k);
+        butt.mousePressed(mc, i, j);
     }
 
 
     @Override
     protected void keyTyped(char par1, int par2) {
         super.keyTyped(par1, par2);
-        if(xCoord.isFocused()){
-            xCoord.textboxKeyTyped(par1, par2);
-        }
-        if(yCoord.isFocused()){
-            yCoord.textboxKeyTyped(par1, par2);
-        }
-        if(zCoord.isFocused()){
-            zCoord.textboxKeyTyped(par1, par2);
-        }
 
-
+        if(Character.isDigit(par1) || par1 == '-'){
+            if(xCoord.isFocused()){
+                xCoord.textboxKeyTyped(par1, par2);
+            }
+            if(yCoord.isFocused()){
+                yCoord.textboxKeyTyped(par1, par2);
+            }
+            if(zCoord.isFocused()){
+                zCoord.textboxKeyTyped(par1, par2);
+            }
+        }
     }
 
     public void syncToTILEENTITY(GuiButton butt){
-        //tileEntity.locX =
+        tileEntity.locX = Integer.parseInt(xCoord.getText());
+        tileEntity.locY = Integer.parseInt(yCoord.getText());
+        tileEntity.locZ = Integer.parseInt(zCoord.getText());
     }
 }
