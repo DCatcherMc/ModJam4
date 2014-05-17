@@ -41,6 +41,7 @@ public class TileEntityRepellent extends TileEntity {
         int total = compound.getInteger("numberSaved");
         for(int i = 0; i < total; i++){
             allowedUsers.add(compound.getString("alloweduser"+i));
+            System.out.println(compound.getString("alloweduser"+i));
         }
 
         locX = compound.getInteger("locX");

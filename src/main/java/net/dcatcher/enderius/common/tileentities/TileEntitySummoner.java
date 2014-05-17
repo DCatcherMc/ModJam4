@@ -9,6 +9,7 @@ import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.AxisAlignedBB;
 
 import java.util.List;
 import java.util.Random;
@@ -44,7 +45,6 @@ public class TileEntitySummoner extends TileEntity {
 
     @Override
     public void updateEntity() {
-
         if(!worldObj.isRemote){
             boolean shouldSpawn = checkNoOfMobs();
             if(shouldSpawn){
@@ -86,7 +86,7 @@ public class TileEntitySummoner extends TileEntity {
     }
 
     public boolean checkNoOfMobs(){
-        List entities = worldObj.getEntitiesWithinAABB(EntityLiving.class, getRenderBoundingBox().expand(4, 4, 4));
+        List entities = worldObj.getEntitiesWithinAABB(EntityLiving.class, AxisAlignedBB.getBoundingBox(xCoord, yCoord, zCoord, xCoord+1, yCoord+1, zCoord+1).expand(4, 4, 4));
         if(entities.isEmpty())
             return true;
         int total = 0;
