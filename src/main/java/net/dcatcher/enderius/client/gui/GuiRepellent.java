@@ -1,6 +1,7 @@
 package net.dcatcher.enderius.client.gui;
 
 import cpw.mods.fml.client.GuiConfirmation;
+import net.dcatcher.enderius.common.network.PacketRepellent;
 import net.dcatcher.enderius.common.tileentities.ContainerRepellent;
 import net.dcatcher.enderius.common.tileentities.TileEntityRepellent;
 import net.minecraft.client.gui.GuiButton;
@@ -10,6 +11,7 @@ import net.minecraft.client.renderer.texture.ITextureObject;
 import net.minecraft.entity.effect.EntityLightningBolt;
 import net.minecraft.inventory.Container;
 import net.minecraft.util.ResourceLocation;
+import org.lwjgl.input.Keyboard;
 import scala.Int;
 
 /**
@@ -64,7 +66,22 @@ public class GuiRepellent extends GuiContainer {
         butt.drawButton(mc, i, j);
     }
 
+    @Override
+    protected void actionPerformed(GuiButton button) {
+        switch(button.id){
+            case 0:
+                int locX = Integer.parseInt(xCoord.getText());
+                int locY = Integer.parseInt(yCoord.getText());
+                int locZ = Integer.parseInt(zCoord.getText());
 
+                PacketRepellent packetRepel = new PacketRepellent()
+
+                System.out.println("Modifying TILEENTITY");
+                break;
+            default:
+                break;
+        }
+    }
 
     @Override
     protected void mouseClicked(int i, int j, int k) {
@@ -80,7 +97,7 @@ public class GuiRepellent extends GuiContainer {
     protected void keyTyped(char par1, int par2) {
         super.keyTyped(par1, par2);
 
-        if(Character.isDigit(par1) || par1 == '-'){
+        if(Character.isDigit(par1) || par1 == '-' || par2 == Keyboard.KEY_BACK){
             if(xCoord.isFocused()){
                 xCoord.textboxKeyTyped(par1, par2);
             }
@@ -93,9 +110,4 @@ public class GuiRepellent extends GuiContainer {
         }
     }
 
-    public void syncToTILEENTITY(GuiButton butt){
-        tileEntity.locX = Integer.parseInt(xCoord.getText());
-        tileEntity.locY = Integer.parseInt(yCoord.getText());
-        tileEntity.locZ = Integer.parseInt(zCoord.getText());
-    }
 }

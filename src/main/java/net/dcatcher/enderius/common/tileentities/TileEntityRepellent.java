@@ -30,6 +30,9 @@ public class TileEntityRepellent extends TileEntity {
         for(int i = 0; i < allowedUsers.size(); i++){
             compound.setString("alloweduser"+i, allowedUsers.get(i));
         }
+        compound.setInteger("locX", locX);
+        compound.setInteger("locY", locY);
+        compound.setInteger("locZ", locZ);
     }
 
     @Override
@@ -39,6 +42,10 @@ public class TileEntityRepellent extends TileEntity {
         for(int i = 0; i < total; i++){
             allowedUsers.add(compound.getString("alloweduser"+i));
         }
+
+        locX = compound.getInteger("locX");
+        locY = compound.getInteger("locY");
+        locZ = compound.getInteger("locZ");
     }
 
     @Override
