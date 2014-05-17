@@ -2,11 +2,13 @@ package net.dcatcher.enderius.common.util;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.PlayerEvent;
+import net.dcatcher.enderius.common.EntityEnderSlime;
 import net.dcatcher.enderius.common.items.ItemEnderSlime;
 import net.dcatcher.enderius.common.items.ItemHandler;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
 import net.minecraft.entity.boss.EntityDragon;
+import net.minecraft.entity.monster.EntityEnderman;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.WorldProviderEnd;
 import net.minecraft.world.biome.BiomeGenEnd;
@@ -19,10 +21,20 @@ import net.minecraftforge.event.entity.player.EntityInteractEvent;
 public class EventListener {
 
     @SubscribeEvent
-    public void onEnderDragonDeath(LivingDeathEvent event){
+    public void onEntityDeath(LivingDeathEvent event){
         if(event.entity instanceof EntityDragon){
             if(!event.entity.worldObj.isRemote)
                 event.entity.dropItem(ItemHandler.enderStar, 1);
+        }else if(event.entity instanceof EntityEnderman){
+            double x = event.entity.posX;
+            double y = event.entity.posY;
+            double z = event.entity.posZ;
+
+            EntityEnderSlime slime = new EntityEnderSlime(event.entity.worldObj);
+            slime.posX = x;
+            slime.posY = y;
+            slime.posZ = z;
+            event.entity.worldObj.spawnEntityInWorld(slime);
         }
     }
 

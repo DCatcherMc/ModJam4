@@ -4,6 +4,7 @@ import net.dcatcher.enderius.Enderius;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -28,7 +29,7 @@ public class TileEntitySummoner extends TileEntity {
 
     @Override
     public void writeToNBT(NBTTagCompound compound) {
-        super.readFromNBT(compound);
+        super.writeToNBT(compound);
         if(entityID != null)
             compound.setString("entityID", entityID);
     }
@@ -48,7 +49,7 @@ public class TileEntitySummoner extends TileEntity {
 
             if(shouldSpawn)
                 cooldown--;
-            if(cooldown == 0 && entityID != null){
+            if(cooldown == 0 && entityID != null && worldObj.getBlock(xCoord, yCoord + 1, zCoord) == Blocks.dragon_egg){
                 cooldown = 20;
                 System.out.println("Finished Cooooldown");
                 Entity ent = EntityList.createEntityByName(entityID, worldObj);

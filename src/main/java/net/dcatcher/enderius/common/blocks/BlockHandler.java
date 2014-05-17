@@ -30,6 +30,6 @@ public class BlockHandler {
 
 
     public static void registerTileEntities(){
-        GameRegistry.registerTileEntity(TileEntitySummoner.class, "teSummoner");
+        GameRegistry.registerTileEntity(TileEntitySummoner.class, "enderiusSummoner");
     }
 }

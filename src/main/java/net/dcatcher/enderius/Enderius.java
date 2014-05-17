@@ -71,6 +71,7 @@ public class Enderius {
         packetPipeline.init();
         proxy.registerRenders();
         RecipeList.initialiseRecipes();
+        BlockHandler.registerTileEntities();
     }
 
 
