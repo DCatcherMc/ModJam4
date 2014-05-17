@@ -16,7 +16,7 @@ public class RenderSummoner extends TileEntitySpecialRenderer {
     public static int renderID = RenderingRegistry.getNextAvailableRenderId();
 
     private ModelSummoner model = new ModelSummoner();
-    public static final ResourceLocation texture = new ResourceLocation("enderius:", "textures/models/summoner.png");
+    public static final ResourceLocation texture = new ResourceLocation("enderius", "textures/models/summoner.png");
 
     @Override
     public void renderTileEntityAt(TileEntity tile, double x, double y, double z, float scale) {

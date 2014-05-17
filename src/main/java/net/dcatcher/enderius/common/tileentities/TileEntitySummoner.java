@@ -44,11 +44,12 @@ public class TileEntitySummoner extends TileEntity {
     @Override
     public void updateEntity() {
         if(!worldObj.isRemote){
+
             boolean shouldSpawn = checkNoOfMobs();
             if(shouldSpawn){
                 cooldown--;
             }
-            if(cooldown == 0 && entityID != null && worldObj.getBlock(xCoord, yCoord + 1, zCoord) == Blocks.dragon_egg){
+            if(cooldown == 0 && entityID != null){
                 cooldown = 100;
                 Entity ent = EntityList.createEntityByName(entityID, worldObj);
                 int x = xCoord + (rand.nextInt(6)-3);
@@ -75,9 +76,8 @@ public class TileEntitySummoner extends TileEntity {
 
         if(blacklist != null){
             for(String current : blacklist){
-                if(EntityList.getEntityString(toCheck).equalsIgnoreCase(current)){
+                if(EntityList.getEntityString(toCheck).equalsIgnoreCase(current))
                     return true;
-                }
             }
         }
         return false;
@@ -94,6 +94,6 @@ public class TileEntitySummoner extends TileEntity {
             }
         }
 
-        return total < 10;
+        return (total < 10);
     }
 }

@@ -1,6 +1,7 @@
 package net.dcatcher.enderius.common.blocks;
 
 import net.dcatcher.enderius.Enderius;
+import net.dcatcher.enderius.client.render.RenderSummoner;
 import net.dcatcher.enderius.common.tileentities.TileEntitySummoner;
 import net.dcatcher.enderius.common.items.ItemHandler;
 import net.minecraft.block.BlockContainer;
@@ -25,6 +26,21 @@ public class BlockSummoner extends BlockContainer {
         setBlockName("enderSummoner");
         setCreativeTab(Enderius.danTab);
         setHardness(2.0f);
+    }
+
+    @Override
+    public boolean renderAsNormalBlock() {
+        return false;
+    }
+
+    @Override
+    public int getRenderType() {
+        return RenderSummoner.renderID;
+    }
+
+    @Override
+    public boolean isOpaqueCube() {
+        return false;
     }
 
     @Override
