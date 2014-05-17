@@ -37,22 +37,48 @@ public class GuiRepellent extends GuiContainer {
     @Override
     protected void drawGuiContainerForegroundLayer(int p1, int p2) {
         fontRendererObj.drawString("Position to teleport users out of: ", 5, 5, 4210752);
+    }
 
-        xCoord = new GuiTextField(fontRendererObj, 5, 10, 40, 10);
+    @Override
+    public void initGui() {
+        super.initGui();
+        xCoord = new GuiTextField(fontRendererObj, ((width-xSize)/2)  + 5, ((height - ySize) /2) + 10, 40, 10);
+        yCoord = new GuiTextField(fontRendererObj, ((width-xSize)/2)  + 5, ((height - ySize) /2) + 20, 40, 10);
+        zCoord = new GuiTextField(fontRendererObj, ((width-xSize)/2)  + 5, ((height - ySize) /2) + 30, 40, 10);
+    }
+
+    @Override
+    public void drawScreen(int i, int j, float f) {
+
         xCoord.drawTextBox();
-        yCoord = new GuiTextField(fontRendererObj, 5, 20, 40, 10);
         yCoord.drawTextBox();
-
-        zCoord = new GuiTextField(fontRendererObj, 5, 30, 40, 10);
         zCoord.drawTextBox();
-
-
-
+        super.drawScreen(i, j, f);
     }
 
     @Override
     protected void mouseClicked(int i, int j, int k) {
         super.mouseClicked(i, j, k);
+        xCoord.mouseClicked(i, j, k);
+        yCoord.mouseClicked(i, j, k);
+        zCoord.mouseClicked(i, j, k);
+    }
+
+
+    @Override
+    protected void keyTyped(char par1, int par2) {
+        super.keyTyped(par1, par2);
+        if(xCoord.isFocused()){
+            xCoord.textboxKeyTyped(par1, par2);
+        }
+        if(yCoord.isFocused()){
+            yCoord.textboxKeyTyped(par1, par2);
+        }
+        if(zCoord.isFocused()){
+            zCoord.textboxKeyTyped(par1, par2);
+        }
+
+
     }
 
     public void syncToTILEENTITY(GuiButton butt){
