@@ -65,6 +65,6 @@ public class TileEntitySummoner extends TileEntity {
     }
 
     public boolean checkBlacklist(Entity toCheck){
-        List<Entity> blacklist = Enderius.spawnerBlacklist;
+        List<String> blacklist = Enderius.spawnerBlacklist;
     }
 }

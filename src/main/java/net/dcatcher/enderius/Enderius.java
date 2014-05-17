@@ -1,9 +1,6 @@
 package net.dcatcher.enderius;
 
-import cpw.mods.fml.common.FMLCommonHandler;
-import cpw.mods.fml.common.FMLContainer;
-import cpw.mods.fml.common.Mod;
-import cpw.mods.fml.common.SidedProxy;
+import cpw.mods.fml.common.*;
 import cpw.mods.fml.common.event.FMLEvent;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
@@ -18,17 +15,16 @@ import net.dcatcher.enderius.common.items.ItemHandler;
 import net.dcatcher.enderius.common.items.RecipeList;
 import net.dcatcher.enderius.common.network.PacketPipeline;
 import net.dcatcher.enderius.common.util.DCCreativeTab;
+import net.dcatcher.enderius.common.util.EnderiusConfiguration;
 import net.dcatcher.enderius.common.util.EventListener;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.biome.BiomeGenEnd;
 import net.minecraftforge.common.MinecraftForge;
 
-/**
- * TODO:
- *  Name this main mod something different.
- */
+import java.util.List;
 
 @Mod(modid="Enderius", name="Enderius", version="${version}")
 public class Enderius {
@@ -42,6 +38,7 @@ public class Enderius {
 
     @SidedProxy(clientSide = "net.dcatcher.enderius.client.ClientProxy", serverSide = "net.dcatcher.enderius.common.CommonProxy")
     public static CommonProxy proxy;
+    public static List<String> spawnerBlacklist;
 
     @Mod.EventHandler
     public static void preInit(FMLPreInitializationEvent event){
@@ -61,6 +58,12 @@ public class Enderius {
         FMLCommonHandler.instance().bus().register(listener);
         //Initialise Recipes
         RecipeList.initialiseRecipes();
+
+        try{
+            EnderiusConfiguration.checkBlacklist(event.getModConfigurationDirectory());
+        }catch(Exception e){
+            FMLLog.getLogger().error("Blacklist could not be read");
+        }
 
     }
 
