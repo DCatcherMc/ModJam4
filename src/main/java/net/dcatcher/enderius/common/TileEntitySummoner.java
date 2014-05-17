@@ -12,6 +12,7 @@ import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.AxisAlignedBB;
 
 import java.util.List;
 import java.util.Random;
@@ -33,7 +34,8 @@ public class TileEntitySummoner extends TileEntity {
     @Override
     public void writeToNBT(NBTTagCompound compound) {
         super.readFromNBT(compound);
-        compound.setString("entityID", entityID);
+        if(entityID != null)
+            compound.setString("entityID", entityID);
     }
 
     @Override
@@ -51,7 +53,8 @@ public class TileEntitySummoner extends TileEntity {
         super.updateEntity();
         worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 
-        worldObj.getEntitiesWithinAABB();
+        boolean shouldSpawn = checkNoOfMobs();
+
 
         cooldown--;
         if(cooldown == 0 && entityID != null){
@@ -59,16 +62,17 @@ public class TileEntitySummoner extends TileEntity {
             //System.out.println("Finished Cooooldown");
             if(!worldObj.isRemote){
                 Entity ent = EntityList.createEntityByName(entityID, worldObj);
-                int x = xCoord + (rand.nextInt(10)-5);
-                int z = zCoord + (rand.nextInt(10)-5);
+                int x = xCoord + (rand.nextInt(8)-4);
+                int z = zCoord + (rand.nextInt(8)-4);
                 int y = yCoord + 1;
                 ent.setLocationAndAngles(x, y, z, 0f, 0f);
-                System.out.println("Spawning a mob of id: " + entityID);
                 if(entityID.equals("Skeleton")){
                     ent.setCurrentItemOrArmor(0, new ItemStack(Items.bow));
                 }
-                //if(!checkBlacklist(ent))
+                if(!checkBlacklist(ent) && shouldSpawn){
                     worldObj.spawnEntityInWorld(ent);
+                    System.out.println("Spawning a mob of id: " + entityID);
+                }
             }
         }
     }
@@ -88,5 +92,21 @@ public class TileEntitySummoner extends TileEntity {
             }
         }
         return false;
+    }
+
+
+    public boolean checkNoOfMobs(){
+        List entities = worldObj.getEntitiesWithinAABB(Entity.class, getRenderBoundingBox().expand(9, 9, 9));
+        if(entities.isEmpty())
+            return true;
+        int total = 0;
+        for(Object ent : entities){
+            if(ent instanceof Entity){
+                total++;
+            }
+        }
+
+        return total < 10;
+
     }
 }
