@@ -33,19 +33,29 @@ public class TileEntitySummoner extends TileEntity {
     @Override
     public void writeToNBT(NBTTagCompound compound) {
         super.readFromNBT(compound);
+        compound.setString("entityID", entityID);
     }
 
     @Override
     public void readFromNBT(NBTTagCompound compound) {
         super.readFromNBT(compound);
+        this.entityID = compound.getString("entityID");
+    }
+
+    @Override
+    public boolean canUpdate() {
+        return true;
     }
 
     public void updateEntity() {
         super.updateEntity();
         worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
+
+        worldObj.getEntitiesWithinAABB();
+
         cooldown--;
         if(cooldown == 0 && entityID != null){
-            cooldown = 100;
+            cooldown = 20;
             //System.out.println("Finished Cooooldown");
             if(!worldObj.isRemote){
                 Entity ent = EntityList.createEntityByName(entityID, worldObj);

@@ -57,7 +57,6 @@ public class Enderius {
         MinecraftForge.EVENT_BUS.register(listener);
         FMLCommonHandler.instance().bus().register(listener);
         //Initialise Recipes
-        RecipeList.initialiseRecipes();
 
         try{
             EnderiusConfiguration.checkBlacklist(event.getModConfigurationDirectory());
@@ -71,6 +70,7 @@ public class Enderius {
     public static void Init(FMLInitializationEvent event){
         packetPipeline.init();
         proxy.registerRenders();
+        RecipeList.initialiseRecipes();
     }
 
 
