@@ -17,6 +17,9 @@ import net.minecraft.world.World;
  */
 public class BlockRepellent extends BlockContainer {
 
+    private IIcon blockBottom;
+    private IIcon blockTop;
+
     protected BlockRepellent() {
         super(Material.iron);
         setCreativeTab(Enderius.danTab);
@@ -30,8 +33,14 @@ public class BlockRepellent extends BlockContainer {
 
     @Override
     public IIcon getIcon(int side, int meta) {
-        return this.blockIcon;
-    }
+        switch(side){
+            case 0:
+                return blockBottom;
+            case 1:
+                return blockTop;
+            default:
+                return blockIcon;
+        }    }
 
     /**
     @Override
@@ -45,11 +54,6 @@ public class BlockRepellent extends BlockContainer {
     @Override
     public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float px, float py, float pz) {
         TileEntity te = world.getTileEntity(x, y, z);
-        if(te == null || player.isSneaking())
-            return false;
-
-        System.out.println("Current Item: " + player.getCurrentEquippedItem().getItem());
-
         if(player.getCurrentEquippedItem() != null && player.getCurrentEquippedItem().getItem() == Items.paper){
             ItemStack itemStack = player.getCurrentEquippedItem();
             String stackName = itemStack.getDisplayName();
@@ -63,5 +67,7 @@ public class BlockRepellent extends BlockContainer {
     @Override
     public void registerBlockIcons(IIconRegister reg) {
         this.blockIcon = reg.registerIcon("enderius:repellent_side");
+        this.blockBottom = reg.registerIcon("enderius:summoner_bottom");
+        this.blockTop = reg.registerIcon("enderius:repellent_bottom");
     }
 }
