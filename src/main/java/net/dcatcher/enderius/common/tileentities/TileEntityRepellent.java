@@ -50,7 +50,7 @@ public class TileEntityRepellent extends TileEntity {
         for(Object entity : entities){
             EntityPlayer player = (EntityPlayer) entity;
             if(!allowedUsers.contains(player.getDisplayName())){
-                player.setLocationAndAngles(locX, locY, locZ, 0f, 0f);
+                //player.setLocationAndAngles(locX, locY, locZ, 0f, 0f);
             }
         }
     }

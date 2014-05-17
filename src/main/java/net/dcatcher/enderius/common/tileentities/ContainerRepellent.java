@@ -8,8 +8,14 @@ import net.minecraft.inventory.Container;
  */
 public class ContainerRepellent extends Container {
 
+    TileEntityRepellent tileEntity;
+
+    public ContainerRepellent(TileEntityRepellent te){
+        this.tileEntity = te;
+    }
+
     @Override
     public boolean canInteractWith(EntityPlayer var1) {
-        return false;
+        return true;
     }
 }

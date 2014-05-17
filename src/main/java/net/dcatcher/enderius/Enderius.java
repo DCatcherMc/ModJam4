@@ -6,6 +6,7 @@ import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.eventhandler.EventBus;
+import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.dcatcher.enderius.common.CommonProxy;
@@ -41,7 +42,7 @@ public class Enderius {
     public static List<String> spawnerBlacklist;
 
     @Mod.EventHandler
-    public static void preInit(FMLPreInitializationEvent event){
+    public void preInit(FMLPreInitializationEvent event){
         //Initialise Items and Blocks
         ItemHandler.initialiseItems();
         BlockHandler.initialiseBlocks();
@@ -67,16 +68,18 @@ public class Enderius {
     }
 
     @Mod.EventHandler
-    public static void Init(FMLInitializationEvent event){
+    public void Init(FMLInitializationEvent event){
         packetPipeline.init();
         proxy.registerRenders();
         RecipeList.initialiseRecipes();
         BlockHandler.registerTileEntities();
+
+        NetworkRegistry.INSTANCE.registerGuiHandler(this, new CommonProxy());
     }
 
 
     @Mod.EventHandler
-    public static void postInit(FMLPostInitializationEvent event){
+    public void postInit(FMLPostInitializationEvent event){
         packetPipeline.postInit();
     }
 }
