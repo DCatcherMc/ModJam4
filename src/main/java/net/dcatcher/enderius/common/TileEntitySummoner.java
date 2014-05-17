@@ -1,5 +1,7 @@
 package net.dcatcher.enderius.common;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.dcatcher.enderius.Enderius;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
@@ -40,9 +42,11 @@ public class TileEntitySummoner extends TileEntity {
 
     public void updateEntity() {
         super.updateEntity();
+        worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
         cooldown--;
         if(cooldown == 0 && entityID != null){
             cooldown = 100;
+            //System.out.println("Finished Cooooldown");
             if(!worldObj.isRemote){
                 Entity ent = EntityList.createEntityByName(entityID, worldObj);
                 int x = xCoord + (rand.nextInt(10)-5);
