@@ -14,7 +14,10 @@ import java.util.List;
 public class EnderiusConfiguration {
 
     public static List<String> checkBlacklist(File location) throws Exception {
-        File blacklistFile = new File(location + "/blacklist.txt");
+        File blacklistFile = new File(location + "/Enderius/blacklist.txt");
+
+        if(!blacklistFile.exists())
+            blacklistFile.createNewFile();
 
         BufferedReader buf = new BufferedReader(new FileReader(blacklistFile));
         String current;

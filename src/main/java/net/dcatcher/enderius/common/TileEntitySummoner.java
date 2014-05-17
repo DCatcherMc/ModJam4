@@ -40,24 +40,23 @@ public class TileEntitySummoner extends TileEntity {
 
     public void updateEntity() {
         super.updateEntity();
-            cooldown--;
-
-            if(cooldown == 0 && entityID != null){
-                cooldown = 100;
-                if(!worldObj.isRemote){
-                    Entity ent = EntityList.createEntityByName(entityID, worldObj);
-                    int x = xCoord + (rand.nextInt(10)-5);
-                    int z = zCoord + (rand.nextInt(10)-5);
-                    int y = yCoord + 1;
-                    ent.setLocationAndAngles(x, y, z, 0f, 0f);
-                    System.out.println("Spawning a mob of id: " + entityID);
-                    if(entityID.equals("Skeleton")){
-                        ent.setCurrentItemOrArmor(0, new ItemStack(Items.bow));
-                    }
-                    if(!checkBlacklist(ent))
-                        worldObj.spawnEntityInWorld(ent);
+        cooldown--;
+        if(cooldown == 0 && entityID != null){
+            cooldown = 100;
+            if(!worldObj.isRemote){
+                Entity ent = EntityList.createEntityByName(entityID, worldObj);
+                int x = xCoord + (rand.nextInt(10)-5);
+                int z = zCoord + (rand.nextInt(10)-5);
+                int y = yCoord + 1;
+                ent.setLocationAndAngles(x, y, z, 0f, 0f);
+                System.out.println("Spawning a mob of id: " + entityID);
+                if(entityID.equals("Skeleton")){
+                    ent.setCurrentItemOrArmor(0, new ItemStack(Items.bow));
                 }
+                //if(!checkBlacklist(ent))
+                    worldObj.spawnEntityInWorld(ent);
             }
+        }
     }
 
     public void setData(String id){
@@ -66,5 +65,14 @@ public class TileEntitySummoner extends TileEntity {
 
     public boolean checkBlacklist(Entity toCheck){
         List<String> blacklist = Enderius.spawnerBlacklist;
+
+        if(blacklist != null){
+            for(String current : blacklist){
+                if(EntityList.getEntityString(toCheck).equalsIgnoreCase(current)){
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 }
