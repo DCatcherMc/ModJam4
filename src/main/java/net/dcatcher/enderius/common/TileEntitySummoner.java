@@ -5,6 +5,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 import net.dcatcher.enderius.Enderius;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
+import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.passive.EntitySheep;
 import net.minecraft.init.Blocks;
@@ -44,14 +45,7 @@ public class TileEntitySummoner extends TileEntity {
         this.entityID = compound.getString("entityID");
     }
 
-    @Override
-    public boolean canUpdate() {
-        return true;
-    }
-
     public void updateEntity() {
-        super.updateEntity();
-        worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 
         boolean shouldSpawn = checkNoOfMobs();
 
@@ -59,7 +53,7 @@ public class TileEntitySummoner extends TileEntity {
         cooldown--;
         if(cooldown == 0 && entityID != null){
             cooldown = 20;
-            //System.out.println("Finished Cooooldown");
+            System.out.println("Finished Cooooldown");
             if(!worldObj.isRemote){
                 Entity ent = EntityList.createEntityByName(entityID, worldObj);
                 int x = xCoord + (rand.nextInt(8)-4);
@@ -75,6 +69,7 @@ public class TileEntitySummoner extends TileEntity {
                 }
             }
         }
+        super.updateEntity();
     }
 
     public void setData(String id){
@@ -96,12 +91,12 @@ public class TileEntitySummoner extends TileEntity {
 
 
     public boolean checkNoOfMobs(){
-        List entities = worldObj.getEntitiesWithinAABB(Entity.class, getRenderBoundingBox().expand(9, 9, 9));
+        List entities = worldObj.getEntitiesWithinAABB(EntityLiving.class, getRenderBoundingBox().expand(9, 9, 9));
         if(entities.isEmpty())
             return true;
         int total = 0;
         for(Object ent : entities){
-            if(ent instanceof Entity){
+            if(ent instanceof EntityLiving){
                 total++;
             }
         }
