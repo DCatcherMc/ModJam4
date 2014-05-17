@@ -42,7 +42,7 @@ public class TileEntitySummoner extends TileEntity {
         System.out.println("Loaded EntityID: " + entityID);
     }
 
-    //@Override
+    @Override
     public void updateEntity() {
 
         if(!worldObj.isRemote){
@@ -54,8 +54,8 @@ public class TileEntitySummoner extends TileEntity {
                 cooldown = 20;
                 System.out.println("Finished Cooooldown");
                 Entity ent = EntityList.createEntityByName(entityID, worldObj);
-                int x = xCoord + (rand.nextInt(8)-4);
-                int z = zCoord + (rand.nextInt(8)-4);
+                int x = xCoord + (rand.nextInt(6)-3);
+                int z = zCoord + (rand.nextInt(6)-3);
                 int y = yCoord + 1;
                 ent.setLocationAndAngles(x, y, z, 0f, 0f);
                 if(entityID.equals("Skeleton")){
@@ -88,7 +88,7 @@ public class TileEntitySummoner extends TileEntity {
     }
 
     public boolean checkNoOfMobs(){
-        List entities = worldObj.getEntitiesWithinAABB(EntityLiving.class, getRenderBoundingBox().expand(9, 9, 9));
+        List entities = worldObj.getEntitiesWithinAABB(EntityLiving.class, getRenderBoundingBox().expand(5, 5, 5));
         if(entities.isEmpty())
             return true;
         int total = 0;
