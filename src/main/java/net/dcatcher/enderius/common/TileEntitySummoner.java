@@ -1,5 +1,6 @@
 package net.dcatcher.enderius.common;
 
+import net.dcatcher.enderius.Enderius;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
 import net.minecraft.entity.EntityLivingBase;
@@ -10,6 +11,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 
+import java.util.List;
 import java.util.Random;
 
 /**
@@ -52,12 +54,17 @@ public class TileEntitySummoner extends TileEntity {
                     if(entityID.equals("Skeleton")){
                         ent.setCurrentItemOrArmor(0, new ItemStack(Items.bow));
                     }
-                    worldObj.spawnEntityInWorld(ent);
+                    if(!checkBlacklist(ent))
+                        worldObj.spawnEntityInWorld(ent);
                 }
             }
     }
 
     public void setData(String id){
         this.entityID = id;
+    }
+
+    public boolean checkBlacklist(Entity toCheck){
+        List<Entity> blacklist = Enderius.spawnerBlacklist;
     }
 }
