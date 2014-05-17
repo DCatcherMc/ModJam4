@@ -1,8 +1,6 @@
 package net.dcatcher.enderius.common.tileentities;
 
-import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
@@ -16,7 +14,7 @@ import java.util.Random;
  */
 public class TileEntityRepellent extends TileEntity {
 
-    public List<String> allowedUsers = new ArrayList<String>();
+    public List<String> blockedUsers = new ArrayList<String>();
     public Random rand = new Random();
     public int locX, locY, locZ;
 
@@ -29,7 +27,7 @@ public class TileEntityRepellent extends TileEntity {
         super.writeToNBT(compound);
         compound.setInteger("numberSaved", blockedUsers.size());
         for(int i = 0; i < blockedUsers.size(); i++){
-            compound.setString("alloweduser"+i, allowedUsers.get(i));
+            compound.setString("banneduser_" + i, blockedUsers.get(i));
         }
     }
 
@@ -39,7 +37,8 @@ public class TileEntityRepellent extends TileEntity {
         int total = compound.getInteger("numberSaved");
         System.out.println(total);
         for(int i = 0; i < total; i++){
-            allowedUsers.add(compound.getString("alloweduser"+i));
+            System.out.println("Added to banned list "+ compound.getString("banneduser_" + i));
+            addPlayerToBlacklist(compound.getString("banneduser_" + i));
         }
     }
 
@@ -52,18 +51,16 @@ public class TileEntityRepellent extends TileEntity {
 
             for(Object entity : entities){
                 EntityPlayer player = (EntityPlayer) entity;
-                if(!allowedUsers.contains(player.getDisplayName())){
-                    System.out.println(player.getDisplayName() + " is not in the list");
-                    for(String str: allowedUsers){System.out.println(str);}
+                if(blockedUsers.contains(player.getDisplayName())){
                     player.setLocationAndAngles(xCoord+20, yCoord + 1, zCoord+20, 0f, 0f);
                 }
             }
         }
     }
 
-    public void addPlayerToWhitelist(String username){
-        if(!allowedUsers.contains(username))
-            allowedUsers.add(username);
+    public void addPlayerToBlacklist(String username){
+        if(!blockedUsers.contains(username))
+            blockedUsers.add(username);
     }
 
     public void setLocationToTPOut(int x, int y, int z){

@@ -46,7 +46,7 @@ public class BlockRepellent extends BlockContainer {
     @Override
     public int onBlockPlaced(World world, int x, int y, int z, int side, float hx, float hy, float hz, int meta) {
         TileEntityRepellent repel = (TileEntityRepellent) world.getTileEntity(x, y, z);
-        repel.addPlayerToWhitelist(world.getClosestPlayer((double)x, (double)y, (double)z, -1).getDisplayName());
+        repel.addPlayerToBlacklist(world.getClosestPlayer((double)x, (double)y, (double)z, -1).getDisplayName());
         return meta;
     }
     */
@@ -57,8 +57,8 @@ public class BlockRepellent extends BlockContainer {
         if(player.getCurrentEquippedItem() != null && player.getCurrentEquippedItem().getItem() == Items.paper){
             ItemStack itemStack = player.getCurrentEquippedItem();
             String stackName = itemStack.getDisplayName();
-            System.out.println("Added to whitelist " + stackName);
-            ((TileEntityRepellent)te).addPlayerToWhitelist(stackName);
+            System.out.println("Added to blacklist " + stackName);
+            ((TileEntityRepellent)te).addPlayerToBlacklist(stackName);
             return true;
         }
         return false;
