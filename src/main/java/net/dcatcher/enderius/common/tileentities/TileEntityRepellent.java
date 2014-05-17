@@ -51,15 +51,15 @@ public class TileEntityRepellent extends TileEntity {
     @Override
     public void updateEntity() {
         super.updateEntity();
-        if(worldObj.getBlock(xCoord, yCoord, zCoord)){
-        List entities = worldObj.getEntitiesWithinAABB(EntityPlayerMP.class, getRenderBoundingBox().expand(10, 10, 10));
+        if(worldObj.isBlockIndirectlyGettingPowered(xCoord,  yCoord, zCoord)){
+            List entities = worldObj.getEntitiesWithinAABB(EntityPlayerMP.class, getRenderBoundingBox().expand(10, 10, 10));
 
-        for(Object entity : entities){
-            EntityPlayer player = (EntityPlayer) entity;
-            if(!allowedUsers.contains(player.getDisplayName())){
-                player.setLocationAndAngles(xCoord+20, locY + 1, locZ+20, 0f, 0f);
+            for(Object entity : entities){
+                EntityPlayer player = (EntityPlayer) entity;
+                if(!allowedUsers.contains(player.getDisplayName())){
+                    player.setLocationAndAngles(xCoord+20, locY + 1, locZ+20, 0f, 0f);
+                }
             }
-        }
         }
     }
 
