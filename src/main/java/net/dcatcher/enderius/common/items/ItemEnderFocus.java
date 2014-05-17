@@ -9,6 +9,7 @@ import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
+import net.minecraftforge.fluids.BlockFluidBase;
 import net.minecraftforge.fluids.BlockFluidClassic;
 
 /**
@@ -33,7 +34,7 @@ public class ItemEnderFocus extends Item {
                              int y, int z, int side, float px, float py, float pz) {
         int abc = 1;
         if(player.isSneaking())
-            abc = 2;
+            abc = 1;
         else
             abc = 10;
 
@@ -45,7 +46,7 @@ public class ItemEnderFocus extends Item {
                     for(int a = 0; a < 3; a++){
                         for(int b = 0; b < 3; b++){
                             Block current = world.getBlock(startXa0 + a, y+dist, startZa0 + b);
-                            if(current != Blocks.bedrock && !(current instanceof BlockFluidClassic) && player.inventory.hasItem(ItemHandler.enderiumFuel)){
+                            if(current != Blocks.bedrock && !(current instanceof BlockFluidBase) && player.inventory.hasItem(ItemHandler.enderiumFuel)){
                                 if(!world.isRemote)
                                     player.entityDropItem(new ItemStack(world.getBlock(startXa0 + a, y+dist, startZa0 + b)), 0f);
                                 world.setBlockToAir(startXa0 + a, y+dist, startZa0 + b);

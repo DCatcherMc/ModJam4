@@ -27,10 +27,9 @@ public class TileEntityRepellent extends TileEntity {
     @Override
     public void writeToNBT(NBTTagCompound compound) {
         super.writeToNBT(compound);
-        compound.setInteger("numberSaved", allowedUsers.size());
-        for(int i = 0; i < allowedUsers.size(); i++){
+        compound.setInteger("numberSaved", blockedUsers.size());
+        for(int i = 0; i < blockedUsers.size(); i++){
             compound.setString("alloweduser"+i, allowedUsers.get(i));
-            System.out.println("Adding " + allowedUsers.get(i));
         }
     }
 
@@ -41,7 +40,6 @@ public class TileEntityRepellent extends TileEntity {
         System.out.println(total);
         for(int i = 0; i < total; i++){
             allowedUsers.add(compound.getString("alloweduser"+i));
-            System.out.println("Adding: " + compound.getString("alloweduser"+i));
         }
     }
 
