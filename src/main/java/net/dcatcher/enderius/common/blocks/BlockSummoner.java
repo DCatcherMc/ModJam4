@@ -12,12 +12,17 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagByte;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.IIcon;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 /**
  * Copyright: DCatcher
  */
 public class BlockSummoner extends BlockContainer {
+
+    private IIcon iconTop, iconBottom;
+
 
     protected BlockSummoner() {
         super(Material.iron);
@@ -44,7 +49,14 @@ public class BlockSummoner extends BlockContainer {
     }
 
     @Override
+    public IIcon getIcon(IBlockAccess p_149673_1_, int p_149673_2_, int p_149673_3_, int p_149673_4_, int p_149673_5_) {
+        return super.getIcon(p_149673_1_, p_149673_2_, p_149673_3_, p_149673_4_, p_149673_5_);
+    }
+
+    @Override
     public void registerBlockIcons(IIconRegister reg) {
-        this.blockIcon = reg.registerIcon("enderius:summoner");
+        this.blockIcon = reg.registerIcon("enderius:summoner_side");
+        this.iconBottom = reg.registerIcon("enderius:summoner_side");
+        this.iconTop = reg.registerIcon("enderius:summoner_side");
     }
 }
