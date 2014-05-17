@@ -15,7 +15,7 @@ import java.util.Random;
  */
 public class TileEntityRepellent extends TileEntity {
 
-    List<String> allowedUsers = new ArrayList<String>();
+    public List<String> allowedUsers = new ArrayList<String>();
     public Random rand = new Random();
     public int locX, locY, locZ;
 
@@ -29,10 +29,8 @@ public class TileEntityRepellent extends TileEntity {
         compound.setInteger("numberSaved", allowedUsers.size());
         for(int i = 0; i < allowedUsers.size(); i++){
             compound.setString("alloweduser"+i, allowedUsers.get(i));
+            System.out.println("Adding " + allowedUsers.get(i));
         }
-        compound.setInteger("locX", locX);
-        compound.setInteger("locY", locY);
-        compound.setInteger("locZ", locZ);
     }
 
     @Override
@@ -40,13 +38,9 @@ public class TileEntityRepellent extends TileEntity {
         super.readFromNBT(compound);
         int total = compound.getInteger("numberSaved");
         for(int i = 0; i < total; i++){
-            allowedUsers.add(compound.getString("alloweduser"+i));
-            System.out.println(compound.getString("alloweduser"+i));
+            allowedUsers.set(i, compound.getString("alloweduser"+i));
+            System.out.println("Adding: " + compound.getString("alloweduser"+i));
         }
-
-        locX = compound.getInteger("locX");
-        locY = compound.getInteger("locY");
-        locZ = compound.getInteger("locZ");
     }
 
     @Override
