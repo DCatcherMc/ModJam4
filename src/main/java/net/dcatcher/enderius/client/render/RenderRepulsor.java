@@ -1,6 +1,5 @@
 package net.dcatcher.enderius.client.render;
 
-import cpw.mods.fml.client.registry.RenderingRegistry;
 import net.dcatcher.enderius.client.ModelSummoner;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
@@ -12,9 +11,7 @@ import org.lwjgl.opengl.GL11;
  */
 public class RenderRepulsor extends TileEntitySpecialRenderer {
 
-    public static int renderID = RenderingRegistry.getNextAvailableRenderId();
-
-    private ModelSummoner model = new ModelSummoner();
+    public static ModelSummoner model = new ModelSummoner();
     public static final ResourceLocation texture = new ResourceLocation("enderius", "textures/models/repulsor.png");
 
     @Override
@@ -28,4 +25,5 @@ public class RenderRepulsor extends TileEntitySpecialRenderer {
         model.render(tile, 0.0625F);
         GL11.glPopMatrix();
     }
+
 }

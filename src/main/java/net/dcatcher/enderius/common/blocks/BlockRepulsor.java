@@ -1,6 +1,7 @@
 package net.dcatcher.enderius.common.blocks;
 
 import net.dcatcher.enderius.Enderius;
+import net.dcatcher.enderius.client.render.BlockRenderer;
 import net.dcatcher.enderius.client.render.RenderRepulsor;
 import net.dcatcher.enderius.common.network.PacketSync;
 import net.dcatcher.enderius.common.tileentities.TileEntityRepulsor;
@@ -38,7 +39,7 @@ public class BlockRepulsor extends BlockContainer {
 
     @Override
     public int getRenderType() {
-        return RenderRepulsor.renderID;
+        return BlockRenderer.id;
     }
 
     @Override
@@ -75,8 +76,6 @@ public class BlockRepulsor extends BlockContainer {
         return meta;
     }
     */
-
-
 
     @Override
     public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float px, float py, float pz) {

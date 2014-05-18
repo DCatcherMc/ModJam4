@@ -1,6 +1,7 @@
 package net.dcatcher.enderius.common.blocks;
 
 import net.dcatcher.enderius.Enderius;
+import net.dcatcher.enderius.client.render.BlockRenderer;
 import net.dcatcher.enderius.client.render.RenderRepulsor;
 import net.dcatcher.enderius.common.tileentities.TileEntitySummoner;
 import net.dcatcher.enderius.common.items.ItemHandler;
@@ -35,7 +36,7 @@ public class BlockSummoner extends BlockContainer {
 
     @Override
     public int getRenderType() {
-        return RenderRepulsor.renderID;
+        return BlockRenderer.id;
     }
 
     @Override

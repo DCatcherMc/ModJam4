@@ -74,6 +74,15 @@ public class ModelSummoner extends ModelBase
     model.rotateAngleY = y;
     model.rotateAngleZ = z;
   }
+
+    public void renderItem(float scale){
+        Base.render(scale);
+        Pillar.render(scale);
+        rungA.render(scale);
+        rungB.render(scale);
+        rungC.render(scale);
+        rungD.render(scale);
+    }
   
   public void setRotationAngles(Entity entity, float f, float f1, float f2, float f3, float f4, float f5)
   {

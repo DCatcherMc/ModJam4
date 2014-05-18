@@ -3,6 +3,7 @@ package net.dcatcher.enderius.common.tileentities;
 import net.dcatcher.enderius.Enderius;
 import net.dcatcher.enderius.common.items.ItemHandler;
 import net.dcatcher.enderius.common.network.PacketRepellent;
+import net.dcatcher.enderius.common.network.PacketSync;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
@@ -60,6 +61,9 @@ public class TileEntityRepulsor extends TileEntity {
             List entities = worldObj.getEntitiesWithinAABB(EntityPlayer.class, AxisAlignedBB.getBoundingBox(xCoord, yCoord, zCoord, xCoord + 1, yCoord + 1, zCoord + 1).expand(10, 10, 10));
             for(Object entity : entities){
                 EntityPlayer player = (EntityPlayer) entity;
+                PacketSync packet = new PacketSync(worldObj, xCoord, yCoord, zCoord);
+                Enderius.packetPipeline.sendToAll(packet);
+                Enderius.packetPipeline.sendToServer(packet);
                 if(!getWhitelist().contains(player.getDisplayName()) && !(player.getCurrentEquippedItem().getItem() == ItemHandler.anchor)){
                     worldObj.getChunkFromBlockCoords(locX, locZ).setChunkModified();
                     player.setPositionAndUpdate(locX, locY, locZ);

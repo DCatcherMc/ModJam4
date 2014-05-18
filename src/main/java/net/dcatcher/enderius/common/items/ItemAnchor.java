@@ -12,7 +12,7 @@ public class ItemAnchor extends Item {
     public ItemAnchor(){
         super();
         setCreativeTab(Enderius.danTab);
-        setUnlocalizedName("enderiusAnchor");
+        setUnlocalizedName("anchor");
     }
 
     @Override
