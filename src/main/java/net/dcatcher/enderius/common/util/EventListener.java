@@ -78,7 +78,6 @@ public class EventListener {
             syringe.writeToNBT(nbt);
             nbt = addNBTData(event.target, nbt);
             syringe.setTagCompound(nbt);
-            System.out.println("Getting information from this mob!" + nbt.getString("entityID"));
 
         }
     }

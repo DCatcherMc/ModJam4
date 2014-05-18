@@ -67,8 +67,8 @@ public class GuiRepellent extends GuiScreen {
         zCoord = new GuiTextField(fontRendererObj, x + 40, y + 60, 60, 15);
         username = new GuiTextField(fontRendererObj, x + 20, y + 125, 90, 15);
 
-        whitelistadder = new GuiButton(1, x + 20, y + 140, 100, 20, "Toggle");
-        coordSender = new GuiButton(2, x + 40, y + 80, 60, 15, "Save");
+        whitelistadder = new GuiButton(1, x + 20, y + 145, 90, 20, "Toggle");
+        coordSender = new GuiButton(2, x + 40, y + 77, 60, 20, "Save");
 
         int[] locs = tileEntity.getLocs();
 
@@ -100,12 +100,15 @@ public class GuiRepellent extends GuiScreen {
         username.drawTextBox();
 
 
-        this.fontRendererObj.drawString("X:", x + 30, y + 43, 0x1a1a1a);
-        this.fontRendererObj.drawString("Y:", x + 30, y + 63, 0x1a1a1a);
-        this.fontRendererObj.drawString("Z:", x + 30, y + 83, 0x1a1a1a);
+        this.fontRendererObj.drawString("X:", x + 30, y + 23, 0x1a1a1a);
+        this.fontRendererObj.drawString("Y:", x + 30, y + 43, 0x1a1a1a);
+        this.fontRendererObj.drawString("Z:", x + 30, y + 63, 0x1a1a1a);
 
-        this.fontRendererObj.drawString("Add/Remove user ", x + 20, y + 100, 0x1a1a1a);
-        this.fontRendererObj.drawString("from whitelist:", x + 20, y + 110, 0x1a1a1a);
+        this.fontRendererObj.drawString("Add/Remove user ", x + 20, y + 103, 0x1a1a1a);
+        this.fontRendererObj.drawString("from whitelist:", x + 20, y + 113, 0x1a1a1a);
+
+        this.fontRendererObj.drawString("Whitelist: ", x + 145, y + 8, 0x1a1a1a);
+
         whitelistadder.drawButton(mc, i, j);
         coordSender.drawButton(mc, i, j);
 
