@@ -42,7 +42,7 @@ public class ItemDNASyringe extends Item {
             return;
 
         NBTTagCompound nbt = new NBTTagCompound();
-        String entityType = stack.writeToNBT(nbt).getString("entityID");
+        String entityType = stack.getTagCompound().getString("entityID");
 
         list.add("Held DNA: " + entityType);
     }

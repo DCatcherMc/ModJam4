@@ -57,10 +57,16 @@ public class EventListener {
         }
     }
 
-    @SubscribeEvent
-    public void onItemTooltip(ItemTooltipEvent event){
-        if(event.entityPlayer == null)
+    public void tooltipEvent(ItemTooltipEvent event){
+        if (event.entityPlayer == null)
             return;
+        if (event.entityPlayer.getCurrentEquippedItem().getItem() != ItemHandler.dnaSyringe)
+            return;
+        if (event.itemStack.getTagCompound() == null)
+            return;
+        NBTTagCompound nbt = new NBTTagCompound();
+        event.itemStack.writeToNBT(nbt);
+        event.toolTip.add("DNA Stored: " + nbt.getString("entityID"));
     }
 
     @SubscribeEvent
@@ -70,10 +76,8 @@ public class EventListener {
             ItemStack syringe = event.entityPlayer.getCurrentEquippedItem();
             NBTTagCompound nbt = new NBTTagCompound();
             syringe.writeToNBT(nbt);
-            syringe.
             nbt = addNBTData(event.target, nbt);
-            syringe.readFromNBT(nbt);
-            syringe.getTooltip(event.entityPlayer, false).add("Entity: " + EntityList.getEntityString(event.target));
+            syringe.setTagCompound(nbt);
             System.out.println("Getting information from this mob!" + nbt.getString("entityID"));
 
         }

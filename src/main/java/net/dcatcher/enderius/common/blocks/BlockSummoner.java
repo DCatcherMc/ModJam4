@@ -54,8 +54,7 @@ public class BlockSummoner extends BlockContainer {
         if(player.getCurrentEquippedItem() != null && player.getCurrentEquippedItem().getItem() == ItemHandler.dnaSyringe){
             TileEntitySummoner summoner = (TileEntitySummoner)world.getTileEntity(x, y, z);
             ItemStack syringe = player.getCurrentEquippedItem();
-            NBTTagCompound nbt = new NBTTagCompound();
-            String entityID = syringe.writeToNBT(nbt).getString("entityID");
+            String entityID = syringe.getTagCompound().getString("entityID");
             summoner.setData(entityID);
             System.out.println(entityID);
             return true;
