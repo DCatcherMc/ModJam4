@@ -13,7 +13,7 @@ item.dnaSyringe.name=DNA Syringe
 tile.blockEndStar.name=End Star Block
 tile.blockNetherStar.name=Nether Star Block
 tile.enderSummoner.name=Summoner
-tile.enderRepellent.name=Repellent
+tile.repulsor.name=Repulsor
 
 
 entity.EnderSlime.name=Ender Cube

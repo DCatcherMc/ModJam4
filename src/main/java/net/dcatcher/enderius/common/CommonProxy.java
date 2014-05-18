@@ -3,7 +3,7 @@ package net.dcatcher.enderius.common;
 import cpw.mods.fml.common.network.IGuiHandler;
 import net.dcatcher.enderius.client.gui.GuiRepellent;
 import net.dcatcher.enderius.common.tileentities.ContainerRepellent;
-import net.dcatcher.enderius.common.tileentities.TileEntityRepellent;
+import net.dcatcher.enderius.common.tileentities.TileEntityRepulsor;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
@@ -34,8 +34,8 @@ public class CommonProxy implements IGuiHandler{
     @Override
     public Object getServerGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
         TileEntity te = world.getTileEntity(x, y, z);
-        if(te instanceof TileEntityRepellent)
-            return new ContainerRepellent((TileEntityRepellent) te);
+        if(te instanceof TileEntityRepulsor)
+            return new ContainerRepellent((TileEntityRepulsor) te);
 
         return null;
     }
@@ -43,8 +43,8 @@ public class CommonProxy implements IGuiHandler{
     @Override
     public Object getClientGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
         TileEntity te = world.getTileEntity(x, y, z);
-        if(te instanceof TileEntityRepellent)
-            return new GuiRepellent((TileEntityRepellent) te);
+        if(te instanceof TileEntityRepulsor)
+            return new GuiRepellent((TileEntityRepulsor) te);
 
         return null;
     }

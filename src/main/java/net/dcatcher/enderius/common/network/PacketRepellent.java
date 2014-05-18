@@ -2,7 +2,7 @@ package net.dcatcher.enderius.common.network;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
-import net.dcatcher.enderius.common.tileentities.TileEntityRepellent;
+import net.dcatcher.enderius.common.tileentities.TileEntityRepulsor;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
 
@@ -52,7 +52,7 @@ public class PacketRepellent extends AbstractPacket {
     public void handleClient(EntityPlayer player) {
         World world = player.worldObj;
 
-        TileEntityRepellent repel = (TileEntityRepellent) world.getTileEntity(ex, ey, ez);
+        TileEntityRepulsor repel = (TileEntityRepulsor) world.getTileEntity(ex, ey, ez);
         if(repel != null){
             repel.locX = tx;
             repel.locY = ty;
@@ -64,7 +64,7 @@ public class PacketRepellent extends AbstractPacket {
     public void handleServer(EntityPlayer player) {
         World world = player.getEntityWorld();
 
-        TileEntityRepellent repel = (TileEntityRepellent) world.getTileEntity(ex, ey, ez);
+        TileEntityRepulsor repel = (TileEntityRepulsor) world.getTileEntity(ex, ey, ez);
         if(repel != null){
             repel.setLocationToTpTo(tx, ty, tz);
             player.getEntityWorld().markBlockForUpdate(ex, ey, ez);

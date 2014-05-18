@@ -8,9 +8,9 @@ import net.minecraft.inventory.Container;
  */
 public class ContainerRepellent extends Container {
 
-    TileEntityRepellent tileEntity;
+    TileEntityRepulsor tileEntity;
 
-    public ContainerRepellent(TileEntityRepellent te){
+    public ContainerRepellent(TileEntityRepulsor te){
         this.tileEntity = te;
     }
 

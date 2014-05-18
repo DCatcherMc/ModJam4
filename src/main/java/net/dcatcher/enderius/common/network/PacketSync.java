@@ -1,18 +1,13 @@
 package net.dcatcher.enderius.common.network;
 
-import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.network.ByteBufUtils;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
-import net.dcatcher.enderius.common.player.DCPlayerProperties;
-import net.dcatcher.enderius.common.tileentities.TileEntityRepellent;
-import net.minecraft.client.Minecraft;
+import net.dcatcher.enderius.common.tileentities.TileEntityRepulsor;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.server.MinecraftServer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
-import net.minecraftforge.common.MinecraftForge;
 
 /**
  * Copyright: DCatcher
@@ -34,7 +29,7 @@ public class PacketSync extends AbstractPacket {
     @Override
     public void encode(ChannelHandlerContext context, ByteBuf buffer) {
         nbt = new NBTTagCompound();
-        TileEntityRepellent te = (TileEntityRepellent) world.getTileEntity(x, y, z);
+        TileEntityRepulsor te = (TileEntityRepulsor) world.getTileEntity(x, y, z);
         te.writeToNBT(nbt);
         ByteBufUtils.writeTag(buffer, nbt);
         buffer.writeInt(x);

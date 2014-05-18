@@ -1,28 +1,23 @@
 package net.dcatcher.enderius;
 
 import cpw.mods.fml.common.*;
-import cpw.mods.fml.common.event.FMLEvent;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
-import cpw.mods.fml.common.eventhandler.EventBus;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.EntityRegistry;
-import cpw.mods.fml.common.registry.GameRegistry;
 import net.dcatcher.enderius.common.CommonProxy;
 import net.dcatcher.enderius.common.EntityEnderSlime;
 import net.dcatcher.enderius.common.blocks.BlockHandler;
 import net.dcatcher.enderius.common.items.ItemHandler;
-import net.dcatcher.enderius.common.items.RecipeList;
+import net.dcatcher.enderius.common.util.RecipeList;
 import net.dcatcher.enderius.common.network.PacketPipeline;
 import net.dcatcher.enderius.common.util.DCCreativeTab;
 import net.dcatcher.enderius.common.util.EnderiusConfiguration;
 import net.dcatcher.enderius.common.util.EventListener;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.world.biome.BiomeGenBase;
-import net.minecraft.world.biome.BiomeGenEnd;
 import net.minecraftforge.common.MinecraftForge;
 
 import java.util.List;

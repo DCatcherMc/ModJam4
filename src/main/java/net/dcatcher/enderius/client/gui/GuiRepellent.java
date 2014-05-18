@@ -1,23 +1,14 @@
 package net.dcatcher.enderius.client.gui;
 
-import cpw.mods.fml.client.GuiConfirmation;
 import net.dcatcher.enderius.Enderius;
 import net.dcatcher.enderius.common.network.PacketRepellent;
-import net.dcatcher.enderius.common.network.PacketSync;
 import net.dcatcher.enderius.common.network.PacketToggle;
-import net.dcatcher.enderius.common.tileentities.ContainerRepellent;
-import net.dcatcher.enderius.common.tileentities.TileEntityRepellent;
+import net.dcatcher.enderius.common.tileentities.TileEntityRepulsor;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.gui.GuiTextField;
-import net.minecraft.client.gui.inventory.GuiContainer;
-import net.minecraft.client.renderer.texture.ITextureObject;
-import net.minecraft.entity.effect.EntityLightningBolt;
-import net.minecraft.inventory.Container;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.input.Keyboard;
-import scala.Int;
-import scala.tools.nsc.Global;
 
 import java.util.List;
 
@@ -26,7 +17,7 @@ import java.util.List;
  */
 public class GuiRepellent extends GuiScreen {
 
-    TileEntityRepellent tileEntity;
+    TileEntityRepulsor tileEntity;
 
     List<String> whitelist;
 
@@ -39,7 +30,7 @@ public class GuiRepellent extends GuiScreen {
     private final int xSize = 256, ySize = 180;
 
 
-    public GuiRepellent(TileEntityRepellent repel) {
+    public GuiRepellent(TileEntityRepulsor repel) {
         super();
         this.tileEntity = repel;
     }

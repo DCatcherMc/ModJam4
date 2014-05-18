@@ -2,14 +2,10 @@ package net.dcatcher.enderius.common.network;
 
 import cpw.mods.fml.common.network.ByteBufUtils;
 import io.netty.buffer.ByteBuf;
-import io.netty.buffer.ByteBufUtil;
 import io.netty.channel.ChannelHandlerContext;
-import net.dcatcher.enderius.common.tileentities.TileEntityRepellent;
+import net.dcatcher.enderius.common.tileentities.TileEntityRepulsor;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
-
-import java.io.BufferedInputStream;
-import java.nio.ByteBuffer;
 
 /**
  * Copyright: DCatcher
@@ -50,7 +46,7 @@ public class PacketToggle extends AbstractPacket {
     @Override
     public void handleClient(EntityPlayer player) {
         World worldObj = player.worldObj;
-        TileEntityRepellent repel = (TileEntityRepellent) worldObj.getTileEntity(x, y, z);
+        TileEntityRepulsor repel = (TileEntityRepulsor) worldObj.getTileEntity(x, y, z);
         if(repel != null && username != null){
             if(repel.getWhitelist().contains(username))
                 repel.getWhitelist().remove(username);
@@ -62,7 +58,7 @@ public class PacketToggle extends AbstractPacket {
     @Override
     public void handleServer(EntityPlayer player) {
         World worldObj = player.worldObj;
-        TileEntityRepellent repel = (TileEntityRepellent) worldObj.getTileEntity(x, y, z);
+        TileEntityRepulsor repel = (TileEntityRepulsor) worldObj.getTileEntity(x, y, z);
         if(repel.getWhitelist().contains(username))
             repel.getWhitelist().remove(username);
         else
