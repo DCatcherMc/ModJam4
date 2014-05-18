@@ -44,19 +44,18 @@ public class TileEntityRepellent extends TileEntity {
         allowedUsers = new ArrayList<String>();
         for(int i = 0; i < compound.getInteger("noOfUsers"); i++){
             getWhitelist().add(compound.getString("allowedUser_" + i));
-            System.out.println("added: " + allowedUsers.get(i));
         }
         this.locX = compound.getInteger("locX");
         this.locY = compound.getInteger("locY");
         this.locZ = compound.getInteger("locZ");
-        System.out.println(locX + ", " + locY + ", " + locZ);
     }
 
     @Override
     public void updateEntity() {
         super.updateEntity();
         if(worldObj.isBlockIndirectlyGettingPowered(xCoord,  yCoord, zCoord)){
-            worldObj.spawnParticle("portal", xCoord + rand.nextInt(2)-1, yCoord + rand.nextInt(2)-1, zCoord + rand.nextInt(2)-1, 0d, 0d, 0d);
+            for(int i = 1; i < 11; i++)
+                worldObj.spawnParticle("portal", xCoord + rand.nextInt(4)-2, yCoord + rand.nextInt(4)-2, zCoord + rand.nextInt(4)-2, 0d, 0d, 0d);
             List entities = worldObj.getEntitiesWithinAABB(EntityPlayer.class, AxisAlignedBB.getBoundingBox(xCoord, yCoord, zCoord, xCoord + 1, yCoord + 1, zCoord + 1).expand(10, 10, 10));
             for(Object entity : entities){
                 EntityPlayer player = (EntityPlayer) entity;

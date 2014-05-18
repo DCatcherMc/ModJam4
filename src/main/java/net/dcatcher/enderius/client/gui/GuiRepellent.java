@@ -135,14 +135,10 @@ public class GuiRepellent extends GuiScreen {
                 int locZ = Integer.parseInt(zCoord.getText());
                 tileEntity.setLocationToTpTo(locX, locY, locZ);
                 PacketRepellent repel = new PacketRepellent(locX, locY, locZ, tileEntity.xCoord, tileEntity.yCoord, tileEntity.zCoord);
-                System.out.println("Sending PacketRepel");
                 Enderius.packetPipeline.sendToServer(repel);
                 Enderius.packetPipeline.sendToAll(repel);
                 break;
         }
-        //PacketSync packet = new PacketSync(tileEntity.getWorldObj(), tileEntity.xCoord, tileEntity.yCoord, tileEntity.zCoord);
-        //Enderius.packetPipeline.sendToAll(packet);
-        //Enderius.packetPipeline.sendToServer(packet);
     }
 
     @Override
