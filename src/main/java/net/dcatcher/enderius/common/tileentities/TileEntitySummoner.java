@@ -55,11 +55,12 @@ public class TileEntitySummoner extends TileEntity {
                 int x = xCoord + (rand.nextInt(6)-3);
                 int z = zCoord + (rand.nextInt(6)-3);
                 int y = yCoord + 1;
-                ent.setLocationAndAngles(x, y, z, 0f, 0f);
-                if(entityID.equals("Skeleton")){
+                if(ent != null)
+                    ent.setLocationAndAngles(x, y, z, 0f, 0f);
+                if(entityID.equals("Skeleton") && ent != null){
                     ent.setCurrentItemOrArmor(0, new ItemStack(Items.bow));
                 }
-                if(shouldSpawn){
+                if(shouldSpawn && ent != null){
                     worldObj.spawnEntityInWorld(ent);
                 }
             }

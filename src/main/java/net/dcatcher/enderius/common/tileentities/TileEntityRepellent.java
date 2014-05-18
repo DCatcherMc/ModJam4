@@ -5,6 +5,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -13,7 +14,7 @@ import java.util.Random;
  */
 public class TileEntityRepellent extends TileEntity {
 
-    public String blockedUser;
+    protected List<String> allowedUsers = new ArrayList<String>();
     public Random rand = new Random();
     public int locX, locY, locZ;
 
@@ -24,14 +25,19 @@ public class TileEntityRepellent extends TileEntity {
     @Override
     public void writeToNBT(NBTTagCompound compound) {
         super.writeToNBT(compound);
-        if(blockedUser != null)
-            compound.setString("blockedUser", blockedUser);
+        compound.setInteger("noOfUsers", allowedUsers.size());
+        for(int i = 0; i < allowedUsers.size(); i++){
+            compound.setString("allowedUser_" + i, allowedUsers.get(i));
+        }
     }
 
     @Override
     public void readFromNBT(NBTTagCompound compound) {
         super.readFromNBT(compound);
-        blockedUser = compound.getString("blockedUser");
+        allowedUsers = new ArrayList<String>();
+        for(int i = 0; i < compound.getInteger("noOfUsers"); i++){
+            allowedUsers.add(compound.getString("allowedUser_"+i));
+        }
     }
 
     @Override
@@ -42,14 +48,14 @@ public class TileEntityRepellent extends TileEntity {
             List entities = worldObj.getEntitiesWithinAABB(EntityPlayer.class, AxisAlignedBB.getBoundingBox(xCoord, yCoord, zCoord, xCoord + 1, yCoord + 1, zCoord + 1).expand(10, 10, 10));
             for(Object entity : entities){
                 EntityPlayer player = (EntityPlayer) entity;
-                if(player.getDisplayName().equals(blockedUser)){
+                if(!allowedUsers.contains(player.getDisplayName())){
                     player.setLocationAndAngles(xCoord + 20, yCoord + 1, zCoord + 20, 0f, 0f);
                 }
             }
         }
     }
 
-    public void addPlayerToBlacklist(String username){
-        this.blockedUser = username;
+    public void addPlayerToWhitelist(String username){
+        allowedUsers.add(username);
     }
 }

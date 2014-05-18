@@ -27,11 +27,12 @@ public class GuiRepellent extends GuiScreen {
     private GuiTextField xCoord, yCoord, zCoord;
     private GuiButton butt;
 
-    private final int xSize = 200, ySize = 300;
+    private final int xSize = 150, ySize = 200;
 
 
-    public GuiRepellent(TileEntityRepellent te) {
-        this.tileEntity = te;
+    public GuiRepellent(TileEntityRepellent repel) {
+        super();
+        this.tileEntity = repel;
     }
 
 
@@ -49,10 +50,14 @@ public class GuiRepellent extends GuiScreen {
     @Override
     public void initGui() {
         super.initGui();
-        xCoord = new GuiTextField(fontRendererObj, ((width-xSize)/2)  + 5, ((height - ySize) /2) + 10, 40, 10);
-        yCoord = new GuiTextField(fontRendererObj, ((width-xSize)/2)  + 5, ((height - ySize) /2) + 20, 40, 10);
-        zCoord = new GuiTextField(fontRendererObj, ((width-xSize)/2)  + 5, ((height - ySize) /2) + 30, 40, 10);
-        butt = new GuiButton(0, ((width-xSize)/2)  + 5, ((height - ySize) /2) + 10, 100, 20, "Save");
+
+        int x = ((width -  xSize) / 2);
+        int y = ((height - ySize) / 2);
+        xCoord = new GuiTextField(fontRendererObj, x + 5, y + 10, 40, 10);
+        xCoord.setFocused(true);
+        yCoord = new GuiTextField(fontRendererObj, x + 5, y + 20, 40, 10);
+        zCoord = new GuiTextField(fontRendererObj, x + 5, y + 30, 40, 10);
+        butt = new GuiButton(0, x  + 5, y + 50, 100, 20, "Save");
 
         //buttonList.add(butt);
 
