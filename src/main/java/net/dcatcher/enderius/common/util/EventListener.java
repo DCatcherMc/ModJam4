@@ -11,11 +11,13 @@ import net.minecraft.entity.boss.EntityDragon;
 import net.minecraft.entity.monster.EntityEnderman;
 import net.minecraft.event.ClickEvent;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.ItemTool;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.WorldProviderEnd;
 import net.minecraft.world.biome.BiomeGenEnd;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.player.EntityInteractEvent;
+import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.world.WorldEvent;
 
@@ -56,15 +58,23 @@ public class EventListener {
     }
 
     @SubscribeEvent
+    public void onItemTooltip(ItemTooltipEvent event){
+        if(event.entityPlayer == null)
+            return;
+    }
+
+    @SubscribeEvent
     public void onPlayerInteract(EntityInteractEvent event){
         if(event.entityPlayer.getCurrentEquippedItem() != null &&
                 event.entityPlayer.getCurrentEquippedItem().getItem() == ItemHandler.dnaSyringe){
             ItemStack syringe = event.entityPlayer.getCurrentEquippedItem();
             NBTTagCompound nbt = new NBTTagCompound();
             syringe.writeToNBT(nbt);
+            syringe.
             nbt = addNBTData(event.target, nbt);
-            event.entityPlayer.getCurrentEquippedItem().getItem().addInformation(syringe, event.entityPlayer, syringe.getTooltip(event.entityPlayer, true),true);
-            System.out.println("Getting information from this mob!");
+            syringe.readFromNBT(nbt);
+            syringe.getTooltip(event.entityPlayer, false).add("Entity: " + EntityList.getEntityString(event.target));
+            System.out.println("Getting information from this mob!" + nbt.getString("entityID"));
 
         }
     }
