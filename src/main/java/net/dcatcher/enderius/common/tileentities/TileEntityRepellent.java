@@ -49,14 +49,16 @@ public class TileEntityRepellent extends TileEntity {
             for(Object entity : entities){
                 EntityPlayer player = (EntityPlayer) entity;
                 if(!allowedUsers.contains(player.getDisplayName())){
-                    player.setLocationAndAngles(xCoord + 20, yCoord + 1, zCoord + 20, 0f, 0f);
+                    player.setLocationAndAngles(locX, locY, locZ, 0f, 0f);
                 }
             }
         }
     }
 
     public void addPlayerToWhitelist(String username){
-        allowedUsers.add(username);
+        if(allowedUsers.isEmpty())
+            allowedUsers = new ArrayList<String>();
+        System.out.println(allowedUsers.add(username));
     }
 
     public void removePlayerFromWhitelist(String username){
@@ -65,5 +67,9 @@ public class TileEntityRepellent extends TileEntity {
 
     public List<String> getWhitelist() {
         return allowedUsers;
+    }
+
+    public int[] getLocs() {
+        return new int[]{locX, locY, locZ};
     }
 }

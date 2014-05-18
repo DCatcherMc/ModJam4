@@ -61,16 +61,18 @@ public class GuiRepellent extends GuiScreen {
         int x = ((width -  xSize) / 2);
         int y = ((height - ySize) / 2);
         xCoord = new GuiTextField(fontRendererObj, x + 40, y + 40, 60, 15);
-        xCoord.setFocused(true);
-        xCoord.setText("" + tileEntity.locX);
         yCoord = new GuiTextField(fontRendererObj, x + 40, y + 60, 60, 15);
-        yCoord.setText(""+tileEntity.locX);
         zCoord = new GuiTextField(fontRendererObj, x + 40, y + 80, 60, 15);
-        zCoord.setText(""+tileEntity.locX);
+        username = new GuiTextField(fontRendererObj, x + 20, y + 140, 90, 15);
+
         whitelistadder = new GuiButton(0, x + 20, y + 160, 100, 20, "Toggle");
         coordSender = new GuiButton(1, x + 40, y + 100, 60, 15, "Save");
 
-        username = new GuiTextField(fontRendererObj, x + 20, y + 140, 90, 15);
+        int[] locs = tileEntity.getLocs();
+
+        xCoord.setText("" + locs[0]);
+        yCoord.setText("" + locs[1]);
+        zCoord.setText("" + locs[2]);
 
         buttonList.add(whitelistadder);
         buttonList.add(coordSender);
@@ -91,6 +93,7 @@ public class GuiRepellent extends GuiScreen {
         yCoord.drawTextBox();
         zCoord.drawTextBox();
         username.drawTextBox();
+
 
         this.fontRendererObj.drawString("X:", x + 30, y + 43, 0x1a1a1a);
         this.fontRendererObj.drawString("Y:", x + 30, y + 63, 0x1a1a1a);
