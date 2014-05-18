@@ -27,6 +27,7 @@ public class GuiRepellent extends GuiScreen {
     TileEntityRepellent tileEntity;
 
     private GuiTextField xCoord, yCoord, zCoord;
+    private GuiTextField username;
     private GuiButton butt;
 
 
@@ -64,7 +65,9 @@ public class GuiRepellent extends GuiScreen {
         yCoord.setText(""+tileEntity.locX);
         zCoord = new GuiTextField(fontRendererObj, x + 40, y + 80, 60, 15);
         zCoord.setText(""+tileEntity.locX);
-        butt = new GuiButton(0, x  + 5, y + 50, 100, 20, "Save");
+        butt = new GuiButton(0, x  + 5, y + 50, 100, 20, "Toggle");
+
+        username = new GuiTextField(fontRendererObj, x + 20, y + 140, 90, 15);
 
         buttonList.add(butt);
 
@@ -79,10 +82,14 @@ public class GuiRepellent extends GuiScreen {
         xCoord.drawTextBox();
         yCoord.drawTextBox();
         zCoord.drawTextBox();
+        username.drawTextBox();
 
         this.fontRendererObj.drawString("X:", x + 30, y + 43, 0x1a1a1a);
         this.fontRendererObj.drawString("Y:", x + 30, y + 63, 0x1a1a1a);
         this.fontRendererObj.drawString("Z:", x + 30, y + 83, 0x1a1a1a);
+
+        this.fontRendererObj.drawString("Add/Remove user ", x + 20, y + 120, 0x1a1a1a);
+        this.fontRendererObj.drawString("from whitelist:", x + 20, y + 130, 0x1a1a1a);
         //butt.drawButton(mc, i, j);
 
         int startX = x + 90, startY = y + 40;
@@ -113,6 +120,7 @@ public class GuiRepellent extends GuiScreen {
         xCoord.mouseClicked(i, j, k);
         yCoord.mouseClicked(i, j, k);
         zCoord.mouseClicked(i, j, k);
+        username.mouseClicked(i, j, k);
         //butt.mousePressed(mc, i, j);
     }
 
@@ -131,6 +139,10 @@ public class GuiRepellent extends GuiScreen {
             if(zCoord.isFocused()){
                 zCoord.textboxKeyTyped(par1, par2);
             }
+        }
+
+        if(username.isFocused()){
+            username.textboxKeyTyped(par1, par2);
         }
     }
 
