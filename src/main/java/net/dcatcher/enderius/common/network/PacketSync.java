@@ -1,50 +1,65 @@
 package net.dcatcher.enderius.common.network;
 
+import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.network.ByteBufUtils;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
 import net.dcatcher.enderius.common.player.DCPlayerProperties;
 import net.dcatcher.enderius.common.tileentities.TileEntityRepellent;
+import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.world.World;
+import net.minecraftforge.common.MinecraftForge;
 
 /**
  * Copyright: DCatcher
  */
 public class PacketSync extends AbstractPacket {
 
-    TileEntityRepellent te;
+    World world;
     NBTTagCompound nbt;
-
+    private int x, y, z;
     public PacketSync(){
     }
 
-    public PacketSync(TileEntityRepellent te){
-       this.te = te;
+    public PacketSync(World world,int x, int y, int z){
+        this.world = world;
+        this.x = x;
+        this.y = y;
+        this.z = z;
     }
     @Override
     public void encode(ChannelHandlerContext context, ByteBuf buffer) {
         nbt = new NBTTagCompound();
+        TileEntityRepellent te = (TileEntityRepellent) world.getTileEntity(x, y, z);
         te.writeToNBT(nbt);
         ByteBufUtils.writeTag(buffer, nbt);
+        buffer.writeInt(x);
+        buffer.writeInt(y);
+        buffer.writeInt(z);
     }
 
     @Override
     public void decode(ChannelHandlerContext context, ByteBuf buffer) {
         nbt = ByteBufUtils.readTag(buffer);
+        x = buffer.readInt();
+        y = buffer.readInt();
+        z = buffer.readInt();
     }
 
     @Override
     public void handleClient(EntityPlayer player) {
-        TileEntity tile = player.worldObj.getTileEntity(te.xCoord, te.yCoord, te.zCoord);
+        TileEntity tile = player.worldObj.getTileEntity(x, y, z);
         tile.readFromNBT(nbt);
         player.worldObj.markBlockForUpdate(tile.xCoord, tile.yCoord, tile.zCoord);
         player.worldObj.markTileEntityChunkModified(tile.xCoord, tile.yCoord, tile.zCoord, tile);    }
 
     @Override
     public void handleServer(EntityPlayer player) {
-        TileEntity tile = player.getEntityWorld().getTileEntity(te.xCoord, te.yCoord, te.zCoord);
+        TileEntity tile = player.worldObj.getTileEntity(x, y, z);
         tile.readFromNBT(nbt);
         player.worldObj.markBlockForUpdate(tile.xCoord, tile.yCoord, tile.zCoord);
         player.worldObj.markTileEntityChunkModified(tile.xCoord, tile.yCoord, tile.zCoord, tile);
