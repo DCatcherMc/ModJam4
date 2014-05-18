@@ -1,5 +1,7 @@
 package net.dcatcher.enderius.common.tileentities;
 
+import net.dcatcher.enderius.Enderius;
+import net.dcatcher.enderius.common.network.PacketRepellent;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
@@ -44,6 +46,10 @@ public class TileEntityRepellent extends TileEntity {
         this.locX = compound.getInteger("locX");
         this.locY = compound.getInteger("locY");
         this.locZ = compound.getInteger("locZ");
+
+        PacketRepellent packet = new PacketRepellent(locX, locY, locZ, xCoord, yCoord, zCoord);
+        Enderius.packetPipeline.sendToAll(packet);
+        Enderius.packetPipeline.sendToServer(packet);
     }
 
     @Override
