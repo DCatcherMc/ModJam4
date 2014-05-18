@@ -121,6 +121,7 @@ public class GuiRepellent extends GuiScreen {
             case 0:
                 PacketToggle toggle = new PacketToggle(username.getText(), tileEntity.xCoord, tileEntity.yCoord, tileEntity.zCoord);
                 Enderius.packetPipeline.sendToServer(toggle);
+                Enderius.packetPipeline.sendToAll(toggle);
                 break;
             case 1:
                 int locX = Integer.parseInt(xCoord.getText());
@@ -129,6 +130,7 @@ public class GuiRepellent extends GuiScreen {
                 PacketRepellent repel = new PacketRepellent(locX, locY, locZ, tileEntity.xCoord, tileEntity.yCoord, tileEntity.zCoord);
                 System.out.println("Sending PacketRepel");
                 Enderius.packetPipeline.sendToServer(repel);
+                Enderius.packetPipeline.sendToAll(repel);
                 break;
         }
 

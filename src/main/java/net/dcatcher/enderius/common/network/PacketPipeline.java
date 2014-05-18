@@ -133,5 +133,10 @@ public class PacketPipeline extends MessageToMessageCodec<FMLProxyPacket, Abstra
         this.channels.get(Side.CLIENT).writeAndFlush(packet);
     }
 
+    public void sendToAll(AbstractPacket packet){
+        this.channels.get(Side.SERVER).attr(FMLOutboundHandler.FML_MESSAGETARGET).set(FMLOutboundHandler.OutboundTarget.ALL);
+        this.channels.get(Side.SERVER).writeAndFlush(packet);
+    }
+
 
 }

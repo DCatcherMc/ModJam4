@@ -42,12 +42,20 @@ public class PacketRepellent extends AbstractPacket {
 
     @Override
     public void handleClient(EntityPlayer player) {
+        System.out.println("Recieved Packet!(CLIENT)");
+        World world = player.worldObj;
 
+        TileEntityRepellent repel = (TileEntityRepellent) world.getTileEntity(ex, ey, ez);
+        if(repel != null){
+            repel.locX = tx;
+            repel.locY = ty;
+            repel.locZ = tz;
+        }
     }
 
     @Override
     public void handleServer(EntityPlayer player) {
-        System.out.println("Recieved Packet!");
+        System.out.println("Recieved Packet!(SERVER)");
         World world = player.worldObj;
 
         TileEntityRepellent repel = (TileEntityRepellent) world.getTileEntity(ex, ey, ez);
