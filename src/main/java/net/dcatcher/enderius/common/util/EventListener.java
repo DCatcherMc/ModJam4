@@ -7,8 +7,10 @@ import net.dcatcher.enderius.common.items.ItemEnderSlime;
 import net.dcatcher.enderius.common.items.ItemHandler;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.boss.EntityDragon;
 import net.minecraft.entity.monster.EntityEnderman;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.event.ClickEvent;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemTool;
@@ -57,28 +59,17 @@ public class EventListener {
         }
     }
 
-    public void tooltipEvent(ItemTooltipEvent event){
-        if (event.entityPlayer == null)
-            return;
-        if (event.entityPlayer.getCurrentEquippedItem().getItem() != ItemHandler.dnaSyringe)
-            return;
-        if (event.itemStack.getTagCompound() == null)
-            return;
-        NBTTagCompound nbt = new NBTTagCompound();
-        event.itemStack.writeToNBT(nbt);
-        event.toolTip.add("DNA Stored: " + nbt.getString("entityID"));
-    }
-
     @SubscribeEvent
     public void onPlayerInteract(EntityInteractEvent event){
         if(event.entityPlayer.getCurrentEquippedItem() != null &&
                 event.entityPlayer.getCurrentEquippedItem().getItem() == ItemHandler.dnaSyringe){
-            ItemStack syringe = event.entityPlayer.getCurrentEquippedItem();
-            NBTTagCompound nbt = new NBTTagCompound();
-            syringe.writeToNBT(nbt);
-            nbt = addNBTData(event.target, nbt);
-            syringe.setTagCompound(nbt);
-
+            if(!(event.entity instanceof EntityPlayer) && !(event.entity instanceof EntityDragon) && (event.entity instanceof EntityLivingBase)){
+                ItemStack syringe = event.entityPlayer.getCurrentEquippedItem();
+                NBTTagCompound nbt = new NBTTagCompound();
+                syringe.writeToNBT(nbt);
+                nbt = addNBTData(event.target, nbt);
+                syringe.setTagCompound(nbt);
+            }
         }
     }
 
