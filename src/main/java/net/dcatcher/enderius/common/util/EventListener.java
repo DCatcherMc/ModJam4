@@ -11,6 +11,7 @@ import net.minecraft.entity.boss.EntityDragon;
 import net.minecraft.entity.monster.EntityEnderman;
 import net.minecraft.event.ClickEvent;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.WorldProviderEnd;
 import net.minecraft.world.biome.BiomeGenEnd;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
@@ -59,8 +60,15 @@ public class EventListener {
         if(event.entityPlayer.getCurrentEquippedItem() != null &&
                 event.entityPlayer.getCurrentEquippedItem().getItem() instanceof ItemEnderSlime){
             ItemStack slime = event.entityPlayer.getCurrentEquippedItem();
-            slime.setStackDisplayName(""+EntityList.getEntityString(event.target));
+            NBTTagCompound nbt = new NBTTagCompound();
+            slime.writeToNBT(nbt);
+            nbt = addNBTData(event.target, nbt);
             System.out.println("Getting information from this mob!");
         }
+    }
+
+    public NBTTagCompound addNBTData(Entity entity, NBTTagCompound nbt){
+        nbt.setString("entityID", EntityList.getEntityString(entity));
+        return nbt;
     }
 }
