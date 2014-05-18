@@ -53,10 +53,10 @@ public class GuiRepellent extends GuiScreen {
 
         int x = ((width -  xSize) / 2);
         int y = ((height - ySize) / 2);
-        xCoord = new GuiTextField(fontRendererObj, x + 20, y + 10, 40, 10);
+        xCoord = new GuiTextField(fontRendererObj, x + 40, y + 40, 60, 15);
         xCoord.setFocused(true);
-        yCoord = new GuiTextField(fontRendererObj, x + 20, y + 20, 40, 10);
-        zCoord = new GuiTextField(fontRendererObj, x + 20, y + 30, 40, 10);
+        yCoord = new GuiTextField(fontRendererObj, x + 40, y + 60, 60, 15);
+        zCoord = new GuiTextField(fontRendererObj, x + 40, y + 80, 60, 15);
         butt = new GuiButton(0, x  + 5, y + 50, 100, 20, "Save");
 
         //buttonList.add(butt);
@@ -67,9 +67,15 @@ public class GuiRepellent extends GuiScreen {
     @Override
     public void drawScreen(int i, int j, float f) {
         this.drawDefaultBackground();
+        int x = ((width -  xSize) / 2);
+        int y = ((height - ySize) / 2);
         xCoord.drawTextBox();
         yCoord.drawTextBox();
         zCoord.drawTextBox();
+
+        this.fontRendererObj.drawString("X:", x + 30, y + 42, 0x1a1a1a);
+        this.fontRendererObj.drawString("X:", x + 30, y + 42, 0x1a1a1a);
+        this.fontRendererObj.drawString("X:", x + 30, y + 42, 0x1a1a1a);
         //butt.drawButton(mc, i, j);
     }
 
