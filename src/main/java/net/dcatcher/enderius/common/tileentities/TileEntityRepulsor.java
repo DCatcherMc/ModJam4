@@ -22,7 +22,9 @@ public class TileEntityRepulsor extends TileEntity {
 
     protected List<String> allowedUsers = new ArrayList<String>();
     public Random rand = new Random();
-    public int locX, locY, locZ;
+    public int locX = 100, locY = 70, locZ = 100;
+
+    public int refreshCountdown = 0;
 
     public TileEntityRepulsor(){
 
@@ -55,6 +57,15 @@ public class TileEntityRepulsor extends TileEntity {
     @Override
     public void updateEntity() {
         super.updateEntity();
+
+        refreshCountdown--;
+        if(refreshCountdown < 0){
+            refreshCountdown = 6000; //Every 5 minutes the TileEntity will be FORCE synced.
+            PacketSync packet = new PacketSync(worldObj, xCoord, yCoord, zCoord);
+            Enderius.packetPipeline.sendToAll(packet);
+            Enderius.packetPipeline.sendToServer(packet);
+            System.out.println("Sending a refresh packet");
+        }
         if(worldObj.isBlockIndirectlyGettingPowered(xCoord,  yCoord, zCoord)){
             for(int i = 1; i < 11; i++)
                 worldObj.spawnParticle("portal", xCoord + rand.nextInt(4)-1, yCoord + rand.nextInt(4)-1, zCoord + rand.nextInt(4)-1, 0d, 0d, 0d);
