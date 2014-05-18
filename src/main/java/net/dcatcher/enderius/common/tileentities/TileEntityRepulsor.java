@@ -74,7 +74,10 @@ public class TileEntityRepulsor extends TileEntity {
                 EntityPlayer player = (EntityPlayer) entity;
                 if(!getWhitelist().contains(player.getDisplayName()) && !(player.getCurrentEquippedItem().getItem() == ItemHandler.anchor)){
                     worldObj.getChunkFromBlockCoords(locX, locZ).setChunkModified();
-                    player.setPositionAndUpdate(locX, locY, locZ);
+                    if(locX == 0 && locY == 0 && locZ == 0)
+                        player.setPositionAndUpdate(xCoord+20, yCoord+2, xCoord+20);
+                    else
+                        player.setPositionAndUpdate(locX, locY, locZ);
                 }
             }
         }
