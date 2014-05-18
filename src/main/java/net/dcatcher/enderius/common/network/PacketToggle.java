@@ -4,7 +4,9 @@ import cpw.mods.fml.common.network.ByteBufUtils;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.ByteBufUtil;
 import io.netty.channel.ChannelHandlerContext;
+import net.dcatcher.enderius.common.tileentities.TileEntityRepellent;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.world.World;
 
 import java.io.BufferedInputStream;
 import java.nio.ByteBuffer;
@@ -32,11 +34,17 @@ public class PacketToggle extends AbstractPacket {
     @Override
     public void encode(ChannelHandlerContext context, ByteBuf buffer) {
         ByteBufUtils.writeUTF8String(buffer, username);
+        buffer.writeInt(x);
+        buffer.writeInt(y);
+        buffer.writeInt(z);
     }
 
     @Override
     public void decode(ChannelHandlerContext context, ByteBuf buffer) {
-        username = ByteBufUtils.readUTF8String(buffer);
+        this.username = ByteBufUtils.readUTF8String(buffer);
+        this.x = buffer.readInt();
+        this.y = buffer.readInt();
+        this.z = buffer.readInt();
     }
 
     @Override
@@ -46,6 +54,11 @@ public class PacketToggle extends AbstractPacket {
 
     @Override
     public void handleServer(EntityPlayer player) {
-
+        World worldObj = player.worldObj;
+        TileEntityRepellent repel = (TileEntityRepellent) worldObj.getTileEntity(x, y, z);
+        if(repel.getWhitelist().contains(username))
+            repel.removePlayerFromWhitelist(username);
+        else
+            repel.addPlayerToWhitelist(username);
     }
 }

@@ -3,6 +3,7 @@ package net.dcatcher.enderius.client.gui;
 import cpw.mods.fml.client.GuiConfirmation;
 import net.dcatcher.enderius.Enderius;
 import net.dcatcher.enderius.common.network.PacketRepellent;
+import net.dcatcher.enderius.common.network.PacketToggle;
 import net.dcatcher.enderius.common.tileentities.ContainerRepellent;
 import net.dcatcher.enderius.common.tileentities.TileEntityRepellent;
 import net.minecraft.client.gui.GuiButton;
@@ -28,7 +29,7 @@ public class GuiRepellent extends GuiScreen {
 
     private GuiTextField xCoord, yCoord, zCoord;
     private GuiTextField username;
-    private GuiButton butt;
+    private GuiButton whitelistadder;
 
 
 
@@ -65,11 +66,11 @@ public class GuiRepellent extends GuiScreen {
         yCoord.setText(""+tileEntity.locX);
         zCoord = new GuiTextField(fontRendererObj, x + 40, y + 80, 60, 15);
         zCoord.setText(""+tileEntity.locX);
-        butt = new GuiButton(0, x  + 5, y + 50, 100, 20, "Toggle");
+        whitelistadder = new GuiButton(0, x + 20, y + 160, 100, 20, "Toggle");
 
         username = new GuiTextField(fontRendererObj, x + 20, y + 140, 90, 15);
 
-        buttonList.add(butt);
+        buttonList.add(whitelistadder);
 
 
         }
@@ -90,14 +91,14 @@ public class GuiRepellent extends GuiScreen {
 
         this.fontRendererObj.drawString("Add/Remove user ", x + 20, y + 120, 0x1a1a1a);
         this.fontRendererObj.drawString("from whitelist:", x + 20, y + 130, 0x1a1a1a);
-        //butt.drawButton(mc, i, j);
+        whitelistadder.drawButton(mc, i, j);
 
-        int startX = x + 90, startY = y + 40;
+        int startX = x + 145, startY = y + 40;
 
         List<String> whitelist = tileEntity.getWhitelist();
 
         for(String str : whitelist){
-            this.fontRendererObj.drawString(str, startX, startY, 0x1a1a1a);
+            this.fontRendererObj.drawString(str, startX, startY, 0xffffff);
             startY += 10;
         }
 
@@ -105,12 +106,8 @@ public class GuiRepellent extends GuiScreen {
 
     @Override
     protected void actionPerformed(GuiButton button) {
-        int locX = Integer.parseInt(xCoord.getText());
-        int locY = Integer.parseInt(yCoord.getText());
-        int locZ = Integer.parseInt(zCoord.getText());
-
-        PacketRepellent packetRepel = new PacketRepellent(locX, locY, locZ, tileEntity.xCoord, tileEntity.yCoord, tileEntity.zCoord);
-        Enderius.packetPipeline.sendToServer(packetRepel);
+        PacketToggle toggle = new PacketToggle(username.getText(), tileEntity.xCoord, tileEntity.yCoord, tileEntity.zCoord);
+        Enderius.packetPipeline.sendToServer(toggle);
         System.out.println("Sending Packet");
     }
 
@@ -121,7 +118,7 @@ public class GuiRepellent extends GuiScreen {
         yCoord.mouseClicked(i, j, k);
         zCoord.mouseClicked(i, j, k);
         username.mouseClicked(i, j, k);
-        //butt.mousePressed(mc, i, j);
+        whitelistadder.mousePressed(mc, i, j);
     }
 
 
