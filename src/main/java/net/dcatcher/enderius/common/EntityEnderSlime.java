@@ -50,7 +50,7 @@ public class EntityEnderSlime extends EntitySlime implements IMob{
 
     @Override
     protected String getJumpSound() {
-        return "mob.magmacube.jump";
+        return "mob.slime.big";
     }
 
     @Override
