@@ -22,7 +22,7 @@ public class TileEntityRepulsor extends TileEntity {
 
     protected List<String> allowedUsers = new ArrayList<String>();
     public Random rand = new Random();
-    public int locX = 100, locY = 70, locZ = 100;
+    public int locX, locY, locZ;
 
     public int refreshCountdown = 0;
 

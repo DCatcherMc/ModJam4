@@ -22,7 +22,7 @@ public class RecipeList {
         GameRegistry.addShapedRecipe(new ItemStack(ItemHandler.enderFocus), "AXP", "XOX", "SXH", 'X', new ItemStack(Items.diamond), 'A', new ItemStack(Items.diamond_axe), 'P',
                 new ItemStack(Items.diamond_pickaxe), 'S', new ItemStack(Items.diamond_shovel), 'H', new ItemStack(Items.diamond_hoe), 'O', new ItemStack(ItemHandler.enderNucleus));
 
-        GameRegistry.addShapedRecipe(new ItemStack(BlockHandler.netherStarBlock, 1), "NNN", "NNN", "NNN", 'N', new ItemStack(Items.nether_star));
+        GameRegistry.addShapedRecipe(new ItemStack(BlockHandler.netherStarBlock, 1), "NN", "NN", 'N', new ItemStack(Items.nether_star));
         GameRegistry.addShapedRecipe(new ItemStack(BlockHandler.endStarBlock, 1), "EE", "EE", 'E', new ItemStack(ItemHandler.enderStar));
 
         GameRegistry.addShapedRecipe(new ItemStack(BlockHandler.enderRepulsor, 1), " E ", " I ", "IRI", 'E', new ItemStack(Items.ender_pearl),
@@ -35,5 +35,8 @@ public class RecipeList {
         GameRegistry.addShapedRecipe(new ItemStack(BlockHandler.enderSummoner, 1), "WEW", " I ", "IRI", 'E', new ItemStack(Items.ender_eye),
                 'I', new ItemStack(Blocks.iron_block), 'R', new ItemStack(Items.redstone), 'W', new ItemStack(Items.potato));
 
+
+        GameRegistry.addShapedRecipe(new ItemStack(Items.nether_star, 4), new ItemStack(BlockHandler.netherStarBlock));
+        GameRegistry.addShapedRecipe(new ItemStack(ItemHandler.enderStar, 4), new ItemStack(BlockHandler.endStarBlock));
     }
 }
