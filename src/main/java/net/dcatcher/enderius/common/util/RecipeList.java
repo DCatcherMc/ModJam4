@@ -36,7 +36,7 @@ public class RecipeList {
                 'I', new ItemStack(Blocks.iron_block), 'R', new ItemStack(Items.redstone), 'W', new ItemStack(Items.potato));
 
 
-        GameRegistry.addShapedRecipe(new ItemStack(Items.nether_star, 4), new ItemStack(BlockHandler.netherStarBlock));
-        GameRegistry.addShapedRecipe(new ItemStack(ItemHandler.enderStar, 4), new ItemStack(BlockHandler.endStarBlock));
+        GameRegistry.addShapelessRecipe(new ItemStack(Items.nether_star, 4), new ItemStack(BlockHandler.netherStarBlock, 1));
+        GameRegistry.addShapelessRecipe(new ItemStack(ItemHandler.enderStar, 4), new ItemStack(BlockHandler.endStarBlock, 1));
     }
 }
