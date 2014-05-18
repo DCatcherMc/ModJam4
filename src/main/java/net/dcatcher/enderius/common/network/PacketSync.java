@@ -48,16 +48,20 @@ public class PacketSync extends AbstractPacket {
     @Override
     public void handleClient(EntityPlayer player) {
         TileEntity tile = player.worldObj.getTileEntity(x, y, z);
-        tile.readFromNBT(nbt);
-        player.worldObj.markBlockForUpdate(tile.xCoord, tile.yCoord, tile.zCoord);
-        player.worldObj.markTileEntityChunkModified(tile.xCoord, tile.yCoord, tile.zCoord, tile);    }
+        if(tile != null){
+            tile.readFromNBT(nbt);
+            player.worldObj.markBlockForUpdate(tile.xCoord, tile.yCoord, tile.zCoord);
+            player.worldObj.markTileEntityChunkModified(tile.xCoord, tile.yCoord, tile.zCoord, tile);
+        }
+    }
 
     @Override
     public void handleServer(EntityPlayer player) {
         TileEntity tile = player.worldObj.getTileEntity(x, y, z);
-        tile.readFromNBT(nbt);
-        player.worldObj.markBlockForUpdate(tile.xCoord, tile.yCoord, tile.zCoord);
-        player.worldObj.markTileEntityChunkModified(tile.xCoord, tile.yCoord, tile.zCoord, tile);
-
+        if(tile != null){
+            tile.readFromNBT(nbt);
+            player.worldObj.markBlockForUpdate(tile.xCoord, tile.yCoord, tile.zCoord);
+            player.worldObj.markTileEntityChunkModified(tile.xCoord, tile.yCoord, tile.zCoord, tile);
+        }
     }
 }
