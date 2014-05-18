@@ -25,6 +25,7 @@ public class BlockRepulsor extends BlockContainer {
         super(Material.iron);
         setCreativeTab(Enderius.danTab);
         setBlockName("repulsor");
+        setHardness(2.0f);
     }
 
     @Override

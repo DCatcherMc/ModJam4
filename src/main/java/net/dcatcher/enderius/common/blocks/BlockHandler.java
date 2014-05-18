@@ -1,6 +1,7 @@
 package net.dcatcher.enderius.common.blocks;
 
 import cpw.mods.fml.common.registry.GameRegistry;
+import net.dcatcher.enderius.common.items.ItemHandler;
 import net.dcatcher.enderius.common.tileentities.TileEntityRepulsor;
 import net.dcatcher.enderius.common.tileentities.TileEntitySummoner;
 import net.minecraft.block.Block;
@@ -29,6 +30,7 @@ public class BlockHandler {
 
         OreDictionary.registerOre("blockNetherStar", netherStarBlock);
         OreDictionary.registerOre("blockEndStar", endStarBlock);
+        OreDictionary.registerOre("endStar", ItemHandler.enderStar);
     }
 
 
