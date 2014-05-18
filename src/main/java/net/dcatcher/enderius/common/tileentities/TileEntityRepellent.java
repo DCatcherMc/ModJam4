@@ -43,11 +43,12 @@ public class TileEntityRepellent extends TileEntity {
         super.readFromNBT(compound);
         allowedUsers = new ArrayList<String>();
         for(int i = 0; i < compound.getInteger("noOfUsers"); i++){
-            allowedUsers.add(compound.getString("allowedUser_"+i));
+            getWhitelist().add(compound.getString("allowedUser_" + i));
+            System.out.println("added: " + allowedUsers.get(i));
         }
         this.locX = compound.getInteger("locX");
         this.locY = compound.getInteger("locY");
-        this.locZ = compound.getInteger("locZ");
+        this.locZ = compound.getInteger("locZ");  
 
         PacketRepellent packet = new PacketRepellent(locX, locY, locZ, xCoord, yCoord, zCoord);
         Enderius.packetPipeline.sendToAll(packet);
@@ -62,9 +63,9 @@ public class TileEntityRepellent extends TileEntity {
             List entities = worldObj.getEntitiesWithinAABB(EntityPlayer.class, AxisAlignedBB.getBoundingBox(xCoord, yCoord, zCoord, xCoord + 1, yCoord + 1, zCoord + 1).expand(10, 10, 10));
             for(Object entity : entities){
                 EntityPlayer player = (EntityPlayer) entity;
-                if(!getWhitelist().contains(player.getDisplayName())&& !this.worldObj.isRemote){
+                if(!getWhitelist().contains(player.getDisplayName())){
                     worldObj.getChunkFromBlockCoords(locX, locZ).setChunkModified();
-                    player.setLocationAndAngles(locX, locY, locZ, 0f, 0f);
+                    player.setPositionAndUpdate(locX, locY, locZ);
                 }
             }
         }

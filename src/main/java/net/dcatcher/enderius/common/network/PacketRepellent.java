@@ -63,6 +63,10 @@ public class PacketRepellent extends AbstractPacket {
             repel.locX = tx;
             repel.locY = ty;
             repel.locZ = tz;
+
+
+            player.getEntityWorld().markBlockForUpdate(ex, ey, ez);
+            player.getEntityWorld().markTileEntityChunkModified(ex, ey, ez, repel);
         }
     }
 }
