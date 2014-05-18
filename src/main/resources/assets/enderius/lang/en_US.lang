@@ -7,6 +7,7 @@ item.enderFocus.name=Ender Focus
 item.enderiumFuel.name=Enderium Fuel
 item.enderNucleus.name=Ender Nucleus
 item.enderStar.name=End Star
+item.dnaSyringe.name=DNA Syringe
 
 
 tile.blockEndStar.name=End Star Block
