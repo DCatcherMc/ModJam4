@@ -63,8 +63,8 @@ public class BlockRepellent extends BlockContainer {
 
     @Override
     public void registerBlockIcons(IIconRegister reg) {
-        this.blockIcon = reg.registerIcon("enderius:repellent_side");
+        this.blockIcon = reg.registerIcon("enderius:summoner_side");
         this.blockBottom = reg.registerIcon("enderius:summoner_bottom");
-        this.blockTop = reg.registerIcon("enderius:repellent_bottom");
+        this.blockTop = reg.registerIcon("enderius:repellent_top");
     }
 }

@@ -4,6 +4,8 @@ import net.dcatcher.enderius.Enderius;
 import net.dcatcher.enderius.common.network.PacketRepellent;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.network.NetworkManager;
+import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
 
@@ -60,7 +62,8 @@ public class TileEntityRepellent extends TileEntity {
             List entities = worldObj.getEntitiesWithinAABB(EntityPlayer.class, AxisAlignedBB.getBoundingBox(xCoord, yCoord, zCoord, xCoord + 1, yCoord + 1, zCoord + 1).expand(10, 10, 10));
             for(Object entity : entities){
                 EntityPlayer player = (EntityPlayer) entity;
-                if(!getWhitelist().contains(player.getDisplayName())){
+                if(!getWhitelist().contains(player.getDisplayName())&& !this.worldObj.isRemote){
+                    worldObj.getChunkFromBlockCoords(locX, locZ).setChunkModified();
                     player.setLocationAndAngles(locX, locY, locZ, 0f, 0f);
                 }
             }
@@ -83,5 +86,10 @@ public class TileEntityRepellent extends TileEntity {
 
     public int[] getLocs() {
         return new int[]{locX, locY, locZ};
+    }
+
+    @Override
+    public void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity pkt) {
+        this.readFromNBT(pkt.func_148857_g());
     }
 }
