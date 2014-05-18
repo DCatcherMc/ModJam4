@@ -17,6 +17,8 @@ import org.lwjgl.input.Keyboard;
 import scala.Int;
 import scala.tools.nsc.Global;
 
+import java.util.List;
+
 /**
  * Copyright: DCatcher
  */
@@ -26,6 +28,8 @@ public class GuiRepellent extends GuiScreen {
 
     private GuiTextField xCoord, yCoord, zCoord;
     private GuiButton butt;
+
+
 
     private final int xSize = 256, ySize = 180;
 
@@ -55,11 +59,14 @@ public class GuiRepellent extends GuiScreen {
         int y = ((height - ySize) / 2);
         xCoord = new GuiTextField(fontRendererObj, x + 40, y + 40, 60, 15);
         xCoord.setFocused(true);
+        xCoord.setText(""+tileEntity.locX);
         yCoord = new GuiTextField(fontRendererObj, x + 40, y + 60, 60, 15);
+        yCoord.setText(""+tileEntity.locX);
         zCoord = new GuiTextField(fontRendererObj, x + 40, y + 80, 60, 15);
+        zCoord.setText(""+tileEntity.locX);
         butt = new GuiButton(0, x  + 5, y + 50, 100, 20, "Save");
 
-        //buttonList.add(butt);
+        buttonList.add(butt);
 
 
         }
@@ -73,10 +80,20 @@ public class GuiRepellent extends GuiScreen {
         yCoord.drawTextBox();
         zCoord.drawTextBox();
 
-        this.fontRendererObj.drawString("X:", x + 30, y + 42, 0x1a1a1a);
-        this.fontRendererObj.drawString("X:", x + 30, y + 42, 0x1a1a1a);
-        this.fontRendererObj.drawString("X:", x + 30, y + 42, 0x1a1a1a);
+        this.fontRendererObj.drawString("X:", x + 30, y + 43, 0x1a1a1a);
+        this.fontRendererObj.drawString("Y:", x + 30, y + 63, 0x1a1a1a);
+        this.fontRendererObj.drawString("Z:", x + 30, y + 83, 0x1a1a1a);
         //butt.drawButton(mc, i, j);
+
+        int startX = x + 90, startY = y + 40;
+
+        List<String> whitelist = tileEntity.getWhitelist();
+
+        for(String str : whitelist){
+            this.fontRendererObj.drawString(str, startX, startY, 0x1a1a1a);
+            startY += 10;
+        }
+
     }
 
     @Override

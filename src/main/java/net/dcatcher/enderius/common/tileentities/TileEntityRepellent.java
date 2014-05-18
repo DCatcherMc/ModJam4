@@ -58,4 +58,8 @@ public class TileEntityRepellent extends TileEntity {
     public void addPlayerToWhitelist(String username){
         allowedUsers.add(username);
     }
+
+    public List<String> getWhitelist() {
+        return allowedUsers;
+    }
 }
