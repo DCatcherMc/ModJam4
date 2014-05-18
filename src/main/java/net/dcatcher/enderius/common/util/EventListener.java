@@ -58,12 +58,14 @@ public class EventListener {
     @SubscribeEvent
     public void onPlayerInteract(EntityInteractEvent event){
         if(event.entityPlayer.getCurrentEquippedItem() != null &&
-                event.entityPlayer.getCurrentEquippedItem().getItem() instanceof ItemEnderSlime){
-            ItemStack slime = event.entityPlayer.getCurrentEquippedItem();
+                event.entityPlayer.getCurrentEquippedItem().getItem() == ItemHandler.dnaSyringe){
+            ItemStack syringe = event.entityPlayer.getCurrentEquippedItem();
             NBTTagCompound nbt = new NBTTagCompound();
-            slime.writeToNBT(nbt);
+            syringe.writeToNBT(nbt);
             nbt = addNBTData(event.target, nbt);
+            event.entityPlayer.getCurrentEquippedItem().getItem().addInformation(syringe, event.entityPlayer, syringe.getTooltip(event.entityPlayer, true),true);
             System.out.println("Getting information from this mob!");
+
         }
     }
 
