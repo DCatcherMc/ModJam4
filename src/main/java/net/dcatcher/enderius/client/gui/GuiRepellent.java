@@ -29,7 +29,7 @@ public class GuiRepellent extends GuiScreen {
 
     private GuiTextField xCoord, yCoord, zCoord;
     private GuiTextField username;
-    private GuiButton whitelistadder;
+    private GuiButton whitelistadder, coordSender;
 
 
 
@@ -39,6 +39,7 @@ public class GuiRepellent extends GuiScreen {
     public GuiRepellent(TileEntityRepellent repel) {
         super();
         this.tileEntity = repel;
+
     }
 
 
@@ -61,19 +62,25 @@ public class GuiRepellent extends GuiScreen {
         int y = ((height - ySize) / 2);
         xCoord = new GuiTextField(fontRendererObj, x + 40, y + 40, 60, 15);
         xCoord.setFocused(true);
-        xCoord.setText(""+tileEntity.locX);
+        xCoord.setText("" + tileEntity.locX);
         yCoord = new GuiTextField(fontRendererObj, x + 40, y + 60, 60, 15);
         yCoord.setText(""+tileEntity.locX);
         zCoord = new GuiTextField(fontRendererObj, x + 40, y + 80, 60, 15);
         zCoord.setText(""+tileEntity.locX);
         whitelistadder = new GuiButton(0, x + 20, y + 160, 100, 20, "Toggle");
+        coordSender = new GuiButton(1, x + 40, y + 100, 60, 15, "Save");
 
         username = new GuiTextField(fontRendererObj, x + 20, y + 140, 90, 15);
 
         buttonList.add(whitelistadder);
-
-
+        buttonList.add(coordSender);
         }
+
+
+    @Override
+    public boolean doesGuiPauseGame() {
+        return false;
+    }
 
     @Override
     public void drawScreen(int i, int j, float f) {
@@ -92,6 +99,7 @@ public class GuiRepellent extends GuiScreen {
         this.fontRendererObj.drawString("Add/Remove user ", x + 20, y + 120, 0x1a1a1a);
         this.fontRendererObj.drawString("from whitelist:", x + 20, y + 130, 0x1a1a1a);
         whitelistadder.drawButton(mc, i, j);
+        coordSender.drawButton(mc, i, j);
 
         int startX = x + 145, startY = y + 40;
 
@@ -106,9 +114,21 @@ public class GuiRepellent extends GuiScreen {
 
     @Override
     protected void actionPerformed(GuiButton button) {
-        PacketToggle toggle = new PacketToggle(username.getText(), tileEntity.xCoord, tileEntity.yCoord, tileEntity.zCoord);
-        Enderius.packetPipeline.sendToServer(toggle);
-        System.out.println("Sending Packet");
+        switch(button.id){
+            case 0:
+                PacketToggle toggle = new PacketToggle(username.getText(), tileEntity.xCoord, tileEntity.yCoord, tileEntity.zCoord);
+                Enderius.packetPipeline.sendToServer(toggle);
+                break;
+            case 1:
+                int locX = Integer.parseInt(xCoord.getText());
+                int locY = Integer.parseInt(yCoord.getText());
+                int locZ = Integer.parseInt(zCoord.getText());
+                PacketRepellent repel = new PacketRepellent(locX, locY, locZ, tileEntity.xCoord, tileEntity.yCoord, tileEntity.zCoord);
+                System.out.println("Sending PacketRepel");
+                Enderius.packetPipeline.sendToServer(repel);
+                break;
+        }
+
     }
 
     @Override
@@ -119,6 +139,7 @@ public class GuiRepellent extends GuiScreen {
         zCoord.mouseClicked(i, j, k);
         username.mouseClicked(i, j, k);
         whitelistadder.mousePressed(mc, i, j);
+        coordSender.mousePressed(mc, i, j);
     }
 
 

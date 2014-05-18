@@ -43,9 +43,6 @@ public class TileEntityRepellent extends TileEntity {
     @Override
     public void updateEntity() {
         super.updateEntity();
-        for(String str : allowedUsers){
-            System.out.println(str);
-        }
         if(worldObj.isBlockIndirectlyGettingPowered(xCoord,  yCoord, zCoord)){
             worldObj.spawnParticle("portal", xCoord + rand.nextInt(2)-1, yCoord + rand.nextInt(2)-1, zCoord + rand.nextInt(2)-1, 0d, 0d, 0d);
             List entities = worldObj.getEntitiesWithinAABB(EntityPlayer.class, AxisAlignedBB.getBoundingBox(xCoord, yCoord, zCoord, xCoord + 1, yCoord + 1, zCoord + 1).expand(10, 10, 10));
