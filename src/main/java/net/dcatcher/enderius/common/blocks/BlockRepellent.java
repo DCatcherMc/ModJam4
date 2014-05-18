@@ -56,7 +56,7 @@ public class BlockRepellent extends BlockContainer {
         TileEntity te = world.getTileEntity(x, y, z);
         if(te !=null && !player.isSneaking() && !world.isRemote){
             player.openGui(Enderius.instance, 0, world, x, y, z);
-            
+            world.markTileEntityChunkModified(x, y, z, te);
             return true;
         }
         return false;

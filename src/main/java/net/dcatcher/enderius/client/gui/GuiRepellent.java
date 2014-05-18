@@ -27,6 +27,8 @@ public class GuiRepellent extends GuiScreen {
 
     TileEntityRepellent tileEntity;
 
+    List<String> whitelist;
+
     private GuiTextField xCoord, yCoord, zCoord;
     private GuiTextField username;
     private GuiButton whitelistadder, coordSender;
@@ -39,7 +41,6 @@ public class GuiRepellent extends GuiScreen {
     public GuiRepellent(TileEntityRepellent repel) {
         super();
         this.tileEntity = repel;
-
     }
 
 
@@ -76,6 +77,9 @@ public class GuiRepellent extends GuiScreen {
 
         buttonList.add(whitelistadder);
         buttonList.add(coordSender);
+
+        whitelist = tileEntity.getWhitelist();
+
         }
 
 
@@ -104,15 +108,13 @@ public class GuiRepellent extends GuiScreen {
         whitelistadder.drawButton(mc, i, j);
         coordSender.drawButton(mc, i, j);
 
-        int startX = x + 145, startY = y + 40;
-
-        List<String> whitelist = tileEntity.getWhitelist();
+        int startX = x + 145, startY = y + 25;
 
         for(String str : whitelist){
             this.fontRendererObj.drawString(str, startX, startY, 0xffffff);
             startY += 10;
         }
-
+        whitelist = tileEntity.getWhitelist();
     }
 
     @Override
@@ -127,6 +129,7 @@ public class GuiRepellent extends GuiScreen {
                 int locX = Integer.parseInt(xCoord.getText());
                 int locY = Integer.parseInt(yCoord.getText());
                 int locZ = Integer.parseInt(zCoord.getText());
+                tileEntity.setLocationToTpTo(locX, locY, locZ);
                 PacketRepellent repel = new PacketRepellent(locX, locY, locZ, tileEntity.xCoord, tileEntity.yCoord, tileEntity.zCoord);
                 System.out.println("Sending PacketRepel");
                 Enderius.packetPipeline.sendToServer(repel);

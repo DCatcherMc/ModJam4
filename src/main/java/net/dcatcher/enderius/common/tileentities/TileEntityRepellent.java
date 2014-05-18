@@ -93,4 +93,10 @@ public class TileEntityRepellent extends TileEntity {
     public void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity pkt) {
         this.readFromNBT(pkt.func_148857_g());
     }
+
+    public void setLocationToTpTo(int x, int y, int z) {
+        this.locX = x;
+        this.locY = y;
+        this.locZ = z;
+    }
 }

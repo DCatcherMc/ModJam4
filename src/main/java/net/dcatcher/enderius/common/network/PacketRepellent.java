@@ -60,10 +60,7 @@ public class PacketRepellent extends AbstractPacket {
 
         TileEntityRepellent repel = (TileEntityRepellent) world.getTileEntity(ex, ey, ez);
         if(repel != null){
-            repel.locX = tx;
-            repel.locY = ty;
-            repel.locZ = tz;
-
+            repel.setLocationToTpTo(tx, ty, tz);
 
             player.getEntityWorld().markBlockForUpdate(ex, ey, ez);
             player.getEntityWorld().markTileEntityChunkModified(ex, ey, ez, repel);
