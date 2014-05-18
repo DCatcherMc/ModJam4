@@ -3,6 +3,7 @@ package net.dcatcher.enderius.client.gui;
 import cpw.mods.fml.client.GuiConfirmation;
 import net.dcatcher.enderius.Enderius;
 import net.dcatcher.enderius.common.network.PacketRepellent;
+import net.dcatcher.enderius.common.network.PacketSync;
 import net.dcatcher.enderius.common.network.PacketToggle;
 import net.dcatcher.enderius.common.tileentities.ContainerRepellent;
 import net.dcatcher.enderius.common.tileentities.TileEntityRepellent;
@@ -136,7 +137,9 @@ public class GuiRepellent extends GuiScreen {
                 Enderius.packetPipeline.sendToAll(repel);
                 break;
         }
-
+        PacketSync packet = new PacketSync(tileEntity);
+        Enderius.packetPipeline.sendToAll(packet);
+        Enderius.packetPipeline.sendToServer(packet);
     }
 
     @Override

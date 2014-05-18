@@ -75,7 +75,7 @@ public class DCPlayerProperties implements IExtendedEntityProperties {
 
     public final boolean sync(){
         if(!player.worldObj.isRemote){
-            Enderius.packetPipeline.sendTo(new PacketSync(levelBow, levelSword, xpBow, xpSword), (EntityPlayerMP) player);
+            //wEnderius.packetPipeline.sendTo(new PacketSync(levelBow, levelSword, xpBow, xpSword), (EntityPlayerMP) player);
             System.out.println("SENDING A SYNC PACKET");
             return true;
         }

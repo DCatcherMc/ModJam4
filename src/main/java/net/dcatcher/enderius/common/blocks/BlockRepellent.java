@@ -58,7 +58,7 @@ public class BlockRepellent extends BlockContainer {
     public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float px, float py, float pz) {
         TileEntity te = world.getTileEntity(x, y, z);
         if(te !=null && !player.isSneaking() && !world.isRemote){
-            PacketSync sync = new PacketSync(te);
+            PacketSync sync = new PacketSync((TileEntityRepellent) te);
 
             player.openGui(Enderius.instance, 0, world, x, y, z);
             world.markTileEntityChunkModified(x, y, z, te);

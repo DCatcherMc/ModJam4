@@ -94,7 +94,7 @@ public class PacketPipeline extends MessageToMessageCodec<FMLProxyPacket, Abstra
 
 
     public void init(){
-        channels = NetworkRegistry.INSTANCE.newChannel("DCMODJAM", this);
+        channels = NetworkRegistry.INSTANCE.newChannel("Enderius", this);
         registerPacket(PacketSync.class);
         registerPacket(PacketRepellent.class);
         registerPacket(PacketToggle.class);

@@ -7,6 +7,7 @@ import net.dcatcher.enderius.common.player.DCPlayerProperties;
 import net.dcatcher.enderius.common.tileentities.TileEntityRepellent;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.tileentity.TileEntity;
 
 /**
  * Copyright: DCatcher
@@ -14,6 +15,7 @@ import net.minecraft.nbt.NBTTagCompound;
 public class PacketSync extends AbstractPacket {
 
     TileEntityRepellent te;
+    NBTTagCompound nbt;
 
     public PacketSync(){
     }
@@ -23,24 +25,29 @@ public class PacketSync extends AbstractPacket {
     }
     @Override
     public void encode(ChannelHandlerContext context, ByteBuf buffer) {
-        NBTTagCompound nbt = new NBTTagCompound();
+        nbt = new NBTTagCompound();
         te.writeToNBT(nbt);
         ByteBufUtils.writeTag(buffer, nbt);
     }
 
     @Override
     public void decode(ChannelHandlerContext context, ByteBuf buffer) {
-        NBTTagCompound nbt = ByteBufUtils.readTag(buffer);
-        te.readFromNBT(nbt);
+        nbt = ByteBufUtils.readTag(buffer);
     }
 
     @Override
     public void handleClient(EntityPlayer player) {
-       
-    }
+        TileEntity tile = player.worldObj.getTileEntity(te.xCoord, te.yCoord, te.zCoord);
+        tile.readFromNBT(nbt);
+        player.worldObj.markBlockForUpdate(tile.xCoord, tile.yCoord, tile.zCoord);
+        player.worldObj.markTileEntityChunkModified(tile.xCoord, tile.yCoord, tile.zCoord, tile);    }
 
     @Override
     public void handleServer(EntityPlayer player) {
+        TileEntity tile = player.getEntityWorld().getTileEntity(te.xCoord, te.yCoord, te.zCoord);
+        tile.readFromNBT(nbt);
+        player.worldObj.markBlockForUpdate(tile.xCoord, tile.yCoord, tile.zCoord);
+        player.worldObj.markTileEntityChunkModified(tile.xCoord, tile.yCoord, tile.zCoord, tile);
 
     }
 }
