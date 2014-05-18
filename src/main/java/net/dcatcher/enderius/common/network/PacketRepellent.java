@@ -31,6 +31,10 @@ public class PacketRepellent extends AbstractPacket {
         buffer.writeInt(tx);
         buffer.writeInt(ty);
         buffer.writeInt(tz);
+
+        buffer.writeInt(ex);
+        buffer.writeInt(ey);
+        buffer.writeInt(ez);
     }
 
     @Override
@@ -38,15 +42,19 @@ public class PacketRepellent extends AbstractPacket {
         tx = buffer.readInt();
         ty = buffer.readInt();
         tz = buffer.readInt();
+
+        ex = buffer.readInt();
+        ey = buffer.readInt();
+        ez = buffer.readInt();
     }
 
     @Override
     public void handleClient(EntityPlayer player) {
-        System.out.println("Recieved Packet!(CLIENT)");
         World world = player.worldObj;
 
         TileEntityRepellent repel = (TileEntityRepellent) world.getTileEntity(ex, ey, ez);
         if(repel != null){
+            System.out.println("Recieved Packet!(CLIENT)");
             repel.locX = tx;
             repel.locY = ty;
             repel.locZ = tz;
@@ -55,13 +63,12 @@ public class PacketRepellent extends AbstractPacket {
 
     @Override
     public void handleServer(EntityPlayer player) {
-        System.out.println("Recieved Packet!(SERVER)");
-        World world = player.worldObj;
+        World world = player.getEntityWorld();
 
         TileEntityRepellent repel = (TileEntityRepellent) world.getTileEntity(ex, ey, ez);
         if(repel != null){
             repel.setLocationToTpTo(tx, ty, tz);
-
+            System.out.println("Recieved Packet!(SERVER)");
             player.getEntityWorld().markBlockForUpdate(ex, ey, ez);
             player.getEntityWorld().markTileEntityChunkModified(ex, ey, ez, repel);
         }

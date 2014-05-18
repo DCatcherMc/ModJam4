@@ -51,7 +51,7 @@ public class PacketToggle extends AbstractPacket {
     public void handleClient(EntityPlayer player) {
         World worldObj = player.worldObj;
         TileEntityRepellent repel = (TileEntityRepellent) worldObj.getTileEntity(x, y, z);
-        if(repel != null){
+        if(repel != null && username != null){
             if(repel.getWhitelist().contains(username))
                 repel.getWhitelist().remove(username);
             else
@@ -67,7 +67,6 @@ public class PacketToggle extends AbstractPacket {
             repel.getWhitelist().remove(username);
         else
             repel.getWhitelist().add(username);
-
 
         player.getEntityWorld().markBlockForUpdate(x, y, z);
         player.getEntityWorld().markTileEntityChunkModified(x, y, z, repel);
