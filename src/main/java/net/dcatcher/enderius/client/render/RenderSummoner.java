@@ -1,6 +1,5 @@
 package net.dcatcher.enderius.client.render;
 
-import com.sun.xml.internal.ws.policy.sourcemodel.ModelNode;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 import net.dcatcher.enderius.client.ModelSummoner;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;

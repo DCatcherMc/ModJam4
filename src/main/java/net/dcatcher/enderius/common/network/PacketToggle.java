@@ -57,8 +57,10 @@ public class PacketToggle extends AbstractPacket {
         World worldObj = player.worldObj;
         TileEntityRepellent repel = (TileEntityRepellent) worldObj.getTileEntity(x, y, z);
         if(repel.getWhitelist().contains(username))
-            repel.removePlayerFromWhitelist(username);
+            repel.getWhitelist().remove(username);
         else
-            repel.addPlayerToWhitelist(username);
+            repel.getWhitelist().add(username);
+
+        System.out.println(repel.getWhitelist().contains(username));
     }
 }

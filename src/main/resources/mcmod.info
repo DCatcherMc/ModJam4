@@ -1,8 +1,8 @@
 [
 {
-  "modid": "DCatcher_ModJam4",
-  "name": "To be decided!",
-  "description": "DCatcher's #ModJam 4 Mod",
+  "modid": "Enderius",
+  "name": "Enderius",
+  "description": "Mod built for ModJam 4",
   "version": "${version}",
   "mcversion": "${mcversion}",
   "url": "",

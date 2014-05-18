@@ -29,6 +29,9 @@ public class TileEntityRepellent extends TileEntity {
         for(int i = 0; i < allowedUsers.size(); i++){
             compound.setString("allowedUser_" + i, allowedUsers.get(i));
         }
+        compound.setInteger("locX", locX);
+        compound.setInteger("locY", locY);
+        compound.setInteger("locZ", locZ);
     }
 
     @Override
@@ -38,6 +41,9 @@ public class TileEntityRepellent extends TileEntity {
         for(int i = 0; i < compound.getInteger("noOfUsers"); i++){
             allowedUsers.add(compound.getString("allowedUser_"+i));
         }
+        this.locX = compound.getInteger("locX");
+        this.locY = compound.getInteger("locY");
+        this.locZ = compound.getInteger("locZ");
     }
 
     @Override
@@ -48,7 +54,7 @@ public class TileEntityRepellent extends TileEntity {
             List entities = worldObj.getEntitiesWithinAABB(EntityPlayer.class, AxisAlignedBB.getBoundingBox(xCoord, yCoord, zCoord, xCoord + 1, yCoord + 1, zCoord + 1).expand(10, 10, 10));
             for(Object entity : entities){
                 EntityPlayer player = (EntityPlayer) entity;
-                if(!allowedUsers.contains(player.getDisplayName())){
+                if(!getWhitelist().contains(player.getDisplayName())){
                     player.setLocationAndAngles(locX, locY, locZ, 0f, 0f);
                 }
             }
