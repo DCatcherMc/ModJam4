@@ -2,7 +2,7 @@
 {
   "modid": "Enderius",
   "name": "Enderius",
-  "description": "Mod built for ModJam 4",
+  "description": "Use the power of the end for strange uses! From mining to a mob farm, the power of the end can complete these tasks!",
   "version": "${version}",
   "mcversion": "${mcversion}",
   "url": "",
