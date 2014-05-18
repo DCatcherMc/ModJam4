@@ -15,6 +15,7 @@ public class TileEntityRepellent extends TileEntity {
 
     public String blockedUser;
     public Random rand = new Random();
+    public int locX, locY, locZ;
 
     public TileEntityRepellent(){
 

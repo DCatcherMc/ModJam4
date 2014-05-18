@@ -54,11 +54,8 @@ public class BlockRepellent extends BlockContainer {
     @Override
     public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float px, float py, float pz) {
         TileEntity te = world.getTileEntity(x, y, z);
-        if(player.getCurrentEquippedItem() != null && player.getCurrentEquippedItem().getItem() == Items.paper){
-            ItemStack itemStack = player.getCurrentEquippedItem();
-            String stackName = itemStack.getDisplayName();
-            System.out.println("Added to blacklist " + stackName);
-            ((TileEntityRepellent)te).addPlayerToBlacklist(stackName);
+        if(te !=null && !player.isSneaking()){
+            player.openGui(Enderius.instance, 0, world, x, y, z);
             return true;
         }
         return false;

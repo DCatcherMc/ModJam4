@@ -6,6 +6,7 @@ import net.dcatcher.enderius.common.network.PacketRepellent;
 import net.dcatcher.enderius.common.tileentities.ContainerRepellent;
 import net.dcatcher.enderius.common.tileentities.TileEntityRepellent;
 import net.minecraft.client.gui.GuiButton;
+import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.gui.GuiTextField;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.texture.ITextureObject;
@@ -19,31 +20,30 @@ import scala.tools.nsc.Global;
 /**
  * Copyright: DCatcher
  */
-public class GuiRepellent extends GuiContainer {
+public class GuiRepellent extends GuiScreen {
 
     TileEntityRepellent tileEntity;
 
     private GuiTextField xCoord, yCoord, zCoord;
     private GuiButton butt;
 
+    private final int xSize = 200, ySize = 300;
+
 
     public GuiRepellent(TileEntityRepellent te) {
-        super(new ContainerRepellent(te));
         this.tileEntity = te;
     }
 
+
+
+
     @Override
-    protected void drawGuiContainerBackgroundLayer(float var1, int var2, int var3) {
+    public void drawDefaultBackground() {
         this.mc.renderEngine.bindTexture(new ResourceLocation("enderius", "textures/gui/repellent.png"));
         int x = (width - xSize) /2;
         int y = (height - ySize) /2;
 
         this.drawTexturedModalRect(x, y, 0,0, xSize, ySize);
-    }
-
-    @Override
-    protected void drawGuiContainerForegroundLayer(int p1, int p2) {
-        fontRendererObj.drawString("Position to teleport users out of: ", 5, 5, 4210752);
     }
 
     @Override
@@ -54,16 +54,18 @@ public class GuiRepellent extends GuiContainer {
         zCoord = new GuiTextField(fontRendererObj, ((width-xSize)/2)  + 5, ((height - ySize) /2) + 30, 40, 10);
         butt = new GuiButton(0, ((width-xSize)/2)  + 5, ((height - ySize) /2) + 10, 100, 20, "Save");
 
-        buttonList.add(butt);
+        //buttonList.add(butt);
+
+
         }
 
     @Override
     public void drawScreen(int i, int j, float f) {
-        super.drawScreen(i, j, f);
+        this.drawDefaultBackground();
         xCoord.drawTextBox();
         yCoord.drawTextBox();
         zCoord.drawTextBox();
-        butt.drawButton(mc, i, j);
+        //butt.drawButton(mc, i, j);
     }
 
     @Override
