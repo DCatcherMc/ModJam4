@@ -48,11 +48,8 @@ public class TileEntityRepellent extends TileEntity {
         }
         this.locX = compound.getInteger("locX");
         this.locY = compound.getInteger("locY");
-        this.locZ = compound.getInteger("locZ");  
-
-        PacketRepellent packet = new PacketRepellent(locX, locY, locZ, xCoord, yCoord, zCoord);
-        Enderius.packetPipeline.sendToAll(packet);
-        Enderius.packetPipeline.sendToServer(packet);
+        this.locZ = compound.getInteger("locZ");
+        System.out.println(locX + ", " + locY + ", " + locZ);
     }
 
     @Override

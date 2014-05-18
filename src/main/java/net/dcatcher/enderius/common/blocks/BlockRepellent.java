@@ -45,6 +45,16 @@ public class BlockRepellent extends BlockContainer {
                 return blockIcon;
         }    }
 
+    @Override
+    public void onBlockAdded(World world, int x, int y, int z) {
+        TileEntity te = world.getTileEntity(x, y, z);
+        if(te != null){
+            PacketSync sync = new PacketSync(world, x, y, z);
+            Enderius.packetPipeline.sendToAll(sync);
+            Enderius.packetPipeline.sendToServer(sync);
+        }
+    }
+
     /**
     @Override
     public int onBlockPlaced(World world, int x, int y, int z, int side, float hx, float hy, float hz, int meta) {
@@ -54,12 +64,15 @@ public class BlockRepellent extends BlockContainer {
     }
     */
 
+
+
     @Override
     public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float px, float py, float pz) {
         TileEntity te = world.getTileEntity(x, y, z);
         if(te !=null && !player.isSneaking() && !world.isRemote){
             PacketSync sync = new PacketSync(world, x, y, z);
-
+            Enderius.packetPipeline.sendToAll(sync);
+            Enderius.packetPipeline.sendToServer(sync);
             player.openGui(Enderius.instance, 0, world, x, y, z);
             world.markTileEntityChunkModified(x, y, z, te);
             return true;

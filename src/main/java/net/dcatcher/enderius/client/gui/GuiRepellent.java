@@ -137,9 +137,9 @@ public class GuiRepellent extends GuiScreen {
                 Enderius.packetPipeline.sendToAll(repel);
                 break;
         }
-        PacketSync packet = new PacketSync(tileEntity.getWorldObj(), tileEntity.xCoord, tileEntity.yCoord, tileEntity.zCoord);
-        Enderius.packetPipeline.sendToAll(packet);
-        Enderius.packetPipeline.sendToServer(packet);
+        //PacketSync packet = new PacketSync(tileEntity.getWorldObj(), tileEntity.xCoord, tileEntity.yCoord, tileEntity.zCoord);
+        //Enderius.packetPipeline.sendToAll(packet);
+        //Enderius.packetPipeline.sendToServer(packet);
     }
 
     @Override
