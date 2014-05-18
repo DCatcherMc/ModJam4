@@ -14,6 +14,7 @@ public class ItemHandler {
     public static Item enderNucleus;
     public static Item enderStar;
     public static Item dnaSyringe;
+    public static Item anchor;
 
     public static void initialiseItems(){
         enderSlime = new ItemEnderSlime();
@@ -22,7 +23,7 @@ public class ItemHandler {
         enderNucleus = new ItemEnderNucleus();
         enderStar = new ItemEnderStar();
         dnaSyringe = new ItemDNASyringe();
-
+        anchor = new ItemAnchor();
 
         GameRegistry.registerItem(enderSlime, "enderSlime");
         GameRegistry.registerItem(enderFocus, "enderFocus");
@@ -30,5 +31,6 @@ public class ItemHandler {
         GameRegistry.registerItem(enderNucleus, "enderNucleus");
         GameRegistry.registerItem(enderStar, "enderStar");
         GameRegistry.registerItem(dnaSyringe, "dnaSyringe");
+        GameRegistry.registerItem(anchor, "anchor");
     }
 }

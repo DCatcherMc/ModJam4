@@ -57,6 +57,9 @@ public class BlockSummoner extends BlockContainer {
             summoner.setData(entityID);
             System.out.println(entityID);
             return true;
+        }else if(player.getCurrentEquippedItem()== null && player.isSneaking()){
+            TileEntitySummoner tile = (TileEntitySummoner) world.getTileEntity(x, y, z);
+            tile.updateEntity();
         }
         return false;
     }

@@ -1,6 +1,7 @@
 package net.dcatcher.enderius.common.tileentities;
 
 import net.dcatcher.enderius.Enderius;
+import net.dcatcher.enderius.common.items.ItemHandler;
 import net.dcatcher.enderius.common.network.PacketRepellent;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
@@ -55,11 +56,11 @@ public class TileEntityRepulsor extends TileEntity {
         super.updateEntity();
         if(worldObj.isBlockIndirectlyGettingPowered(xCoord,  yCoord, zCoord)){
             for(int i = 1; i < 11; i++)
-                worldObj.spawnParticle("portal", xCoord + rand.nextInt(4)-2, yCoord + rand.nextInt(4)-2, zCoord + rand.nextInt(4)-2, 0d, 0d, 0d);
+                worldObj.spawnParticle("portal", xCoord + rand.nextInt(4)-1, yCoord + rand.nextInt(4)-1, zCoord + rand.nextInt(4)-1, 0d, 0d, 0d);
             List entities = worldObj.getEntitiesWithinAABB(EntityPlayer.class, AxisAlignedBB.getBoundingBox(xCoord, yCoord, zCoord, xCoord + 1, yCoord + 1, zCoord + 1).expand(10, 10, 10));
             for(Object entity : entities){
                 EntityPlayer player = (EntityPlayer) entity;
-                if(!getWhitelist().contains(player.getDisplayName())){
+                if(!getWhitelist().contains(player.getDisplayName()) && !(player.getCurrentEquippedItem().getItem() == ItemHandler.anchor)){
                     worldObj.getChunkFromBlockCoords(locX, locZ).setChunkModified();
                     player.setPositionAndUpdate(locX, locY, locZ);
                 }
