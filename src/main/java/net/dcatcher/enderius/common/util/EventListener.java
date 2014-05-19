@@ -2,26 +2,18 @@ package net.dcatcher.enderius.common.util;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.PlayerEvent;
+import net.dcatcher.enderius.Enderius;
 import net.dcatcher.enderius.common.EntityEnderSlime;
-import net.dcatcher.enderius.common.items.ItemEnderSlime;
 import net.dcatcher.enderius.common.items.ItemHandler;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.boss.EntityDragon;
 import net.minecraft.entity.monster.EntityEnderman;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.event.ClickEvent;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.ItemTool;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.world.WorldProviderEnd;
-import net.minecraft.world.biome.BiomeGenEnd;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.player.EntityInteractEvent;
-import net.minecraftforge.event.entity.player.ItemTooltipEvent;
-import net.minecraftforge.event.entity.player.PlayerInteractEvent;
-import net.minecraftforge.event.world.WorldEvent;
 
 /**
  * Copyright: DCatcher
@@ -63,7 +55,7 @@ public class EventListener {
     public void onPlayerInteract(EntityInteractEvent event){
         if(event.entityPlayer.getCurrentEquippedItem() != null &&
                 event.entityPlayer.getCurrentEquippedItem().getItem() == ItemHandler.dnaSyringe){
-            if(!(event.entity instanceof EntityPlayer) && !(event.entity instanceof EntityDragon) && (event.entity instanceof EntityLivingBase)){
+            if(!Enderius.spawnerBlacklist.contains(EntityList.getEntityString(event.entity)) && event.target instanceof EntityLivingBase){
                 ItemStack syringe = event.entityPlayer.getCurrentEquippedItem();
                 NBTTagCompound nbt = new NBTTagCompound();
                 syringe.writeToNBT(nbt);

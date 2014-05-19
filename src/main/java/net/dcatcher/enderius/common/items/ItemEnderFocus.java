@@ -5,12 +5,10 @@ import net.minecraft.block.Block;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import net.minecraftforge.fluids.BlockFluidBase;
-import net.minecraftforge.fluids.BlockFluidClassic;
 
 /**
  * Copyright: DCatcher
@@ -63,7 +61,7 @@ public class ItemEnderFocus extends Item {
                     for(int a = 0; a < 3; a++){
                         for(int b = 0; b < 3; b++){
                             Block current = world.getBlock(startXa1 + a, y-dist, startZa1 + b);
-                            if(current != Blocks.bedrock && !(current instanceof BlockFluidClassic) && player.inventory.hasItem(ItemHandler.enderiumFuel)){
+                            if(current != Blocks.bedrock && !(current instanceof BlockFluidBase) && player.inventory.hasItem(ItemHandler.enderiumFuel)){
                                 if(!world.isRemote)
                                     player.entityDropItem(new ItemStack(world.getBlock(startXa1 + a, y-dist, startZa1 + b)), 0f);
                                 world.setBlockToAir(startXa1 + a, y-dist, startZa1 + b);
@@ -81,7 +79,7 @@ public class ItemEnderFocus extends Item {
                     for(int a = 0; a < 3; a++){
                         for(int b = 0; b < 3; b++){
                             Block current = world.getBlock(startXb + a, startYb + b, z +dist);
-                            if(current != Blocks.bedrock && !(current instanceof BlockFluidClassic) && player.inventory.hasItem(ItemHandler.enderiumFuel)){
+                            if(current != Blocks.bedrock && !(current instanceof BlockFluidBase) && player.inventory.hasItem(ItemHandler.enderiumFuel)){
                                 if(!world.isRemote)
                                     player.entityDropItem(new ItemStack(world.getBlock(startXb + a, startYb + b, z+dist)), 0f);
                                 world.setBlockToAir(startXb + a, startYb + b, z+dist);
@@ -98,7 +96,7 @@ public class ItemEnderFocus extends Item {
                     for(int a = 0; a < 3; a++){
                         for(int b = 0; b < 3; b++){
                             Block current = world.getBlock(startXb1 + a, startYb1 + b, z-dist);
-                            if(current != Blocks.bedrock  && !(current instanceof BlockFluidClassic) && player.inventory.hasItem(ItemHandler.enderiumFuel)){
+                            if(current != Blocks.bedrock  && !(current instanceof BlockFluidBase) && player.inventory.hasItem(ItemHandler.enderiumFuel)){
                                 if(!world.isRemote)
                                     player.entityDropItem(new ItemStack(world.getBlock(startXb1 + a, startYb1 + b, z-dist)), 0f);
                                 world.setBlockToAir(startXb1 + a, startYb1 + b, z-dist);
@@ -116,7 +114,7 @@ public class ItemEnderFocus extends Item {
                     for(int a = 0; a < 3; a++){
                         for(int b = 0; b < 3; b++){
                             Block current = world.getBlock(x+dist, startYc+a, startZc + b);
-                            if(current != Blocks.bedrock && !(current instanceof BlockFluidClassic) && player.inventory.hasItem(ItemHandler.enderiumFuel)){
+                            if(current != Blocks.bedrock && !(current instanceof BlockFluidBase) && player.inventory.hasItem(ItemHandler.enderiumFuel)){
                                 if(!world.isRemote)
                                     player.entityDropItem(new ItemStack(current), 0f);
                                 world.setBlockToAir(x + dist, startYc + a, startZc + b);
@@ -133,7 +131,7 @@ public class ItemEnderFocus extends Item {
                     for(int a = 0; a < 3; a++){
                         for(int b = 0; b < 3; b++){
                             Block current = world.getBlock(x-dist, startYc1+a, startZc1 + b);
-                            if(current != Blocks.bedrock && !(current instanceof BlockFluidClassic) && player.inventory.hasItem(ItemHandler.enderiumFuel)){
+                            if(current != Blocks.bedrock && !(current instanceof BlockFluidBase) && player.inventory.hasItem(ItemHandler.enderiumFuel)){
                                 if(!world.isRemote)
                                     player.entityDropItem(new ItemStack(current), 0f);
                                 world.setBlockToAir(x - dist, startYc1 + a, startZc1 + b);

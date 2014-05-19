@@ -55,9 +55,11 @@ public class Enderius {
         //Initialise Recipes
 
         try{
-            EnderiusConfiguration.checkBlacklist(event.getModConfigurationDirectory());
+            EnderiusConfiguration config = new EnderiusConfiguration();
+            spawnerBlacklist = config.generateBlacklist(event.getModConfigurationDirectory());
         }catch(Exception e){
             FMLLog.getLogger().error("Blacklist could not be read");
+            e.printStackTrace();
         }
 
     }
