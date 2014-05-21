@@ -15,6 +15,7 @@ import net.dcatcher.enderius.common.network.PacketPipeline;
 import net.dcatcher.enderius.common.util.DCCreativeTab;
 import net.dcatcher.enderius.common.util.EnderiusConfiguration;
 import net.dcatcher.enderius.common.util.EventListener;
+import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.world.biome.BiomeGenBase;
@@ -35,6 +36,7 @@ public class Enderius {
     @SidedProxy(clientSide = "net.dcatcher.enderius.client.ClientProxy", serverSide = "net.dcatcher.enderius.common.CommonProxy")
     public static CommonProxy proxy;
     public static List<String> spawnerBlacklist;
+    public static List<String> blockBlacklist;
 
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event){
@@ -56,9 +58,10 @@ public class Enderius {
 
         try{
             EnderiusConfiguration config = new EnderiusConfiguration();
-            spawnerBlacklist = config.generateBlacklist(event.getModConfigurationDirectory());
+            spawnerBlacklist = config.generateMobBlacklist(event.getModConfigurationDirectory());
+            blockBlacklist= config.genBannedBlocks(event.getModConfigurationDirectory());
         }catch(Exception e){
-            FMLLog.getLogger().error("Blacklist could not be read");
+            FMLLog.getLogger().error("Blacklist(s) could not be read");
             e.printStackTrace();
         }
 
