@@ -1,6 +1,7 @@
 package net.dcatcher.enderius.common;
 
 import net.dcatcher.enderius.common.items.ItemHandler;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.monster.EntitySlime;
 import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.player.EntityPlayer;
@@ -23,6 +24,26 @@ public class EntityEnderSlime extends EntitySlime implements IMob{
     @Override
     public boolean getCanSpawnHere() {
         return true;
+    }
+
+    @Override
+    protected void collideWithEntity(Entity entity) {
+        if(entity instanceof EntitySlime){
+            EntityEnderSlime newSlime = new EntityEnderSlime(worldObj);
+            newSlime.setPositionAndUpdate(entity.posX, entity.posY, entity.posZ);
+            newSlime.setSlimeSize(((EntitySlime) entity).getSlimeSize());
+            entity.setDead();
+            worldObj.spawnEntityInWorld(newSlime);
+
+        }else{
+            double x = entity.posX;
+            double y = entity.posY;
+            double z = entity.posZ;
+            Random random = new Random();
+
+            entity.setPosition(x+ (this.rand.nextInt(10) - 5), y + this.rand.nextInt(5), z + (this.rand.nextInt(10) - 5));
+            entity.worldObj.playSound(x, y, z, "mob.endermen.portal", 1f, 1f, true);
+        }
     }
 
     @Override
