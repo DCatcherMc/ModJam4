@@ -1,6 +1,9 @@
 package net.dcatcher.enderius;
 
-import cpw.mods.fml.common.*;
+import cpw.mods.fml.common.FMLCommonHandler;
+import cpw.mods.fml.common.FMLLog;
+import cpw.mods.fml.common.Mod;
+import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
@@ -10,12 +13,11 @@ import net.dcatcher.enderius.common.CommonProxy;
 import net.dcatcher.enderius.common.EntityEnderSlime;
 import net.dcatcher.enderius.common.blocks.BlockHandler;
 import net.dcatcher.enderius.common.items.ItemHandler;
-import net.dcatcher.enderius.common.util.RecipeList;
 import net.dcatcher.enderius.common.network.PacketPipeline;
 import net.dcatcher.enderius.common.util.DCCreativeTab;
 import net.dcatcher.enderius.common.util.EnderiusConfiguration;
 import net.dcatcher.enderius.common.util.EventListener;
-import net.minecraft.block.Block;
+import net.dcatcher.enderius.common.util.RecipeList;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.world.biome.BiomeGenBase;
@@ -59,7 +61,7 @@ public class Enderius {
         try{
             EnderiusConfiguration config = new EnderiusConfiguration();
             spawnerBlacklist = config.generateMobBlacklist(event.getModConfigurationDirectory());
-            blockBlacklist= config.genBannedBlocks(event.getModConfigurationDirectory());
+            blockBlacklist = config.genBannedBlocks(event.getModConfigurationDirectory());
         }catch(Exception e){
             FMLLog.getLogger().error("Blacklist(s) could not be read");
             e.printStackTrace();
